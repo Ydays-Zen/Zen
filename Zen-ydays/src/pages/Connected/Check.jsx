@@ -10,6 +10,7 @@ const Private = () => {
   const [file, setFile] = useState(null);
   const [imgList, setImgList] = useState([]);
   const imgListRef = ref(storage, "images/");
+
   const { currentUser } = useContext(UserContext);
 
   const location = useLocation();
@@ -25,17 +26,13 @@ const Private = () => {
     uploadBytes(imgRef, file).then((snapshot) => {
       console.log("Uploaded img");
       getDownloadURL(snapshot.ref).then((url) => {
-        // Vérifier si l'URL n'est pas déjà dans la liste
-        if (!imgList.includes(url)) {
-          setImgList((prev) => [...prev, url]);
-        }
+        setImgList((prev) => [...prev, url]);
       });
     });
   };
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    console.log("Effect triggered");
     listAll(imgListRef).then((res) => {
       res.items.forEach((itemRef) => {
         getDownloadURL(itemRef).then((url) => {
@@ -43,7 +40,8 @@ const Private = () => {
         });
       });
     });
-  }, []); // Passer un tableau vide comme dépendance
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
