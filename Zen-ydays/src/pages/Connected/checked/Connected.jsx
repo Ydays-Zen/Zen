@@ -3,11 +3,20 @@ import { useContext } from "react";
 import { auth } from "../../../db/firebase-config.jsx";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { storage } from "../../../db/firebase-config.jsx";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 const Connected = () => {
   const navigate = useNavigate();
 
   const { currentUser } = useContext(UserContext);
+
+  const [file, setFile] = useState(null);
+  const [imgList, setImgList] = useState([]);
+  const imgListRef = ref(storage, "images/");
+
   const logOut = async () => {
     try {
       await signOut(auth);
@@ -16,10 +25,53 @@ const Connected = () => {
       alert(error.message);
     }
   };
+
+  const uploadImg = () => {
+    if (file == null) return;
+
+    const imgRef = ref(storage, `images/${file.name + v4()}`);
+
+    uploadBytes(imgRef, file).then((snapshot) => {
+      console.log("Uploaded img");
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImgList((prev) => [...prev, url]);
+      });
+    });
+  };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    listAll(imgListRef).then((res) => {
+      res.items.forEach((itemRef) => {
+        getDownloadURL(itemRef).then((url) => {
+          setImgList((prev) => [...prev, url]);
+        });
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       {currentUser && <h2>Welcome {currentUser.email}</h2>}
       {currentUser && <button onClick={logOut}>Log Out</button>}
+
+      <input
+        type="file"
+        name=""
+        id=""
+        onChange={(event) => {
+          setFile(event.target.files[0]);
+        }}
+      />
+      <button onClick={uploadImg}>Upload Img</button>
+
+      {imgList.length > 0 ? (
+        [...new Set(imgList)].map((img, index) => (
+          <img src={img} alt="" key={index} />
+        ))
+      ) : (
+        <h1>No images</h1>
+      )}
     </div>
   );
 };
