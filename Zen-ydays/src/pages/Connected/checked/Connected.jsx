@@ -15,7 +15,6 @@ const Connected = () => {
 
   const [file, setFile] = useState(null);
   const [imgList, setImgList] = useState([]);
-  const imgListRef = ref(storage, "images/");
 
   const logOut = async () => {
     try {
@@ -29,7 +28,10 @@ const Connected = () => {
   const uploadImg = () => {
     if (file == null) return;
 
-    const imgRef = ref(storage, `images/${file.name + v4()}`);
+    const imgRef = ref(
+      storage,
+      `images/${currentUser.uid}/${file.name + v4()}`
+    );
 
     uploadBytes(imgRef, file).then((snapshot) => {
       console.log("Uploaded img");
@@ -39,17 +41,20 @@ const Connected = () => {
     });
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    listAll(imgListRef).then((res) => {
+    if (!currentUser) return;
+
+    const userImgListRef = ref(storage, `images/${currentUser.uid}/`);
+
+    listAll(userImgListRef).then((res) => {
       res.items.forEach((itemRef) => {
         getDownloadURL(itemRef).then((url) => {
           setImgList((prev) => [...prev, url]);
         });
       });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentUser]);
+
   return (
     <div>
       {currentUser && <h2>Welcome {currentUser.email}</h2>}
