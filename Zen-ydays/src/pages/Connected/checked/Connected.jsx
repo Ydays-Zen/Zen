@@ -8,6 +8,8 @@ import { storage } from "../../../db/firebase-config.jsx";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
+import Comments from "../../../components/Comments.jsx";
+
 const Connected = () => {
   const navigate = useNavigate();
 
@@ -77,6 +79,8 @@ const Connected = () => {
       ) : (
         <h1>No images</h1>
       )}
+
+      <Comments />
     </div>
   );
 };
