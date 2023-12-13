@@ -1,8 +1,10 @@
 import "./Profil.css";
-import SubManager from './SubManager';
+import { UserContext } from '../../context/userContext.jsx';
+import SubManager from '../../SubManager/SubManager.jsx';
+import { useContext } from "react";
 
 function Profil() {
-  const currentUserId = 'ID_utilisateur'; 
+  const currentUserId = useContext(UserContext); 
 
   const handleFollow = (targetUserId) => {
     SubManager.follow(currentUserId, targetUserId);
@@ -15,8 +17,8 @@ function Profil() {
         <div className="Profil-Container">
           <div className="Profil-Container-Info">
             <div>
-              <h2>Profil de l'utilisateur</h2>
-              <button onClick={() => handleFollow(targetUserId)}>Follow</button>
+              <h2>Profil de l&apos;utilisateur</h2>
+              <button onClick={() => handleFollow}>Follow</button>
             </div>
             <div className="Profil-Container-Info-Name">
               <h2>Nom</h2>

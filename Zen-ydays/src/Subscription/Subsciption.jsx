@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/firestore';
+
 
 const firebaseConfig = {
   
@@ -28,3 +28,5 @@ export const followUser = async (currentUserId, targetUserId) => {
     console.error('Erreur lors de l\'abonnement:', error);
   }
 };
+
+export default followUser;

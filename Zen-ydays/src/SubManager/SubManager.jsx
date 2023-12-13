@@ -1,4 +1,4 @@
-import { followUser } from './firebase'; 
+import { followUser } from '../Subscription/Subsciption.jsx'; 
 
 const SubManager = {
   follow: (currentUserId, targetUserId) => {
