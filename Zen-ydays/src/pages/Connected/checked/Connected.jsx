@@ -9,6 +9,7 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
 import Comments from "../../../components/Comments.jsx";
+import Header from "../../../layout/Header.jsx";
 
 const Connected = () => {
   const navigate = useNavigate();
@@ -59,6 +60,8 @@ const Connected = () => {
 
   return (
     <div>
+      <Header />
+
       {currentUser && <h2>Welcome {currentUser.email}</h2>}
       {currentUser && <button onClick={logOut}>Log Out</button>}
 
