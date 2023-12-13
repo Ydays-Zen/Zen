@@ -1,20 +1,31 @@
-import './Nav.css'
+import Message from "../assets/Message.svg";
+import Library from "../assets/library.svg";
+import Logo from "../assets/logo_zen.png";
 
-function Nav(){
-    return(
-        <div className="Menu">
-            <nav>
-                <img src="" alt=""/>
-                <img src="" alt=""/>
-                <div className="New_story">
-                    <img src="" alt=""/>
-                </div>
-                <img src="" alt=""/>
-                <img src="" alt=""/>
-            </nav>
+import "./Nav.css";
+
+function Nav() {
+  return (
+    <>
+      <nav>
+        <div className="content">
+          <img className="logo" src={Logo} alt="Logo Zen" />
+
+          <div>
+            <a href="#">
+              {" "}
+              <img src={Library} alt="Library" />
+            </a>
+
+            <a href="#">
+              {" "}
+              <img src={Message} alt="Message" />
+            </a>
+          </div>
         </div>
-    )
+      </nav>
+    </>
+  );
 }
 
-
-export default Nav
+export default Nav;

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import Comments from "../../../components/Comments.jsx";
-import Header from "../../../layout/Header.jsx";
+import Header from "../../../layout/homes/Header.jsx";
 import UploadImg from "../../../components/UploadImg.jsx";
 
 const Connected = () => {
