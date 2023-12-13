@@ -1,13 +1,11 @@
-import { useState, useEffect, useContext } from "react";
-import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
+import React, { useState, useEffect, useContext } from "react";
+import { collection, getDocs, query, where, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
 import { firestore } from "../db/firebase-config";
 import { UserContext } from "../context/userContext";
 
 const DisplayBooks = () => {
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
-
-  // Utilisez un tableau d'états pour stocker les commentaires pour chaque livre
   const [newComments, setNewComments] = useState([]);
 
   const fetchData = async () => {
@@ -41,10 +39,9 @@ const DisplayBooks = () => {
 
       setBooksList(booksData);
 
-      // Initialisez le tableau des nouveaux commentaires avec des chaînes vides pour chaque livre
       setNewComments(Array(booksData.length).fill(""));
     } catch (error) {
-      console.error("Erreur lors de la récupération des books :", error);
+      console.error("Erreur lors de la récupération des données :", error);
     }
   };
 
@@ -72,7 +69,6 @@ const DisplayBooks = () => {
         date: new Date(),
       });
 
-      // Réinitialiser le commentaire spécifique au livre
       setNewComments((prevComments) => {
         const newCommentsCopy = [...prevComments];
         newCommentsCopy[index] = "";
@@ -85,12 +81,49 @@ const DisplayBooks = () => {
     }
   };
 
+  const handleLikeSubmit = async (bookUid) => {
+    try {
+      if (!currentUser) {
+        console.error("Utilisateur non connecté.");
+        return;
+      }
+
+      const bookRef = doc(firestore, "Books", bookUid);
+      const bookDoc = await getDoc(bookRef);
+
+      if (!bookDoc.exists()) {
+        console.error("Livre non trouvé.");
+        return;
+      }
+
+      const likedBy = bookDoc.data().likedBy || [];
+
+      // Vérifiez si l'utilisateur a déjà liké ce livre
+      if (likedBy.includes(currentUser.uid)) {
+        // Si oui, retirez le like
+        await updateDoc(bookRef, {
+          likedBy: likedBy.filter((uid) => uid !== currentUser.uid),
+        });
+      } else {
+        // Si non, ajoutez le like
+        await updateDoc(bookRef, {
+          likedBy: [...likedBy, currentUser.uid],
+        });
+      }
+
+      fetchData();
+    } catch (error) {
+      console.error("Erreur lors de la gestion du like :", error);
+    }
+  };
+
   return (
     <div>
       <h2>Books List</h2>
       {booksList.map((book, index) => (
         <div key={book.id}>
           <p>{book.title}</p>
+          <p>Likes: {book.likedBy ? book.likedBy.length : 0}</p>
           <ul>
             {book.comments &&
               book.comments.map((comment, commentIndex) => (
@@ -111,6 +144,11 @@ const DisplayBooks = () => {
               />
               <button onClick={() => handleCommentSubmit(book.id, index)}>
                 Add Comment
+              </button>
+              <button onClick={() => handleLikeSubmit(book.id)}>
+                {book.likedBy && book.likedBy.includes(currentUser.uid)
+                  ? "Unlike"
+                  : "Like"}
               </button>
             </div>
           )}

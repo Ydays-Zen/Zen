@@ -72,7 +72,7 @@ const Post = () => {
 
         <label>Image (URL):</label>
         <input
-          type="text"
+          type="file"
           placeholder="Image"
           value={image}
           onChange={(e) => setImage(e.target.value)}
