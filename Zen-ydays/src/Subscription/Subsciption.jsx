@@ -19,7 +19,7 @@ export const followUser = async (currentUserId, targetUserId) => {
 
     console.log('Abonnement réussi');
   } catch (error) {
-    console.error('Erreur lors de l'abonnement:', error);
+    console.error('Erreur lors de l\'abonnement:', error);
   }
 };
 
