@@ -1,0 +1,13 @@
+nav{
+    position: absolute;
+    bottom: 20px;
+    background-color: #D3C8B2;
+    width: 90vw;
+    height: 8vh;
+    border-radius: 8px;
+}
+
+.Menu{
+    display: flex;
+    justify-content: center;
+}
