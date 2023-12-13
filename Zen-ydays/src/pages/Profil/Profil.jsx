@@ -1,7 +1,7 @@
-import "./Profil.css";
-import { UserContext } from '../../context/userContext.jsx';
-import SubManager from '../../SubManager/SubManager.jsx';
 import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import "./Profil.css";
+import SubManager from '../../SubManager/SubManager.jsx';
 
 function Profil() {
   const currentUserId = useContext(UserContext); 
