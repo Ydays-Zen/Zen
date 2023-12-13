@@ -1,7 +1,7 @@
 import './header.css';
-import Message from '../../../../../../Bureau/ZEN/Zen/Zen-ydays/src/assets/Message.svg'
-import Library from '../../../../../../Bureau/ZEN/Zen/Zen-ydays/src/assets/library.svg'
-import Logo from '../../../../../../Bureau/ZEN/Zen/Zen-ydays/src/assets/logo_zen.png'
+import Message from '../assets/Message.svg'
+import Library from '../assets/library.svg'
+import Logo from '../assets/logo_zen.png'
 
 export function Header (){
     return(
