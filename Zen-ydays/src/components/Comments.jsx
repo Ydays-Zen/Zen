@@ -1,4 +1,4 @@
-import DisplayBooks from "./DisplayBooks"; // Assurez-vous d'importer correctement le composant DisplayBooks
+import DisplayBooks from "./DisplayBooks";
 
 const Comments = () => {
   return (
