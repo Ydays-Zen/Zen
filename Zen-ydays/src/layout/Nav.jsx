@@ -17,6 +17,13 @@ function Nav(){
                 <img src={favoris} alt=""/>
                 <img src={user} alt=""/>
             </nav>
+            <div className="select_icon">
+                <div className="select_home"></div>
+                <div className="select_search"></div>
+                <div className="inutile"></div>
+                <div className="select_fav"></div>
+                <div className="select_user"></div>
+            </div>
         </div>
     )
 }

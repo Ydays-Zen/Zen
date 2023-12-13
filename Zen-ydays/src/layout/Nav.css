@@ -1,18 +1,24 @@
+.Menu{
+    width: 100vw;
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
 nav{
     display: flex;
     justify-content: space-around;
-    position: absolute;
-    bottom: 20px;
     background-color: #D3C8B2;
     width: 90vw;
     height: 8vh;
     border-radius: 8px;
 }
 
-.Menu{
-    display: flex;
-    justify-content: center;
-}
+
 nav>img{
     width: 30px;
 }
@@ -30,14 +36,46 @@ nav>img{
 }
 
 
-.Menu img.selected::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px; /* Épaisseur de la bordure inférieure */
-    background-color: #fff; /* Couleur de la bordure inférieure */
-    border-radius: 0 0 10px 10px; /* Ajoute des coins arrondis à la bordure inférieure */
+
+.select_icon{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    top: -15px;
+    width: 90vw;
+    height: 15px;
+}
+
+
+
+.select_home{
+    background-color: #000000;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+}
+.select_search{
+    background-color: #000000;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+}
+.inutile{
+    background-color: rgba(0, 0, 0, 0);
+    width: 100px;
+    height: 4px;
+}
+.select_fav{
+    background-color: #000000;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+}
+.select_user{
+    background-color: #000000;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
 }
 
