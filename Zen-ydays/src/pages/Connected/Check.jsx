@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { UserContext } from "../../context/userContext.jsx";
 import { Outlet, useLocation, Navigate } from "react-router-dom";
-import "./checked/Check.css";
 
 const Private = () => {
   const { currentUser } = useContext(UserContext);
@@ -11,7 +10,7 @@ const Private = () => {
     return <Navigate to={"/"} state={{ from: location }} />;
   }
   return (
-    <div className="test2">
+    <div>
       <Outlet />
     </div>
   );

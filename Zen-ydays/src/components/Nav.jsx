@@ -2,7 +2,7 @@ import Message from "../assets/Message.svg";
 import Library from "../assets/library.svg";
 import Logo from "../assets/logo_zen.png";
 
-import "./Nav.css";
+import "./styles/Nav.css";
 
 function Nav() {
   return (
@@ -17,7 +17,7 @@ function Nav() {
               <img src={Library} alt="Library" />
             </a>
 
-            <a href="#">
+            <a href="/messagerie">
               {" "}
               <img src={Message} alt="Message" />
             </a>
