@@ -1,7 +1,7 @@
 // useLike.js
 import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../context/userContext.jsx';
-import { firestore, doc, updateDoc, getDoc, collection } from 'firebase/firestore';
+import { firestore, doc, updateDoc, getDoc } from "firebase/firestore";
 
 // Hook personnalisé pour gérer les likes d'un post
 const useLike = (postID) => {

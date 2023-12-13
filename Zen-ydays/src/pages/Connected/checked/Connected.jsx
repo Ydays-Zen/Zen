@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import Comments from "../../../components/Comments.jsx";
 import Header from "../../../layout/homes/Header.jsx";
-import UploadImg from "../../../components/UploadImg.jsx";
+// import UploadImg from "../../../components/UploadImg.jsx";
 
 const Connected = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Connected = () => {
 
       <Comments />
 
-      <UploadImg />
+      {/* <UploadImg /> */}
     </div>
   );
 };

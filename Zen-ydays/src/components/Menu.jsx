@@ -24,7 +24,10 @@ const Menu = () => {
           </div>
 
           <div className="write">
-            <img className="post" src={Plume} alt="Logo Zen" />
+            <a href="/check/post">
+              {" "}
+              <img className="post" src={Plume} alt="Logo Zen" />
+            </a>
           </div>
 
           <div>
