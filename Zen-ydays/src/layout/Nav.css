@@ -1,4 +1,4 @@
-.Menu{
+.Menu {
     width: 100vw;
     position: absolute;
     bottom: 20px;
@@ -8,74 +8,98 @@
     flex-direction: column;
 }
 
-
-nav{
+nav {
     display: flex;
     justify-content: space-around;
-    background-color: #D3C8B2;
+    align-items: center;
+    background-color: #d3c8b2;
     width: 90vw;
     height: 8vh;
     border-radius: 8px;
 }
 
-
-nav>img{
+nav > img {
     width: 30px;
 }
-.New_story>img{
+
+.New_story > img {
     width: 60px;
     background-color: #786146;
     padding: 10px;
     border-radius: 100px;
-    border: 7px solid #FFF5E1;
+    border: 7px solid #fff5e1;
 }
 
-.New_story{
+.New_story {
     position: relative;
     top: -50px;
 }
 
-
-
-.select_icon{
+.select_icon_container {
+    top: -5px;
+    position: relative;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    position: relative;
-    top: -15px;
     width: 90vw;
-    height: 15px;
 }
 
-
-
-.select_home{
-    background-color: #000000;
+.select_home,
+.select_search,
+.select_fav,
+.select_user {
     width: 40px;
     height: 4px;
     border-radius: 2px;
-}
-.select_search{
-    background-color: #000000;
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
-}
-.inutile{
     background-color: rgba(0, 0, 0, 0);
+}
+
+.select_home.selected,
+.select_search.selected {
+    background-color: #000000;
+}
+
+.select_fav,
+.select_user {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.select_fav.selected,
+.select_user.selected {
+    background-color: #000000;
+}
+
+
+.inutile{
     width: 100px;
     height: 4px;
-}
-.select_fav{
-    background-color: #000000;
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
-}
-.select_user{
-    background-color: #000000;
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0);
 }
 
+.select_home,
+.select_search,
+.select_fav,
+.select_user {
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0);
+    transition: transform 0.3s ease; /* Ajout de la transition sur la propriété transform */
+}
+
+.select_home.selected,
+.select_search.selected {
+    background-color: #000000;
+    transform: translateY(-5px); /* Translation vers le haut lorsqu'il est sélectionné */
+}
+
+.select_fav,
+.select_user {
+    background-color: rgba(0, 0, 0, 0);
+    transition: transform 0.3s ease; /* Ajout de la transition sur la propriété transform */
+}
+
+.select_fav.selected,
+.select_user.selected {
+    background-color: #000000;
+    transform: translateY(-5px); /* Translation vers le haut lorsqu'il est sélectionné */
+}
