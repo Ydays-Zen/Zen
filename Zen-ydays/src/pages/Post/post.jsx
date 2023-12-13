@@ -16,7 +16,6 @@ const Post = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const bookRef = collection(firestore, "Books");
-
   const uploadImg = async () => {
     if (!image) return;
 
@@ -32,8 +31,11 @@ const Post = () => {
       // Obtenez le chemin du fichier après le téléchargement
       const url = await getDownloadURL(imgRef);
 
-      // Mettez à jour l'URL de l'image
-      setImageUrl(url);
+      // Mettez à jour l'URL de l'image avec un callback
+      setImageUrl((prevUrl) => {
+        console.log("Updated Image URL:", url);
+        return url;
+      });
     } catch (error) {
       console.error("Erreur lors du téléchargement de l'image :", error);
     }
@@ -41,6 +43,7 @@ const Post = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Handle submit reached");
 
     if (!currentUser) {
       console.log("Vous devez être connecté pour poster un livre.");
