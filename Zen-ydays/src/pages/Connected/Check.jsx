@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { UserContext } from "../../context/userContext.jsx";
 import { Outlet, useLocation, Navigate } from "react-router-dom";
-import Header from "../../../../../../../Documents/GitHub/Zen/Zen-ydays/src/layout/Header.jsx";
-import Nav from "../../../../../../../Documents/GitHub/Zen/Zen-ydays/src/layout/Nav.jsx";
-import '../../../../../../../Documents/GitHub/Zen/Zen-ydays/src/pages/Connected/checked/Check.css';
+import Header from "../../layout/Header.jsx";
+import Nav from "../../layout/Nav.jsx";
+import '../../pages/Connected/checked/Check.css';
 
 const Private = () => {
     const { currentUser } = useContext(UserContext);
