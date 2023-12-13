@@ -1,4 +1,6 @@
 nav{
+    display: flex;
+    justify-content: space-around;
     position: absolute;
     bottom: 20px;
     background-color: #D3C8B2;
@@ -11,3 +13,31 @@ nav{
     display: flex;
     justify-content: center;
 }
+nav>img{
+    width: 30px;
+}
+.New_story>img{
+    width: 60px;
+    background-color: #786146;
+    padding: 10px;
+    border-radius: 100px;
+    border: 7px solid #FFF5E1;
+}
+
+.New_story{
+    position: relative;
+    top: -50px;
+}
+
+
+.Menu img.selected::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Épaisseur de la bordure inférieure */
+    background-color: #fff; /* Couleur de la bordure inférieure */
+    border-radius: 0 0 10px 10px; /* Ajoute des coins arrondis à la bordure inférieure */
+}
+
