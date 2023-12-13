@@ -1,0 +1,33 @@
+.Header{
+    width: 100vw;
+    height: 10vh;
+    background-color: #D3C8B2;
+    border-radius: 0 0 18px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.left_header{
+    width: 20%;
+    height: 80%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.left_header>img{
+    height: 80%;
+}
+
+.right_header{
+    width: 30%;
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.right_header>img{
+    width: 30px;
+}
