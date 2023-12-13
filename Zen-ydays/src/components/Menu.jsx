@@ -1,6 +1,8 @@
-import Message from "../assets/Message.svg";
-import Library from "../assets/library.svg";
 import Plume from "../assets/plume.svg";
+import Home from "../assets/home.svg";
+import Search from "../assets/search.svg";
+import Bookmark from "../assets/bookmark.svg";
+import User from "../assets/user.svg";
 
 import "./styles/menu.css";
 
@@ -12,12 +14,12 @@ const Menu = () => {
           <div>
             <a href="#">
               {" "}
-              <img className="icon" src={Library} alt="Library" />
+              <img className="icon" src={Home} alt="Library" />
             </a>
 
             <a href="#">
               {" "}
-              <img className="icon" src={Message} alt="Message" />
+              <img className="icon" src={Search} alt="Message" />
             </a>
           </div>
 
@@ -28,12 +30,12 @@ const Menu = () => {
           <div>
             <a href="#">
               {" "}
-              <img className="icon" src={Library} alt="Library" />
+              <img className="icon" src={Bookmark} alt="Library" />
             </a>
 
             <a href="/messagerie">
               {" "}
-              <img className="icon" src={Message} alt="Message" />
+              <img className="icon" src={User} alt="Message" />
             </a>
           </div>
         </div>

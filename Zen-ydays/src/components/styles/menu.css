@@ -23,8 +23,6 @@ nav  .post{
     /* margin-left: 20px; */
 }
 
-
-
 .write {
 
     display: flex;
@@ -42,6 +40,8 @@ nav  .post{
     background-color: #786146;
     border-radius:50%;
     transition: cubic-bezier(0.45, 0.73, 0, 0.59) .3s;
+
+    border: 5px solid #FFF5E1;
 }
 
 .contenue .icon {
@@ -56,5 +56,11 @@ nav  .post{
     transition: cubic-bezier(0.45, 0.73, 0, 0.59) .3s;
 }
 
+@media  screen and (min-width: 768px) {
+    nav .contenue  {
+        display: none;
+    }
+    
+}
 
   
