@@ -5,6 +5,8 @@ import SignUp from "./pages/SignUp/SignUp.jsx";
 import Connected from "./pages/Connected/checked/Connected.jsx";
 import Check from "./pages/Connected/Check.jsx";
 import Post from "./pages/Post/post.jsx";
+import Profil from "./pages/Profil/Profil.jsx";
+
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/check/Post" element={<Post />} />
+        <Route path="/check/Profil" element={<Profil />} />
 
       </Routes>
     </div>
