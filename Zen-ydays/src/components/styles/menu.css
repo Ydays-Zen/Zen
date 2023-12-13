@@ -1,0 +1,64 @@
+
+nav .contenue {
+    width: 95%;
+    height: 65px;
+    background-color: #D3C8B2;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15px;
+    z-index: 100;
+    
+}
+
+nav  .post{
+    width: 80px;
+    height: 50px;
+    /* margin-left: 20px; */
+}
+
+.write {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute; 
+  
+    width: 80px;
+    height: 80px;
+    bottom:28px;
+    margin:auto;
+    left:50%;
+    transform: translateX(-50%);
+    
+    background-color: #786146;
+    border-radius:50%;
+    border: 5px solid #FFF5E1;
+}
+
+.contenue .icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+}
+
+
+.contenue .icon:hover {
+    transform: scale(1.2);
+    transition: cubic-bezier(0.45, 0.73, 0, 0.59) .3s;
+}
+
+@media  screen and (min-width: 768px) {
+    nav .contenue  {
+        display: none;
+    }
+    
+}
+
+  
