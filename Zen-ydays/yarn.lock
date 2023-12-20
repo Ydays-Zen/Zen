@@ -2796,6 +2796,10 @@ vite@^5.0.8:
 >>>>>>> 3118cf7fa71db0c756835d0de777a3d07ee70f22
 >>>>>>> 4820c9669889840e48fdc72df872882c039a5bf4
 >>>>>>> 3286e9796bc2de4f879f3dcb6ef9739df4210278
+vite@^5.0.10:
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-5.0.10.tgz#1e13ef5c3cf5aa4eed81f5df6d107b3c3f1f6356"
+  integrity sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==
   dependencies:
     esbuild "^0.19.3"
     postcss "^8.4.32"
