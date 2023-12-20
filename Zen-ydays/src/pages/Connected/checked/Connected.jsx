@@ -3,11 +3,13 @@ import { useContext } from "react";
 import { auth } from "../../../db/firebase-config.jsx";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 
 import Comments from "../../../components/Comments.jsx";
 import Header from "../../../layout/homes/Header.jsx";
-import UploadImg from "../../../components/UploadImg.jsx";
+// import UploadImg from "../../../components/UploadImg.jsx";
 
 const Connected = () => {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ const Connected = () => {
   const logOut = async () => {
     try {
       await signOut(auth);
+      cookies.remove("auth-token");
       navigate("/signin");
     } catch (error) {
       alert(error.message);
@@ -32,7 +35,7 @@ const Connected = () => {
 
       <Comments />
 
-      <UploadImg />
+      {/* <UploadImg /> */}
     </div>
   );
 };

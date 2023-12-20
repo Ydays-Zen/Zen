@@ -13,7 +13,10 @@ const NavBar = () => {
       <nav>
         <div className="navBar">
           <div className="plume">
-            <img className="post" src={Plume} alt="write" />
+            <a href="/check/post">
+              {" "}
+              <img className="post" src={Plume} alt="write" />
+            </a>
           </div>
 
           <div className="icons">

@@ -187,93 +187,97 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@esbuild/android-arm64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.19.9.tgz#683794bdc3d27222d3eced7b74cad15979548031"
+"@esbuild/aix-ppc64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.19.10.tgz#fb3922a0183d27446de00cf60d4f7baaadf98d84"
 
-"@esbuild/android-arm@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/android-arm/-/android-arm-0.19.9.tgz#21a4de41f07b2af47401c601d64dfdefd056c595"
+"@esbuild/android-arm64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.19.10.tgz#ef31015416dd79398082409b77aaaa2ade4d531a"
 
-"@esbuild/android-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/android-x64/-/android-x64-0.19.9.tgz#e2d7674bc025ddc8699f0cc76cb97823bb63c252"
+"@esbuild/android-arm@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/android-arm/-/android-arm-0.19.10.tgz#1c23c7e75473aae9fb323be5d9db225142f47f52"
 
-"@esbuild/darwin-arm64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/darwin-arm64/-/darwin-arm64-0.19.9.tgz#ae7a582289cc5c0bac15d4b9020a90cb7288f1e9"
+"@esbuild/android-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/android-x64/-/android-x64-0.19.10.tgz#df6a4e6d6eb8da5595cfce16d4e3f6bc24464707"
 
-"@esbuild/darwin-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/darwin-x64/-/darwin-x64-0.19.9.tgz#8a216c66dcf51addeeb843d8cfaeff712821d12b"
+"@esbuild/darwin-arm64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/darwin-arm64/-/darwin-arm64-0.19.10.tgz#8462a55db07c1b2fad61c8244ce04469ef1043be"
 
-"@esbuild/freebsd-arm64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/freebsd-arm64/-/freebsd-arm64-0.19.9.tgz#63d4f603e421252c3cd836b18d01545be7c6c440"
+"@esbuild/darwin-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/darwin-x64/-/darwin-x64-0.19.10.tgz#d1de20bfd41bb75b955ba86a6b1004539e8218c1"
 
-"@esbuild/freebsd-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/freebsd-x64/-/freebsd-x64-0.19.9.tgz#a3db52595be65360eae4de1d1fa3c1afd942e1e4"
+"@esbuild/freebsd-arm64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/freebsd-arm64/-/freebsd-arm64-0.19.10.tgz#16904879e34c53a2e039d1284695d2db3e664d57"
 
-"@esbuild/linux-arm64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-arm64/-/linux-arm64-0.19.9.tgz#4ae5811ce9f8d7df5eb9edd9765ea9401a534f13"
+"@esbuild/freebsd-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/freebsd-x64/-/freebsd-x64-0.19.10.tgz#8ad9e5ca9786ca3f1ef1411bfd10b08dcd9d4cef"
 
-"@esbuild/linux-arm@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-arm/-/linux-arm-0.19.9.tgz#9807e92cfd335f46326394805ad488e646e506f2"
+"@esbuild/linux-arm64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-arm64/-/linux-arm64-0.19.10.tgz#d82cf2c590faece82d28bbf1cfbe36f22ae25bd2"
 
-"@esbuild/linux-ia32@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-ia32/-/linux-ia32-0.19.9.tgz#18892c10f3106652b16f9da88a0362dc95ed46c7"
+"@esbuild/linux-arm@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-arm/-/linux-arm-0.19.10.tgz#477b8e7c7bcd34369717b04dd9ee6972c84f4029"
 
-"@esbuild/linux-loong64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.19.9.tgz#dc2ebf9a125db0a1bba18c2bbfd4fbdcbcaf61c2"
+"@esbuild/linux-ia32@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-ia32/-/linux-ia32-0.19.10.tgz#d55ff822cf5b0252a57112f86857ff23be6cab0e"
 
-"@esbuild/linux-mips64el@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-mips64el/-/linux-mips64el-0.19.9.tgz#4c2f7c5d901015e3faf1563c4a89a50776cb07fd"
+"@esbuild/linux-loong64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.19.10.tgz#a9ad057d7e48d6c9f62ff50f6f208e331c4543c7"
 
-"@esbuild/linux-ppc64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-ppc64/-/linux-ppc64-0.19.9.tgz#8385332713b4e7812869622163784a5633f76fc4"
+"@esbuild/linux-mips64el@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-mips64el/-/linux-mips64el-0.19.10.tgz#b011a96924773d60ebab396fbd7a08de66668179"
 
-"@esbuild/linux-riscv64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-riscv64/-/linux-riscv64-0.19.9.tgz#23f1db24fa761be311874f32036c06249aa20cba"
+"@esbuild/linux-ppc64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-ppc64/-/linux-ppc64-0.19.10.tgz#5d8b59929c029811e473f2544790ea11d588d4dd"
 
-"@esbuild/linux-s390x@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-s390x/-/linux-s390x-0.19.9.tgz#2dffe497726b897c9f0109e774006e25b33b4fd0"
+"@esbuild/linux-riscv64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-riscv64/-/linux-riscv64-0.19.10.tgz#292b06978375b271bd8bc0a554e0822957508d22"
 
-"@esbuild/linux-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.19.9.tgz#ceb1d62cd830724ff5b218e5d3172a8bad59420e"
+"@esbuild/linux-s390x@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-s390x/-/linux-s390x-0.19.10.tgz#d30af63530f8d4fa96930374c9dd0d62bf59e069"
 
-"@esbuild/netbsd-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/netbsd-x64/-/netbsd-x64-0.19.9.tgz#0cbca65e9ef4d3fc41502d3e055e6f49479a8f18"
+"@esbuild/linux-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.19.10.tgz#898c72eeb74d9f2fb43acf316125b475548b75ce"
 
-"@esbuild/openbsd-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/openbsd-x64/-/openbsd-x64-0.19.9.tgz#1f57adfbee09c743292c6758a3642e875bcad1cf"
+"@esbuild/netbsd-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/netbsd-x64/-/netbsd-x64-0.19.10.tgz#fd473a5ae261b43eab6dad4dbd5a3155906e6c91"
 
-"@esbuild/sunos-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/sunos-x64/-/sunos-x64-0.19.9.tgz#116be6adbd2c7479edeeb5f6ea0441002ab4cb9c"
+"@esbuild/openbsd-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/openbsd-x64/-/openbsd-x64-0.19.10.tgz#96eb8992e526717b5272321eaad3e21f3a608e46"
 
-"@esbuild/win32-arm64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/win32-arm64/-/win32-arm64-0.19.9.tgz#2be22131ab18af4693fd737b161d1ef34de8ca9d"
+"@esbuild/sunos-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/sunos-x64/-/sunos-x64-0.19.10.tgz#c16ee1c167f903eaaa6acf7372bee42d5a89c9bc"
 
-"@esbuild/win32-ia32@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/win32-ia32/-/win32-ia32-0.19.9.tgz#e10ead5a55789b167b4225d2469324538768af7c"
+"@esbuild/win32-arm64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/win32-arm64/-/win32-arm64-0.19.10.tgz#7e417d1971dbc7e469b4eceb6a5d1d667b5e3dcc"
 
-"@esbuild/win32-x64@0.19.9":
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.19.9.tgz#b2da6219b603e3fa371a78f53f5361260d0c5585"
+"@esbuild/win32-ia32@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/win32-ia32/-/win32-ia32-0.19.10.tgz#2b52dfec6cd061ecb36171c13bae554888b439e5"
+
+"@esbuild/win32-x64@0.19.10":
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.19.10.tgz#bd123a74f243d2f3a1f046447bb9b363ee25d072"
 
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
@@ -299,9 +303,9 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/js@8.55.0":
-  version "8.55.0"
-  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.55.0.tgz#b721d52060f369aa259cf97392403cb9ce892ec6"
+"@eslint/js@8.56.0":
+  version "8.56.0"
+  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.56.0.tgz#ef20350fec605a7f7035a01764731b2de0f3782b"
 
 "@fastify/busboy@^2.0.0":
   version "2.1.0"
@@ -758,61 +762,61 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
 
-"@remix-run/router@1.13.1":
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.13.1.tgz#07e2a8006f23a3bc898b3f317e0a58cc8076b86e"
+"@remix-run/router@1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.14.0.tgz#9bc39a5a3a71b81bdb310eba6def5bc3966695b7"
 
-"@rollup/rollup-android-arm-eabi@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.9.0.tgz#0437b27edd7095d0b6d5db99d13af8157d7c58b0"
+"@rollup/rollup-android-arm-eabi@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.9.1.tgz#beaf518ee45a196448e294ad3f823d2d4576cf35"
 
-"@rollup/rollup-android-arm64@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.9.0.tgz#d4c14ef9e45d5c46b8d1f611ab8124a611d5be5b"
+"@rollup/rollup-android-arm64@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.9.1.tgz#6f76cfa759c2d0fdb92122ffe28217181a1664eb"
 
-"@rollup/rollup-darwin-arm64@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.9.0.tgz#6f3fdf5712db6b5e3d8f62a86a09cd659dd871f9"
+"@rollup/rollup-darwin-arm64@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.9.1.tgz#9aaefe33a5481d66322d1c62f368171c03eabe2b"
 
-"@rollup/rollup-darwin-x64@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.9.0.tgz#626d7786fe7c10b2e8533ad981b4a791fd72b9d0"
+"@rollup/rollup-darwin-x64@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.9.1.tgz#707dcaadcdc6bd3fd6c69f55d9456cd4446306a3"
 
-"@rollup/rollup-linux-arm-gnueabihf@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.9.0.tgz#57ece7bb1b7659a3ea2ace580a63b8f92b3161f1"
+"@rollup/rollup-linux-arm-gnueabihf@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.9.1.tgz#7a4dbbd1dd98731d88a55aefcef0ec4c578fa9c7"
 
-"@rollup/rollup-linux-arm64-gnu@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.9.0.tgz#345b276b814a5377344adc5780c4dfb7cd0e8ba9"
+"@rollup/rollup-linux-arm64-gnu@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.9.1.tgz#967ba8e6f68a5f21bd00cd97773dcdd6107e94ed"
 
-"@rollup/rollup-linux-arm64-musl@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.9.0.tgz#61cc6516e6e92e2205ea1d0ac30326379b0563c8"
+"@rollup/rollup-linux-arm64-musl@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.9.1.tgz#d3a4e1c9f21eef3b9f4e4989f334a519a1341462"
 
-"@rollup/rollup-linux-riscv64-gnu@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.9.0.tgz#e9add70ddca7bd6f685ec447ae83eb3be552f211"
+"@rollup/rollup-linux-riscv64-gnu@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.9.1.tgz#415c0533bb752164effd05f5613858e8f6779bc9"
 
-"@rollup/rollup-linux-x64-gnu@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.9.0.tgz#ece153613f0cf2c864dbfc2076c579da8abd51a9"
+"@rollup/rollup-linux-x64-gnu@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.9.1.tgz#0983385dd753a2e0ecaddea7a81dd37fea5114f5"
 
-"@rollup/rollup-linux-x64-musl@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.9.0.tgz#2d2dbdf5fbf2c19d1f3d31b8a7850b57f5799037"
+"@rollup/rollup-linux-x64-musl@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.9.1.tgz#eb7494ebc5199cbd2e5c38c2b8acbe2603f35e03"
 
-"@rollup/rollup-win32-arm64-msvc@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.9.0.tgz#bf2dbad350376e46cb77fab408bb398ad5f3648d"
+"@rollup/rollup-win32-arm64-msvc@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.9.1.tgz#5bebc66e3a7f82d4b9aa9ff448e7fc13a69656e9"
 
-"@rollup/rollup-win32-ia32-msvc@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.9.0.tgz#5c26b07f74f4054f3ecf202550100496ed2e73f3"
+"@rollup/rollup-win32-ia32-msvc@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.9.1.tgz#34156ebf8b4de3b20e6497260fe519a30263f8cf"
 
-"@rollup/rollup-win32-x64-msvc@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.9.0.tgz#4ea610e0c40a07a8afa2977cbf80507f41c2271c"
+"@rollup/rollup-win32-x64-msvc@4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.9.1.tgz#d146db7a5949e10837b323ce933ed882ac878262"
 
 "@types/babel__core@^7.20.5":
   version "7.20.5"
@@ -825,8 +829,8 @@
     "@types/babel__traverse" "*"
 
 "@types/babel__generator@*":
-  version "7.6.7"
-  resolved "https://registry.yarnpkg.com/@types/babel__generator/-/babel__generator-7.6.7.tgz#a7aebf15c7bc0eb9abd638bdb5c0b8700399c9d0"
+  version "7.6.8"
+  resolved "https://registry.yarnpkg.com/@types/babel__generator/-/babel__generator-7.6.8.tgz#f836c61f48b1346e7d2b0d93c6dacc5b9535d3ab"
   dependencies:
     "@babel/types" "^7.0.0"
 
@@ -843,9 +847,13 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/cookie@^0.5.1":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.5.4.tgz#7e70a20cd695bc48d46b08c2505874cd68b760e0"
+
 "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "20.10.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.4.tgz#b246fd84d55d5b1b71bf51f964bd514409347198"
+  version "20.10.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.5.tgz#47ad460b514096b7ed63a1dae26fad0914ed3ab2"
   dependencies:
     undici-types "~5.26.4"
 
@@ -854,8 +862,8 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.11.tgz#2596fb352ee96a1379c657734d4b913a613ad563"
 
 "@types/react-dom@^18.2.15":
-  version "18.2.17"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.17.tgz#375c55fab4ae671bd98448dcfa153268d01d6f64"
+  version "18.2.18"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.18.tgz#16946e6cd43971256d874bc3d0a72074bb8571dd"
   dependencies:
     "@types/react" "*"
 
@@ -1076,6 +1084,10 @@ convert-source-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
 
+cookie@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
+
 cross-spawn@^7.0.2:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -1127,8 +1139,8 @@ doctrine@^3.0.0:
     esutils "^2.0.2"
 
 electron-to-chromium@^1.4.601:
-  version "1.4.611"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.611.tgz#92d3a8f03110fbf5f99b054da97825f994fa480a"
+  version "1.4.615"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.615.tgz#b1c41839962d2e4e63dca05519da9040e34848c2"
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -1220,31 +1232,32 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 esbuild@^0.19.3:
-  version "0.19.9"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.19.9.tgz#423a8f35153beb22c0b695da1cd1e6c0c8cdd490"
+  version "0.19.10"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.19.10.tgz#55e83e4a6b702e3498b9f872d84bfb4ebcb6d16e"
   optionalDependencies:
-    "@esbuild/android-arm" "0.19.9"
-    "@esbuild/android-arm64" "0.19.9"
-    "@esbuild/android-x64" "0.19.9"
-    "@esbuild/darwin-arm64" "0.19.9"
-    "@esbuild/darwin-x64" "0.19.9"
-    "@esbuild/freebsd-arm64" "0.19.9"
-    "@esbuild/freebsd-x64" "0.19.9"
-    "@esbuild/linux-arm" "0.19.9"
-    "@esbuild/linux-arm64" "0.19.9"
-    "@esbuild/linux-ia32" "0.19.9"
-    "@esbuild/linux-loong64" "0.19.9"
-    "@esbuild/linux-mips64el" "0.19.9"
-    "@esbuild/linux-ppc64" "0.19.9"
-    "@esbuild/linux-riscv64" "0.19.9"
-    "@esbuild/linux-s390x" "0.19.9"
-    "@esbuild/linux-x64" "0.19.9"
-    "@esbuild/netbsd-x64" "0.19.9"
-    "@esbuild/openbsd-x64" "0.19.9"
-    "@esbuild/sunos-x64" "0.19.9"
-    "@esbuild/win32-arm64" "0.19.9"
-    "@esbuild/win32-ia32" "0.19.9"
-    "@esbuild/win32-x64" "0.19.9"
+    "@esbuild/aix-ppc64" "0.19.10"
+    "@esbuild/android-arm" "0.19.10"
+    "@esbuild/android-arm64" "0.19.10"
+    "@esbuild/android-x64" "0.19.10"
+    "@esbuild/darwin-arm64" "0.19.10"
+    "@esbuild/darwin-x64" "0.19.10"
+    "@esbuild/freebsd-arm64" "0.19.10"
+    "@esbuild/freebsd-x64" "0.19.10"
+    "@esbuild/linux-arm" "0.19.10"
+    "@esbuild/linux-arm64" "0.19.10"
+    "@esbuild/linux-ia32" "0.19.10"
+    "@esbuild/linux-loong64" "0.19.10"
+    "@esbuild/linux-mips64el" "0.19.10"
+    "@esbuild/linux-ppc64" "0.19.10"
+    "@esbuild/linux-riscv64" "0.19.10"
+    "@esbuild/linux-s390x" "0.19.10"
+    "@esbuild/linux-x64" "0.19.10"
+    "@esbuild/netbsd-x64" "0.19.10"
+    "@esbuild/openbsd-x64" "0.19.10"
+    "@esbuild/sunos-x64" "0.19.10"
+    "@esbuild/win32-arm64" "0.19.10"
+    "@esbuild/win32-ia32" "0.19.10"
+    "@esbuild/win32-x64" "0.19.10"
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -1299,13 +1312,13 @@ eslint-visitor-keys@^3.3.0, eslint-visitor-keys@^3.4.1, eslint-visitor-keys@^3.4
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz#0cd72fe8550e3c2eae156a96a4dddcd1c8ac5800"
 
 eslint@^8.53.0:
-  version "8.55.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.55.0.tgz#078cb7b847d66f2c254ea1794fa395bf8e7e03f8"
+  version "8.56.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.56.0.tgz#4957ce8da409dc0809f99ab07a1b94832ab74b15"
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
     "@eslint-community/regexpp" "^4.6.1"
     "@eslint/eslintrc" "^2.1.4"
-    "@eslint/js" "8.55.0"
+    "@eslint/js" "8.56.0"
     "@humanwhocodes/config-array" "^0.11.13"
     "@humanwhocodes/module-importer" "^1.0.1"
     "@nodelib/fs.walk" "^1.2.8"
@@ -1382,8 +1395,8 @@ fast-levenshtein@^2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
 fastq@^1.6.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.15.0.tgz#d04d07c6a2a68fe4599fea8d2e103a937fae6b3a"
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.16.0.tgz#83b9a9375692db77a822df081edb6a9cf6839320"
   dependencies:
     reusify "^1.0.4"
 
@@ -2060,17 +2073,17 @@ react-refresh@^0.14.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
 
 react-router-dom@^6.19.0:
-  version "6.20.1"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.20.1.tgz#e34f8075b9304221420de3609e072bb349824984"
+  version "6.21.0"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.21.0.tgz#aa4c6bc046a8e8723095bc09b3c0ab2254532712"
   dependencies:
-    "@remix-run/router" "1.13.1"
-    react-router "6.20.1"
+    "@remix-run/router" "1.14.0"
+    react-router "6.21.0"
 
-react-router@6.20.1:
-  version "6.20.1"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.20.1.tgz#e8cc326031d235aaeec405bb234af77cf0fe75ef"
+react-router@6.21.0:
+  version "6.21.0"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.21.0.tgz#6fe3e59877aca3dccceec1801d26991ddf42d12b"
   dependencies:
-    "@remix-run/router" "1.13.1"
+    "@remix-run/router" "1.14.0"
 
 react@^18.2.0:
   version "18.2.0"
@@ -2124,22 +2137,22 @@ rimraf@^3.0.2:
     glob "^7.1.3"
 
 rollup@^4.2.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-4.9.0.tgz#94dff4070f106c1be6b2e88401a49b023c87fa88"
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-4.9.1.tgz#351d6c03e4e6bcd7a0339df3618d2aeeb108b507"
   optionalDependencies:
-    "@rollup/rollup-android-arm-eabi" "4.9.0"
-    "@rollup/rollup-android-arm64" "4.9.0"
-    "@rollup/rollup-darwin-arm64" "4.9.0"
-    "@rollup/rollup-darwin-x64" "4.9.0"
-    "@rollup/rollup-linux-arm-gnueabihf" "4.9.0"
-    "@rollup/rollup-linux-arm64-gnu" "4.9.0"
-    "@rollup/rollup-linux-arm64-musl" "4.9.0"
-    "@rollup/rollup-linux-riscv64-gnu" "4.9.0"
-    "@rollup/rollup-linux-x64-gnu" "4.9.0"
-    "@rollup/rollup-linux-x64-musl" "4.9.0"
-    "@rollup/rollup-win32-arm64-msvc" "4.9.0"
-    "@rollup/rollup-win32-ia32-msvc" "4.9.0"
-    "@rollup/rollup-win32-x64-msvc" "4.9.0"
+    "@rollup/rollup-android-arm-eabi" "4.9.1"
+    "@rollup/rollup-android-arm64" "4.9.1"
+    "@rollup/rollup-darwin-arm64" "4.9.1"
+    "@rollup/rollup-darwin-x64" "4.9.1"
+    "@rollup/rollup-linux-arm-gnueabihf" "4.9.1"
+    "@rollup/rollup-linux-arm64-gnu" "4.9.1"
+    "@rollup/rollup-linux-arm64-musl" "4.9.1"
+    "@rollup/rollup-linux-riscv64-gnu" "4.9.1"
+    "@rollup/rollup-linux-x64-gnu" "4.9.1"
+    "@rollup/rollup-linux-x64-musl" "4.9.1"
+    "@rollup/rollup-win32-arm64-msvc" "4.9.1"
+    "@rollup/rollup-win32-ia32-msvc" "4.9.1"
+    "@rollup/rollup-win32-x64-msvc" "4.9.1"
     fsevents "~2.3.2"
 
 run-parallel@^1.1.9:
@@ -2366,6 +2379,13 @@ undici@5.26.5:
   dependencies:
     "@fastify/busboy" "^2.0.0"
 
+universal-cookie@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-6.1.1.tgz#2d619e21804c93b39ff0c77fe47dafd7a492346d"
+  dependencies:
+    "@types/cookie" "^0.5.1"
+    cookie "^0.5.0"
+
 update-browserslist-db@^1.0.13:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.0.13.tgz#3c5e4f5c083661bd38ef64b6328c26ed6c8248c4"
@@ -2383,9 +2403,9 @@ uuid@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
 
-vite@^5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-5.0.8.tgz#070383dcb4d4f12adde9c119b8cca0f40bf906e9"
+vite@^5.0.3:
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-5.0.10.tgz#1e13ef5c3cf5aa4eed81f5df6d107b3c3f1f6356"
   dependencies:
     esbuild "^0.19.3"
     postcss "^8.4.32"
