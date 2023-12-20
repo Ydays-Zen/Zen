@@ -104,7 +104,7 @@ const Main = () => {
 
   return (
     <>
-      <main>
+      <main className="mainDisplayBooks">
         {booksList.map((book) => (
           <div key={book.id} className="displaybooks">
             <h2>{book.title}</h2>

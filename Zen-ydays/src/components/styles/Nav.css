@@ -30,7 +30,7 @@ nav div .logo{
     margin-right: 20px;
 }
 
-@media  screen and (min-width: 768px) {
+@media  screen and (min-width: 850px) {
     nav .content  {
         display: none;
     }

@@ -54,7 +54,7 @@ nav  .post{
     transition: cubic-bezier(0.45, 0.73, 0, 0.59) .3s;
 }
 
-@media  screen and (min-width: 768px) {
+@media  screen and (min-width: 850px) {
     nav .contenue  {
         display: none;
     }
