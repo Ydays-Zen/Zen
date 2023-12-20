@@ -1,15 +1,35 @@
 /*----------partie 1 info_profil----------*/
 .container_info{
-    height:25vh;
+    display: flex;
+    height:14vh;
     background-color: #fff;
+    margin-top:9vh;
+    border: 2px solid black;
 }
-.image_profil{}
-.info_profil{}
+.image_profil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:30vw;
+    background-color: red;
+}
+.image_profil>img{
+    height: 72px;
+    border-radius: 50px;
+}
+
+.info_profil{
+    background-color: blue;
+    width: 55vw;
+}
 .name{}
 .info_follow{}
 .followers{}
 .following{}
-.edit_profil{}
+.edit_profil{
+    width: 15vw;
+    background-color:pink;
+}
 
 
 
@@ -18,7 +38,7 @@
 /*-------/fin partie 1 info_profil-------------*/
 /*----------partie 2 oeuvres_profil----------*/
 .container_oeuvres{
-    height: 25vh;
+    height: 20vh;
     background-color: red;
 }
 .container_oeuvres>h3{}
@@ -31,8 +51,9 @@
 /*----------partie 3 lecture_profil----------*/
 
 .container_lecture{
-    height: 25vh;
+    height: 20vh;
     background-color: green;
+    margin-bottom: 20vh;
 }
 .container_info>h3{}
 .all_lecture{}
