@@ -1,0 +1,41 @@
+/*----------partie 1 info_profil----------*/
+.container_info{
+    height:25vh;
+    background-color: #fff;
+}
+.image_profil{}
+.info_profil{}
+.name{}
+.info_follow{}
+.followers{}
+.following{}
+.edit_profil{}
+
+
+
+
+
+/*-------/fin partie 1 info_profil-------------*/
+/*----------partie 2 oeuvres_profil----------*/
+.container_oeuvres{
+    height: 25vh;
+    background-color: red;
+}
+.container_oeuvres>h3{}
+.all_oeuvres{}
+.exemple_oeuvres{}
+
+
+
+/*----------/fin partie 2 oeuvres_profil----------*/
+/*----------partie 3 lecture_profil----------*/
+
+.container_lecture{
+    height: 25vh;
+    background-color: green;
+}
+.container_info>h3{}
+.all_lecture{}
+.exemple_lecture{}
+
+/*----------/fin partie 3 lecture_profil----------*/
