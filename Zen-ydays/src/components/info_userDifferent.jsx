@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/userContext';
 import { followUser, unfollowUser } from '../../src/Subscription/Subscription';
 
-export function UserDifferent({ userId }) {
+export function Info_userDifferent({ userId }) {
     const { currentUser } = useContext(UserContext);
     const [profileUser, setProfileUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
@@ -81,4 +81,4 @@ const getProfileUserFromDatabase = async (userId) => {
         return null;
     }
 };
-export default UserDifferent;
+export default Info_userDifferent;

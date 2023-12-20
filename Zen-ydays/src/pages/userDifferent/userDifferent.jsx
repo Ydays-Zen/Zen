@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./userDifferent.css";
-import UserDifferent from "../../components/info_userDifferent.jsx";
+import Info_userDifferent from "../../components/info_userDifferent.jsx";
 import SubManager from "../../SubManager/SubManager.jsx";
 
 class UserDifferent extends Component {
@@ -16,7 +16,7 @@ class UserDifferent extends Component {
   render() {
     return (
       <>
-      <UserDifferent />
+      <Info_userDifferent userId={this.state.targetUserId} />
       </>
     );
   }
