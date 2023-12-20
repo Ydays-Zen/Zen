@@ -23,10 +23,12 @@ export function Info_profil() {
                     </div>
                     <div className="info_follow">
                         <div className="followers">
-                            Followers: {followerCount}
+                          <p>Followers</p>
+                          <p>{followerCount}</p>
                         </div>
                         <div className="following">
-                            Following: {followingCount}
+                          <p>Following</p>
+                          <p>{followingCount}</p>
                         </div>
                     </div>
                 </div>
