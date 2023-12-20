@@ -3,6 +3,7 @@ import { UserContext } from '../context/userContext';
 
 import '../pages/Profil/profil.css';
 import profil_image from '../assets/exemple_pp.jpeg';
+import edit_image from '../assets/edit.svg';
 
 export function Info_profil() {
     const { followerCount, followingCount, currentUser } = useContext(UserContext);
@@ -32,7 +33,9 @@ export function Info_profil() {
                         </div>
                     </div>
                 </div>
-                <div className="edit_profil"></div>
+                <div className="edit_profil">
+                    <img src={edit_image} alt=""/>
+                </div>
             </div>
         </div>
     );

@@ -60,8 +60,15 @@
     margin: 2px;
 }
 .edit_profil{
+    display: flex;
+    justify-content: end;
+    align-items: start;
     width: 15vw;
-    background-color:pink;
+}
+
+.edit_profil>img{
+    width: 30px;
+    margin: 10px 10px 0 0;
 }
 
 
