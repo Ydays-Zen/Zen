@@ -2,7 +2,7 @@
 nav .contenue {
     width: 95%;
     height: 65px;
-    background-color: #D3C8B2;
+    background-color: var(--secondary);
     border-radius: 8px;
 
     display: flex;
@@ -37,9 +37,9 @@ nav  .post{
     left:50%;
     transform: translateX(-50%);
     
-    background-color: #786146;
+    background-color: var(--tertiary);
     border-radius:50%;
-    border: 5px solid #FFF5E1;
+    border: 5px solid var(--primary);
 }
 
 .contenue .icon {

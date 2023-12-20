@@ -27,12 +27,9 @@ const Connected = () => {
   return (
     <div>
       <Header />
-
       {currentUser && <h2>Welcome {currentUser.email}</h2>}
       {currentUser && <button onClick={logOut}>Log Out</button>}
-
       <Main />
-      {/* <UploadImg /> */}
     </div>
   );
 };

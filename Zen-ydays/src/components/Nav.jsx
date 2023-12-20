@@ -10,7 +10,6 @@ function Nav() {
       <nav>
         <div className="content">
           <img className="logo" src={Logo} alt="Logo Zen" />
-
           <div>
             <a href="#">
               {" "}
