@@ -1,6 +1,5 @@
-// Subsciption.jsx
 import { auth, firestore } from "../db/firebase-config";
-import firebase from 'firebase/compat/app';  // Importez 'compat/app' pour la compatibilité avec Firebase v9
+import firebase from 'firebase/compat/app'; 
 
 export const followUser = async (currentUserId, targetUserId) => {
   try {

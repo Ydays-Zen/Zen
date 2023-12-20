@@ -1,17 +1,21 @@
+*{
+    color: black;
+}
+
 /*----------partie 1 info_profil----------*/
 .container_info{
     display: flex;
     height:14vh;
-    background-color: #fff;
     margin-top:9vh;
-    border: 2px solid black;
+    border: solid black;
+    border-width: 2px 0;
 }
 .image_profil{
     display: flex;
     justify-content: center;
     align-items: center;
     width:30vw;
-    background-color: red;
+
 }
 .image_profil>img{
     height: 72px;
@@ -19,11 +23,26 @@
 }
 
 .info_profil{
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
     width: 55vw;
+    height: 100%;
 }
-.name{}
-.info_follow{}
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    background-color: blue;
+    height: 30%;
+}
+.name>h4{
+    background-color: yellow;
+}
+.info_follow{
+    height: 70%;
+    background-color: green;
+    display: flex;
+}
 .followers{}
 .following{}
 .edit_profil{
