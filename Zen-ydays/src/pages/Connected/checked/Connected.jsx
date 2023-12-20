@@ -3,13 +3,11 @@ import { useContext } from "react";
 import { auth } from "../../../db/firebase-config.jsx";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-
-import Comments from "../../../components/Comments.jsx";
-import Header from "../../../layout/homes/Header.jsx";
-// import UploadImg from "../../../components/UploadImg.jsx";
+import Header from "../../../layout/home/Header.jsx";
+import Main from "../../../layout/home/Main.jsx";
 
 const Connected = () => {
   const navigate = useNavigate();
@@ -33,8 +31,7 @@ const Connected = () => {
       {currentUser && <h2>Welcome {currentUser.email}</h2>}
       {currentUser && <button onClick={logOut}>Log Out</button>}
 
-      <Comments />
-
+      <Main />
       {/* <UploadImg /> */}
     </div>
   );

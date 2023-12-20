@@ -13,7 +13,7 @@ const Post = () => {
   const [resume, setResume] = useState("");
   const [image, setImage] = useState(null);
   const [tags, setTags] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl] = useState("");
 
   const bookRef = collection(firestore, "Books");
 
