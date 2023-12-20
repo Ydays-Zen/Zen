@@ -12,28 +12,10 @@ class UserDifferent extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchUser();
-  }
-
-  fetchUser = () => {
-    fetch(`http://localhost:3000/user/${this.state.targetUserId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-          user: data,
-        });
-      });
-  };
-
-  handleFollow = () => {
-    SubManager.follow(this.state.currentUserId, this.state.targetUserId);
-    console.log(`Vous suivez l'utilisateur avec l'ID : ${this.state.targetUserId}`);
-  };
-
   render() {
     return (
       <>
+      <UserDifferent />
       </>
     );
   }
