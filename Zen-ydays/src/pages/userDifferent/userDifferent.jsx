@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./userDifferent.css";
+import UserDifferent from "../../components/info_userDifferent.jsx";
 import SubManager from "../../SubManager/SubManager.jsx";
 
 class UserDifferent extends Component {
