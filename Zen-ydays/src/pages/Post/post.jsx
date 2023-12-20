@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import { collection, addDoc } from "firebase/firestore";
@@ -37,6 +37,11 @@ const Post = () => {
       return "";
     }
   };
+
+  useEffect(() => {
+    console.log("Nouvelle URL dans useEffect :", imageUrl);
+    // Effectuer d'autres actions avec la nouvelle URL si nécessaire
+  }, [imageUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
