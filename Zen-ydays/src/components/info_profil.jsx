@@ -5,7 +5,6 @@ import '../pages/Profil/profil.css';
 import profil_image from '../assets/exemple_pp.jpeg';
 
 export function Info_profil() {
-  // Utilisez le contexte utilisateur
   const { followerCount, followingCount } = useContext(UserContext);
 
   return (
