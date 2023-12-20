@@ -3,6 +3,9 @@ import { UserContext } from "../../context/userContext";
 import "./Profil.css";
 import SubManager from '../../SubManager/SubManager.jsx';
 
+import Info_profil from "../../components/info_profil.jsx";
+import Header from "../../layout/Header.jsx";
+import Nav from "../../layout/Nav.jsx";
 function Profil() {
   const currentUserId = useContext(UserContext); 
 
@@ -12,7 +15,10 @@ function Profil() {
 
   return (
     <>
-      <div className="Profil">
+      <Header/>
+      <Info_profil/>
+      <Nav/>
+      {/*<div className="Profil">
         <h1>Profil</h1>
         <div className="Profil-Container">
           <div className="Profil-Container-Info">
@@ -44,9 +50,10 @@ function Profil() {
             </div>
           </div>
         </div>
-      </div>
+      </div>*/}
     </>
   );
 }
+
 
 export default Profil;
