@@ -1,0 +1,56 @@
+/* post.css */
+
+.post {
+ 
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post h2 {
+    color: #786146;
+    text-align: center;
+  }
+  
+  .post form {
+    background-color: #D3C8B2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 0 auto;
+  }
+  
+  .post label {
+    display: block;
+    margin-top: 10px;
+    color: #786146;
+  }
+  
+  .post input, .post textarea, .post button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #786146;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .post button {
+    background-color: #786146;
+    color: #FFF5E1;
+    cursor: pointer;
+  }
+  
+  .post button:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: #D3C8B2;
+  }
+
+  
+
+ 
+  
