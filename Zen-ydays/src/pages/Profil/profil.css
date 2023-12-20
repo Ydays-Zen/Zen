@@ -31,20 +31,34 @@
 .name{
     display: flex;
     justify-content: center;
-    align-items: end;
-    background-color: blue;
+    align-items: center;
     height: 30%;
 }
 .name>h4{
-    background-color: yellow;
+    font-size: 24px;
 }
 .info_follow{
     height: 70%;
-    background-color: green;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
-.followers{}
-.following{}
+.followers{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.followers>p{
+    margin: 2px;
+}
+.following{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.following>p{
+    margin: 2px;
+}
 .edit_profil{
     width: 15vw;
     background-color:pink;
