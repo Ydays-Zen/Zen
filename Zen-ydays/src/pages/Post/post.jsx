@@ -19,6 +19,7 @@ const Post = () => {
   const [image, setImage] = useState(null);
   const [tags, setTags] = useState("");
   const [imageUrl] = useState("");
+  const [preview, setPreview] = useState(null);
 
   const bookRef = collection(firestore, "Books");
 
@@ -45,8 +46,17 @@ const Post = () => {
 
   useEffect(() => {
     console.log("Nouvelle URL dans useEffect :", imageUrl);
-    // Effectuer d'autres actions avec la nouvelle URL si nécessaire
-  }, [imageUrl]);
+
+    // Mise à jour de l'aperçu de l'image
+    setPreview({
+      title,
+      content,
+      resume,
+      tags: tags.split(",").map((tag) => tag.trim()),
+      imageUrl,
+    });
+  }, [title, content, resume, tags, imageUrl]); 
+    
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -160,10 +170,25 @@ const Post = () => {
           <button type="submit">Poster le Livre</button>
         </form>
       </div>
+            {/* Aperçu du livre */}
+      <div className="book-preview">
+        <h2>Aperçu du Livre</h2>
+        {preview && (
+          <div>
+            <h3>{preview.title}</h3>
+            <p>{preview.resume}</p>
+            <img src={preview.imageUrl} alt="" />
+            <p>{preview.tags.join(", ")}</p>
+            <p>{preview.content}</p>
+            <img src={preview.imageUrl} alt="Aperçu du livre"/>
+
+
+          </div>
+        )}
+
     </div>
-    
-   
+    </div>
   );
-};
+}
 
 export default Post;
