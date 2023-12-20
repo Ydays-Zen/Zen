@@ -16,28 +16,25 @@ const Post = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const bookRef = collection(firestore, "Books");
+
   const uploadImg = async () => {
-    if (!image) return;
-
-    const imgRef = ref(
-      storage,
-      `images/${currentUser.uid}/${image.name + v4()}`
-    );
-
+    if (!image) return "";
+  
+    const imgRef = ref(storage, `images/${currentUser.uid}/${image.name + v4()}`);
+  
     try {
       await uploadBytes(imgRef, image);
       console.log("Uploaded img");
-
+  
       // Obtenez le chemin du fichier après le téléchargement
       const url = await getDownloadURL(imgRef);
-
-      // Mettez à jour l'URL de l'image avec un callback
-      setImageUrl((prevUrl) => {
-        console.log("Updated Image URL:", url);
-        return url;
-      });
+      console.log("Image URL:", url);
+  
+      // Retournez l'URL de l'image pour l'utiliser dans le formulaire
+      return url;
     } catch (error) {
       console.error("Erreur lors du téléchargement de l'image :", error);
+      return "";
     }
   };
 
@@ -62,7 +59,7 @@ const Post = () => {
 
     try {
       // Attendre que l'image soit téléchargée
-      await uploadImg();
+      const imageUrl = await uploadImg();
 
       // Maintenant imageUrl devrait être mis à jour
       await addDoc(bookRef, {
@@ -81,11 +78,11 @@ const Post = () => {
       setImage(null);
       setTags("");
       setContent("");
-      setImageUrl("");
     } catch (error) {
       console.error("Erreur lors de la soumission du formulaire :", error);
     }
   };
+
   return (
     <div>
       <h2>Poster un Livre</h2>
@@ -118,7 +115,20 @@ const Post = () => {
           name=""
           id=""
           onChange={(event) => {
-            setImage(event.target.files[0]);
+            // Utilisez FileReader pour lire le contenu du fichier
+            const selectedFile = event.target.files[0];
+
+            // Mise à jour de l'état de l'image
+            setImage(selectedFile);
+
+            // Vous pouvez également afficher l'aperçu de l'image si nécessaire
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              // e.target.result contient l'URL de l'image en base64
+              const imageUrl = e.target.result;
+              console.log("Image Preview URL:", imageUrl);
+            };
+            reader.readAsDataURL(selectedFile);
           }}
         />
 
