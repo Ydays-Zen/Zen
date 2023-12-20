@@ -1,3 +1,4 @@
+/*
 import { followUser } from './firebase'; 
 
 const SubManager = {
@@ -7,3 +8,4 @@ const SubManager = {
 };
 
 export default SubManager;
+*/
