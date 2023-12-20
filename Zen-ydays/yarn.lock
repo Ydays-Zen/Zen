@@ -2067,6 +2067,7 @@ react-refresh@^0.14.0:
 react-router-dom@^6.21.0:
   version "6.21.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.21.0.tgz#aa4c6bc046a8e8723095bc09b3c0ab2254532712"
+  integrity sha512-1dUdVj3cwc1npzJaf23gulB562ESNvxf7E4x8upNJycqyUm5BRRZ6dd3LrlzhtLaMrwOCO8R0zoiYxdaJx4LlQ==
   dependencies:
     "@remix-run/router" "1.14.0"
     react-router "6.21.0"
