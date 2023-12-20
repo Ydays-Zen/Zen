@@ -1,5 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { collection, getDocs, query, where, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
+import { useState, useEffect, useContext } from "react";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  addDoc,
+  doc,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
 import { firestore } from "../db/firebase-config";
 import { UserContext } from "../context/userContext";
 
@@ -123,6 +132,8 @@ const DisplayBooks = () => {
       {booksList.map((book, index) => (
         <div key={book.id}>
           <p>{book.title}</p>
+          {/* Affichege de notre couverture de livre  */}
+          <img src={book.image} alt="" />
           <p>Likes: {book.likedBy ? book.likedBy.length : 0}</p>
           <ul>
             {book.comments &&

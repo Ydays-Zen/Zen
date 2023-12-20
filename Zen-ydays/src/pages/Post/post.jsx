@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import { collection, addDoc } from "firebase/firestore";
@@ -16,8 +16,9 @@ const Post = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const bookRef = collection(firestore, "Books");
+
   const uploadImg = async () => {
-    if (!image) return;
+    if (!image) return "";
 
     const imgRef = ref(
       storage,
@@ -30,16 +31,20 @@ const Post = () => {
 
       // Obtenez le chemin du fichier après le téléchargement
       const url = await getDownloadURL(imgRef);
+      console.log("Image URL:", url);
 
-      // Mettez à jour l'URL de l'image avec un callback
-      setImageUrl((prevUrl) => {
-        console.log("Updated Image URL:", url);
-        return url;
-      });
+      // Retournez l'URL de l'image pour l'utiliser dans le formulaire
+      return url;
     } catch (error) {
       console.error("Erreur lors du téléchargement de l'image :", error);
+      return "";
     }
   };
+
+  useEffect(() => {
+    console.log("Nouvelle URL dans useEffect :", imageUrl);
+    // Effectuer d'autres actions avec la nouvelle URL si nécessaire
+  }, [imageUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +67,7 @@ const Post = () => {
 
     try {
       // Attendre que l'image soit téléchargée
-      await uploadImg();
+      const imageUrl = await uploadImg();
 
       // Maintenant imageUrl devrait être mis à jour
       await addDoc(bookRef, {
@@ -81,7 +86,6 @@ const Post = () => {
       setImage(null);
       setTags("");
       setContent("");
-      setImageUrl("");
     } catch (error) {
       console.error("Erreur lors de la soumission du formulaire :", error);
     }
@@ -118,7 +122,20 @@ const Post = () => {
           name=""
           id=""
           onChange={(event) => {
-            setImage(event.target.files[0]);
+            // Utilisez FileReader pour lire le contenu du fichier
+            const selectedFile = event.target.files[0];
+
+            // Mise à jour de l'état de l'image
+            setImage(selectedFile);
+
+            // Vous pouvez également afficher l'aperçu de l'image si nécessaire
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              // e.target.result contient l'URL de l'image en base64
+              const imageUrl = e.target.result;
+              console.log("Image Preview URL:", imageUrl);
+            };
+            reader.readAsDataURL(selectedFile);
           }}
         />
 
