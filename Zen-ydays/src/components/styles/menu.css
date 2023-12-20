@@ -8,6 +8,7 @@ nav .contenue {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* padding: 0 20px; */
 
     position: fixed;
     left: 50%;
@@ -42,11 +43,15 @@ nav  .post{
     border: 5px solid var(--primary);
 }
 
-.contenue .icon {
-    width: 30px;
-    height: 30px;
-    margin: 0 15px;
+
+.contenue .iconsFa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+    margin: 0 20px;
 }
+
 
 
 .contenue .icon:hover {

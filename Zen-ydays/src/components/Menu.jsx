@@ -1,25 +1,26 @@
 import Plume from "../assets/plume.svg";
-import Home from "../assets/home.svg";
-import Search from "../assets/search.svg";
-import Bookmark from "../assets/bookmark.svg";
-import User from "../assets/user.svg";
 
 import "./styles/menu.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 const Menu = () => {
   return (
     <>
       <nav>
         <div className="contenue">
-          <div>
+          <div className="iconsFa">
             <a href="#">
               {" "}
-              <img className="icon" src={Home} alt="Library" />
+              <FontAwesomeIcon icon={faHouse} size="xl" color="black" />
             </a>
 
             <a href="#">
               {" "}
-              <img className="icon" src={Search} alt="Message" />
+              <FontAwesomeIcon icon={faSearch} size="xl" color="black" />{" "}
             </a>
           </div>
 
@@ -30,15 +31,15 @@ const Menu = () => {
             </a>
           </div>
 
-          <div>
+          <div className="iconsFa">
             <a href="#">
               {" "}
-              <img className="icon" src={Bookmark} alt="Library" />
+              <FontAwesomeIcon icon={faBookmark} size="xl" color="black" />{" "}
             </a>
 
             <a href="/messagerie">
               {" "}
-              <img className="icon" src={User} alt="Message" />
+              <FontAwesomeIcon icon={faUser} size="xl" color="black" />
             </a>
           </div>
         </div>
