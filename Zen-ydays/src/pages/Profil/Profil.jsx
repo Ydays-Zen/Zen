@@ -8,6 +8,7 @@ function Profil() {
 
   const handleFollow = (targetUserId) => {
     SubManager.follow(currentUserId, targetUserId);
+    console.log(`Vous suivez l'utilisateur avec l'ID : ${targetUserId}`);
   };
 
   return (
@@ -18,7 +19,8 @@ function Profil() {
           <div className="Profil-Container-Info">
             <div>
               <h2>Profil de l&apos;utilisateur</h2>
-              <button onClick={() => handleFollow}>Follow</button>
+              {/* Ajoutez les parenthèses pour appeler correctement handleFollow */}
+              <button onClick={() => handleFollow()}>Follow</button>
             </div>
             <div className="Profil-Container-Info-Name">
               <h2>Nom</h2>
