@@ -1,54 +1,91 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../../context/userContext.jsx';
-import { firestore } from '../../db/firebase-config.jsx';
-import { collection, addDoc } from 'firebase/firestore';
+import { useState, useContext, useEffect } from "react";
+import { UserContext } from "../../context/userContext.jsx";
+import { firestore, storage } from "../../db/firebase-config.jsx";
+import { collection, addDoc } from "firebase/firestore";
 
-
-
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 const Post = () => {
-  const { currentUser } = useContext(UserContext); // Utilisez le contexte d'authentification pour obtenir l'utilisateur connecté
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState(''); // Déplacez cette déclaration ici
-  const [resume, setResume] = useState('');
-  const [image, setImage] = useState('');
-  const [tags, setTags] = useState('');
+  const { currentUser } = useContext(UserContext);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [resume, setResume] = useState("");
+  const [image, setImage] = useState(null);
+  const [tags, setTags] = useState("");
+  const [imageUrl] = useState("");
 
   const bookRef = collection(firestore, "Books");
 
+  const uploadImg = async () => {
+    if (!image) return "";
+  
+    const imgRef = ref(storage, `images/${currentUser.uid}/${image.name + v4()}`);
+  
+    try {
+      await uploadBytes(imgRef, image);
+      console.log("Uploaded img");
+  
+      // Obtenez le chemin du fichier après le téléchargement
+      const url = await getDownloadURL(imgRef);
+      console.log("Image URL:", url);
+  
+      // Retournez l'URL de l'image pour l'utiliser dans le formulaire
+      return url;
+    } catch (error) {
+      console.error("Erreur lors du téléchargement de l'image :", error);
+      return "";
+    }
+  };
+
+  useEffect(() => {
+    console.log("Nouvelle URL dans useEffect :", imageUrl);
+    // Effectuer d'autres actions avec la nouvelle URL si nécessaire
+  }, [imageUrl]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Handle submit reached");
 
-    // Vérifiez si l'utilisateur est connecté
     if (!currentUser) {
-      console.log('Vous devez être connecté pour poster un livre.');
+      console.log("Vous devez être connecté pour poster un livre.");
       return;
     }
 
-    //valider les champs du formulaire ici
     if (!title || !resume || !image || !tags || !content) {
-      console.log('Veuillez remplir tous les champs du formulaire.');
+      console.log("Veuillez remplir tous les champs du formulaire.");
       return;
     }
 
-    // Enregistrez le livre dans la collection 'books'
-    await addDoc(bookRef, {
-      title,
-      resume,
-      image,
-      tags: tags.split(',').map(tag => tag.trim()), // Convertit les tags en tableau
-      date: new Date(),
-      content,
-      like: 0, // Initialiser le nombre de likes à 0
-      userId: currentUser.uid, // Enregistrez l'ID de l'utilisateur connecté
-    });
+    if (!image) {
+      console.log("Veuillez sélectionner une image.");
+      return;
+    }
 
-    // Effacez les champs du formulaire après la soumission
-    setTitle('');
-    setResume('');
-    setImage('');
-    setTags('');
-    setContent('');
+    try {
+      // Attendre que l'image soit téléchargée
+      const imageUrl = await uploadImg();
+
+      // Maintenant imageUrl devrait être mis à jour
+      await addDoc(bookRef, {
+        title,
+        resume,
+        image: imageUrl,
+        tags: tags.split(",").map((tag) => tag.trim()),
+        date: new Date(),
+        content,
+        like: 0,
+        userId: currentUser.uid,
+      });
+
+      setTitle("");
+      setResume("");
+      setImage(null);
+      setTags("");
+      setContent("");
+    } catch (error) {
+      console.error("Erreur lors de la soumission du formulaire :", error);
+    }
   };
 
   return (
@@ -71,11 +108,33 @@ const Post = () => {
         ></textarea>
 
         <label>Image (URL):</label>
-        <input
-          type="text"
+        {/* <input
+          type="file"
           placeholder="Image"
           value={image}
           onChange={(e) => setImage(e.target.value)}
+        /> */}
+
+        <input
+          type="file"
+          name=""
+          id=""
+          onChange={(event) => {
+            // Utilisez FileReader pour lire le contenu du fichier
+            const selectedFile = event.target.files[0];
+
+            // Mise à jour de l'état de l'image
+            setImage(selectedFile);
+
+            // Vous pouvez également afficher l'aperçu de l'image si nécessaire
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              // e.target.result contient l'URL de l'image en base64
+              const imageUrl = e.target.result;
+              console.log("Image Preview URL:", imageUrl);
+            };
+            reader.readAsDataURL(selectedFile);
+          }}
         />
 
         <label>Tags (séparés par des virgules):</label>
