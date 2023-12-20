@@ -6,10 +6,16 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
+
+import Comments from "../../../components/Comments.jsx";
+import Header from "../../../layout/homes/Header.jsx";
+// import UploadImg from "../../../components/UploadImg.jsx";
+
 const Connected = () => {
   const navigate = useNavigate();
 
   const { currentUser } = useContext(UserContext);
+
   const logOut = async () => {
     try {
       await signOut(auth);
@@ -19,10 +25,17 @@ const Connected = () => {
       alert(error.message);
     }
   };
+
   return (
     <div>
+      <Header />
+
       {currentUser && <h2>Welcome {currentUser.email}</h2>}
       {currentUser && <button onClick={logOut}>Log Out</button>}
+
+      <Comments />
+
+      {/* <UploadImg /> */}
     </div>
   );
 };
