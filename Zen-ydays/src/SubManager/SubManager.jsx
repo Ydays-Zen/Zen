@@ -1,4 +1,4 @@
-import { followUser } from '../Subscription/Subsciption.jsx'; 
+import { followUser } from '../Subscription/Subscription.jsx'; 
 
 const SubManager = {
   follow: (currentUserId, targetUserId) => {
