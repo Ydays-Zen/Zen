@@ -5,7 +5,7 @@ import SubManager from "../../SubManager/SubManager.jsx";
 import Info_profil from "../../components/info_profil.jsx";
 import Oeuvres_profil from "../../components/oeuvres_profil.jsx";
 import Last_lecture_profil from "../../components/last_lecture_profil.jsx";
-import Header from "../../layout/Header.jsx";
+import Header from "../../layout/home/Header.jsx";
 import Nav from "../../layout/Nav.jsx";
 
 function Profil() {
