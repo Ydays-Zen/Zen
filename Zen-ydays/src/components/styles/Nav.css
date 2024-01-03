@@ -1,10 +1,11 @@
+nav {
+    width: 100%;
+    background-color: var(--secondary);
+    border-radius: 0 0 18px 18px;
+}
 
 nav .content {
-    width: 100%;
     height: 85px;
-    background-color: #D3C8B2;
-    border-radius: 0 0 18px 18px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,7 +30,7 @@ nav div .logo{
     margin-right: 20px;
 }
 
-@media  screen and (min-width: 768px) {
+@media  screen and (min-width: 850px) {
     nav .content  {
         display: none;
     }
