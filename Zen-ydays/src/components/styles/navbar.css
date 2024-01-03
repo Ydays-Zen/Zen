@@ -1,0 +1,64 @@
+.navBar {
+    width: 85px;
+    height: 100%;
+    background-color: #D3C8B2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.plume {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute; 
+  
+    width: 80px;
+    height: 80px;
+    top: 100px;
+    right: 40px;
+
+    
+    background-color: #786146;
+    border-radius:50%;
+    border: 5px solid #FFF5E1;
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.icon, .iconNav {
+    width: 35px;
+    height: 35px;
+}
+
+a {
+    margin: 15px 0;
+
+}
+
+.iconNav {
+    margin-bottom: 20px;
+}
+
+
+@media  screen and (max-width: 768px) {
+    nav .navBar  {
+        display: none;
+    }
+    
+}
