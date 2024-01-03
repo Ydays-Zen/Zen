@@ -1,14 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import "./Profil.css";
-import SubManager from '../../SubManager/SubManager.jsx';
+import { doc, getDoc } from 'firebase/firestore';
+import { firestore } from '../../db/firebase-config.jsx'; // Assurez-vous que le chemin est correct
 
 function Profil() {
-  const currentUserId = useContext(UserContext); 
+  const currentUserId = useContext(UserContext);
+  const [userData, setUserData] = useState(null);
 
-  const handleFollow = (targetUserId) => {
-    SubManager.follow(currentUserId, targetUserId);
-  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userDoc = await getDoc(doc(firestore, 'utilisateurs', currentUserId));
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données utilisateur", error);
+      }
+    };
+
+    if (currentUserId) {
+      fetchUserData();
+    }
+  }, [currentUserId]);
+
+
 
   return (
     <>
@@ -18,15 +34,14 @@ function Profil() {
           <div className="Profil-Container-Info">
             <div>
               <h2>Profil de l&apos;utilisateur</h2>
-              <button onClick={() => handleFollow}>Follow</button>
             </div>
             <div className="Profil-Container-Info-Name">
               <h2>Nom</h2>
-              <p>Prénom</p>
+              <p>{currentUserId.email}</p>
             </div>
             <div className="Profil-Container-Info-Email">
               <h2>Email</h2>
-              <p>Adresse email</p>
+              <p>{userData?.email}</p>
             </div>
             <div className="Profil-Container-Info-Password">
               <h2>Mot de passe</h2>
