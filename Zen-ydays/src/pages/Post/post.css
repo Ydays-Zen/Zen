@@ -1,91 +1,64 @@
 /* post.css */
 
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Utilisez la hauteur de la vue (viewport height) pour centrer verticalement */
+}
+
 .post {
-
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .post h2 {
-    color: #786146;
-    text-align: center;
-  }
-  
-  .post form {
-    background-color: #D3C8B2;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    margin: 0 auto;
-  }
-  
-  .post label {
-    display: block;
-    margin-top: 10px;
-    color: #786146;
-  }
-
-  
-  .post input, .post textarea, .post button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #786146;
-    background-color: #D3C8B2;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    color: #786146;
-  }
-  
-  .post button {
-    background-color: #786146;
-    color: #FFF5E1;
-    cursor: pointer;
-  }
-  
-  .post button:hover {
-    transition: all 0.3s ease-in-out;
-    background-color: #D3C8B2;
-  }
-
-  /* visualisation du livre à droite */
-
-/* book-preview.css */
-
-.book-preview {
-  background-color: #D3C8B2;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
-  position: absolute;
-  top: 50%; /* Centrer verticalement */
-  right: 180px; /* Aligner à droite */
-  transform: translateY(-50%);
+  max-width: 400px; /* Ajustez la largeur maximale selon vos préférences */
+  width: 100%; /* Utilisez 100% de la largeur disponible */
 }
 
-.book-preview h3 {
+.post h2 {
   color: #786146;
   text-align: center;
 }
 
-.book-preview p {
+.post form {
+  background-color: #D3C8B2;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.post label {
+  display: block;
+  margin-top: 10px;
   color: #786146;
 }
 
-.book-preview img {
-  max-width: 100%;
-  height: auto;
+.post input,
+.post textarea,
+.post button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #786146;
+  background-color: #D3C8B2;
   border-radius: 5px;
-  margin-top: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #786146;
 }
 
-  
+.post button {
+  background-color: #786146;
+  color: #FFF5E1;
+  cursor: pointer;
+}
+
+.post button:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #D3C8B2;
+}
