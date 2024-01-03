@@ -66,7 +66,7 @@
   flex-direction: column;
   align-items: center;
   width: 300px;
-  position: fixed; /* ou position: absolute; */
+  position: absolute;
   top: 50%; /* Centrer verticalement */
   right: 180px; /* Aligner à droite */
   transform: translateY(-50%);
