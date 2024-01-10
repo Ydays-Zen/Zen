@@ -1,15 +1,16 @@
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import "./Profil.css";
+
 import SubManager from "../../components/SubManager.jsx";
 
 function Profil() {
   const currentUserId = useContext(UserContext); 
 
-  const handleFollow = (targetUserId) => {
-    SubManager.follow(currentUserId, targetUserId);
-    console.log(`Vous suivez l'utilisateur avec l'ID : ${targetUserId}`);
-  };
+  // const handleFollow = (targetUserId) => {
+  //   SubManager.follow(currentUserId, targetUserId);
+  //   console.log(`Vous suivez l'utilisateur avec l'ID : ${targetUserId}`);
+  // };
 
   return (
     <>

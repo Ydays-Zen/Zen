@@ -19,20 +19,17 @@ const Post = () => {
 
   const uploadImg = async () => {
     if (!image) return "";
-
-    const imgRef = ref(
-      storage,
-      `images/${currentUser.uid}/${image.name + v4()}`
-    );
-
+  
+    const imgRef = ref(storage, `images/${currentUser.uid}/${image.name + v4()}`);
+  
     try {
       await uploadBytes(imgRef, image);
       console.log("Uploaded img");
-
+  
       // Obtenez le chemin du fichier après le téléchargement
       const url = await getDownloadURL(imgRef);
       console.log("Image URL:", url);
-
+  
       // Retournez l'URL de l'image pour l'utiliser dans le formulaire
       return url;
     } catch (error) {
@@ -90,6 +87,7 @@ const Post = () => {
       console.error("Erreur lors de la soumission du formulaire :", error);
     }
   };
+
   return (
     <div>
       <h2>Poster un Livre</h2>
