@@ -20,12 +20,12 @@ const NavBar = () => {
           </div>
 
           <div className="icons">
-            <a href="#">
+            <a href="/check/connected">
               {" "}
               <img className="icon" src={Home} alt="home" />
             </a>
 
-            <a href="/messagerie">
+            <a href="/check/Messages">
               {" "}
               <img className="icon" src={Message} alt="Message" />
             </a>

@@ -6,10 +6,13 @@ import Connected from "./pages/Connected/checked/Connected.jsx";
 import Check from "./pages/Connected/Check.jsx";
 import Post from "./pages/Post/post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
+import Message from "./pages/Messages/Message.jsx";
+import { UserContextProvider } from "./context/userContext.jsx";
 
 const App = () => {
   return (
     <div>
+      <UserContextProvider>
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -20,8 +23,10 @@ const App = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/check/Post" element={<Post />} />
+        <Route path="/check/Messages" element={<Message />} />
         <Route path="/check/Profil" element={<Profil />} />
       </Routes>
+      </UserContextProvider>
     </div>
   );
 };

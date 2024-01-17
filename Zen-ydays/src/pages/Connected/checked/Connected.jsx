@@ -1,6 +1,6 @@
 import { UserContext } from "../../../context/userContext.jsx";
-import { useContext } from "react";
-import { auth } from "../../../db/firebase-config.jsx";
+import { useContext} from "react";
+import { auth} from "../../../db/firebase-config.jsx";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -13,6 +13,12 @@ const Connected = () => {
   const navigate = useNavigate();
 
   const { currentUser } = useContext(UserContext);
+
+  const userId = currentUser.uid;
+  
+
+    console.log('User ID:', userId);
+    console.log('Pseudo:', currentUser.displayName);
 
   const logOut = async () => {
     try {
