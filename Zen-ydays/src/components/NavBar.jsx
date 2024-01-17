@@ -47,9 +47,7 @@ const NavBar = () => {
               <FontAwesomeIcon icon={faBookmark} size="xl" color="black" />{" "}
             </a>
 
-            <a href="#">
-              <FontAwesomeIcon icon={faUser} size="xl" color="black" />
-            </a>
+            <a href="#"></a>
           </div>
         </div>
       </nav>

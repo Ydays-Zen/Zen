@@ -28,7 +28,7 @@ const Category = () => {
 
   return (
     <>
-      <img className="logo" src="../../public/logo_zen.png" alt="Logo" />
+      {/* <img className="logo" src="../../public/logo_zen.png" alt="Logo" /> */}
 
       <div className="category">
         <div>
