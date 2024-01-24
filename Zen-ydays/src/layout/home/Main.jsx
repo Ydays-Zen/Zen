@@ -14,6 +14,8 @@ import {
   where,
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
+import Category from "../../components/Category";
+import NavBar from "../../components/NavBar";
 import { UserContext } from "../../context/userContext";
 import { firestore } from "../../db/firebase-config";
 
@@ -26,8 +28,6 @@ const Main = () => {
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [activeResume, setActiveResume] = useState(null);
-
-  console.log(btnValue);
 
   // Récupérez les données des livres et des commentaires
   const fetchData = async () => {
@@ -118,65 +118,70 @@ const Main = () => {
 
   return (
     <>
-      <main className="mainDisplayBooks">
-        {booksList.map((book) => (
-          <div key={book.id} className="displaybooks">
-            <h2>{book.title}</h2>
+      <div className="connected">
+        <Category />
 
-            {/* Affichage de la couverture du livre */}
-            <img className="couverture" src={book.image} alt="Couverture" />
+        <main className="mainDisplayBooks">
+          {booksList.map((book) => (
+            <div key={book.id} className="displaybooks">
+              <h2>{book.title}</h2>
 
-            <div className="tags">
-              <p className="tag">{book.tags}</p>
-            </div>
+              {/* Affichage de la couverture du livre */}
+              <img className="couverture" src={book.image} alt="Couverture" />
 
-            {currentUser && (
-              <div className="content">
-                {/* Système de like */}
-
-                <div className="likes">
-                  <FontAwesomeIcon
-                    onClick={() => handleLikeSubmit(book.id)}
-                    icon={
-                      book.likedBy && book.likedBy.includes(currentUser.uid)
-                        ? faHeartSolid
-                        : faHeartRegular
-                    }
-                    size="xl"
-                    color={
-                      book.likedBy && book.likedBy.includes(currentUser.uid)
-                        ? "red"
-                        : "black"
-                    }
-                  />
-
-                  <p>{book.likedBy ? book.likedBy.length : 0}</p>
-                </div>
-                {/* Resume */}
-                <button onClick={() => handleResumeClick(book.id)}>
-                  Résumé
-                </button>
-                {/* Affichage du Résumé  */}
-
-                <div
-                  className={`resume ${
-                    activeResume === book.id ? "active" : ""
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                    size="xl"
-                    onClick={() => handleResumeClick(book.id)}
-                    className={` ${activeResume === book.id ? "active" : ""}`}
-                  />
-                  <h3>Résumé</h3>
-                  <p>{book.resume}</p>
-                </div>
+              <div className="tags">
+                <p className="tag">{book.tags}</p>
               </div>
-            )}
-          </div>
-        ))}
-      </main>
+
+              {currentUser && (
+                <div className="content">
+                  {/* Système de like */}
+
+                  <div className="likes">
+                    <FontAwesomeIcon
+                      onClick={() => handleLikeSubmit(book.id)}
+                      icon={
+                        book.likedBy && book.likedBy.includes(currentUser.uid)
+                          ? faHeartSolid
+                          : faHeartRegular
+                      }
+                      size="xl"
+                      color={
+                        book.likedBy && book.likedBy.includes(currentUser.uid)
+                          ? "red"
+                          : "black"
+                      }
+                    />
+
+                    <p>{book.likedBy ? book.likedBy.length : 0}</p>
+                  </div>
+                  {/* Resume */}
+                  <button onClick={() => handleResumeClick(book.id)}>
+                    Résumé
+                  </button>
+                  {/* Affichage du Résumé  */}
+
+                  <div
+                    className={`resume ${
+                      activeResume === book.id ? "active" : ""
+                    }`}
+                  >
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      size="xl"
+                      onClick={() => handleResumeClick(book.id)}
+                      className={` ${activeResume === book.id ? "active" : ""}`}
+                    />
+                    <h3>Résumé</h3>
+                    <p>{book.resume}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </main>
+        <NavBar />
+      </div>
     </>
   );
 };

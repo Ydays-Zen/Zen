@@ -21,6 +21,9 @@ const Category = () => {
           ...doc.data(),
         }));
 
+        // Triez les catégories par ordre alphabétique des tags
+        categoriesData.sort((a, b) => a.tags.localeCompare(b.tags));
+
         setCategories(categoriesData);
       } catch (error) {
         console.error("Erreur lors de la récupération des catégories :", error);
@@ -35,22 +38,24 @@ const Category = () => {
     setBtnValue(tags);
   };
 
+  const displayCategory = () => {
+    return categories.map((category) => (
+      <div className="categoryButton" key={category.id}>
+        <button onClick={() => handleClick(category.tags)} id={category.tags}>
+          {category.tags}
+        </button>
+      </div>
+    ));
+  };
+
   return (
     <>
       <div className="category">
         <div>
           <h2>Category</h2>
 
-          {categories.map((category) => (
-            <div className="categoryButton" key={category.id}>
-              <button
-                onClick={() => handleClick(category.tags)}
-                id={category.tags}
-              >
-                {category.tags}
-              </button>
-            </div>
-          ))}
+          {displayCategory()}
+
           <p>{btnValue}</p>
         </div>
       </div>

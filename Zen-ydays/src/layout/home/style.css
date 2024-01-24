@@ -1,17 +1,19 @@
+
+
 .mainDisplayBooks {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-
+    width: 80%;
+    margin: 0 auto;
 }
 
 .displaybooks{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin: 50px;
+    max-width: 200px;
 }
 
 .couverture {
