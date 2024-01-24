@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import "./userDifferent.css";
+import { Component } from "react";
 import Info_userDifferent from "../../components/info_userDifferent.jsx";
-import SubManager from "../../SubManager/SubManager.jsx";
+import "./userDifferent.css";
 
 class UserDifferent extends Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class UserDifferent extends Component {
   render() {
     return (
       <>
-      <Info_userDifferent userId={this.state.targetUserId} />
+        <Info_userDifferent userId={this.state.targetUserId} />
       </>
     );
   }

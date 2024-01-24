@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
-import { UserContext } from "../../context/userContext";
 // import SubManager from "../../components/SubManager.jsx";
 import Info_profil from "../../components/info_profil.jsx";
-import Oeuvres_profil from "../../components/oeuvres_profil.jsx";
 import Last_lecture_profil from "../../components/last_lecture_profil.jsx";
+import Oeuvres_profil from "../../components/oeuvres_profil.jsx";
 import Header from "../../layout/home/Header.jsx";
 
 import "./Profil.css";
-import Nav from "../../layout/Nav.jsx";
 
 function Profil() {
   // const currentUserId = useContext(UserContext);
