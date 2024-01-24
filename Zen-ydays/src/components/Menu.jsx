@@ -1,11 +1,13 @@
 import Plume from "../assets/plume.svg";
 
-import "./styles/menu.css";
+import {
+  faBookmark,
+  faHouse,
+  faSearch,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import "./styles/menu.css";
 
 const Menu = () => {
   return (
@@ -13,7 +15,7 @@ const Menu = () => {
       <nav>
         <div className="contenue">
           <div className="iconsFa">
-            <a href="#">
+            <a href="/check/connected">
               {" "}
               <FontAwesomeIcon icon={faHouse} size="xl" color="black" />
             </a>
@@ -37,7 +39,7 @@ const Menu = () => {
               <FontAwesomeIcon icon={faBookmark} size="xl" color="black" />{" "}
             </a>
 
-            <a href="/messagerie">
+            <a href="/check/Profil">
               {" "}
               <FontAwesomeIcon icon={faUser} size="xl" color="black" />
             </a>

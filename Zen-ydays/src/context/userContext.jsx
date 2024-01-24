@@ -77,7 +77,7 @@ export function UserContextProvider(props) {
         );
       }
     } catch (error) {
-      console.error("Error fetching follower and following counts:", error);
+      // console.error("Error fetching follower and following counts:", error);
     }
   };
 

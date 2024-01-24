@@ -1,22 +1,23 @@
-import { useState, useEffect, useContext } from "react";
 import {
+  addDoc,
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
-  where,
-  addDoc,
-  doc,
   updateDoc,
-  getDoc,
+  where,
 } from "firebase/firestore";
-import { firestore } from "../db/firebase-config";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
+import { firestore } from "../db/firebase-config";
 
 const DisplayBooks = () => {
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [newComments, setNewComments] = useState([]);
 
+  // Récupérez les données des livres et des commentaires
   const fetchData = async () => {
     try {
       const booksRef = collection(firestore, "Books");
@@ -58,6 +59,7 @@ const DisplayBooks = () => {
     fetchData();
   }, []);
 
+  // Ajoutez un commentaire à un livre
   const handleCommentSubmit = async (bookUid, index) => {
     try {
       if (!currentUser) {
@@ -70,6 +72,7 @@ const DisplayBooks = () => {
         return;
       }
 
+      // Ajoutez le commentaire à la collection "Comments"
       const commentsRef = collection(firestore, "Comments");
       await addDoc(commentsRef, {
         bookUid,
@@ -78,6 +81,7 @@ const DisplayBooks = () => {
         date: new Date(),
       });
 
+      // Réinitialisez le commentaire dans l'état local
       setNewComments((prevComments) => {
         const newCommentsCopy = [...prevComments];
         newCommentsCopy[index] = "";
@@ -90,6 +94,7 @@ const DisplayBooks = () => {
     }
   };
 
+  // Gérez les likes
   const handleLikeSubmit = async (bookUid) => {
     try {
       if (!currentUser) {
