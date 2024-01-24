@@ -10,7 +10,7 @@
     
 }
 
-.logout{
+/* .logout{
     top: 0;
     right: 0;
     margin: 0.15em;
@@ -19,7 +19,17 @@
     font-size: 1.5em;
     cursor: pointer;
 
-}
+} */
+
+/* .btn_logout {
+    left: 20%;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+} */
 
 .search-bar-container {
     display: flex;
