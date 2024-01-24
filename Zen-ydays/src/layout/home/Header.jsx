@@ -11,9 +11,9 @@ export function Header() {
       <header>
         <Nav />
         <Menu />
+        <NavBar />
 
         <Category />
-        <NavBar />
       </header>
     </>
   );

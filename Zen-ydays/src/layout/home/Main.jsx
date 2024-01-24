@@ -19,16 +19,27 @@ import { firestore } from "../../db/firebase-config";
 
 import "./style.css";
 
+import { useCategory } from "../../context/CategoryContext";
+
 const Main = () => {
+  const { btnValue } = useCategory();
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [activeResume, setActiveResume] = useState(null);
 
+  console.log(btnValue);
+
+  // Récupérez les données des livres et des commentaires
   const fetchData = async () => {
     try {
       const booksRef = collection(firestore, "Books");
-      const querySnapshot = await getDocs(booksRef);
 
+      // Utilisez btnValue pour filtrer les livres si elle est définie
+      const filteredBooksQuery = btnValue
+        ? query(booksRef, where("tags", "array-contains", btnValue))
+        : booksRef;
+
+      const querySnapshot = await getDocs(filteredBooksQuery);
       const booksData = [];
 
       for (const doc of querySnapshot.docs) {
@@ -61,8 +72,9 @@ const Main = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [btnValue]); // Rafraîchir la liste lorsque btnValue change
 
+  // Gestion du like
   const handleLikeSubmit = async (bookUid) => {
     try {
       if (!currentUser) {
