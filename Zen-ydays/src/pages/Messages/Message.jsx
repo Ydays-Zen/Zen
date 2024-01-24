@@ -1,10 +1,12 @@
 // Message.jsx
-import React, { useState, useEffect, useContext } from 'react';
-import Header from '../../layout/home/Header';
-import Chat from '../../components/Chat';
-import SendMessage from '../../components/SendMessage';
-import Messages from '../../components/Messages';
-import { UserContext } from '../../context/userContext';
+import { useContext, useState } from "react";
+import Chat from "../../components/Chat";
+import Messages from "../../components/Messages";
+import SendMessage from "../../components/SendMessage";
+import { UserContext } from "../../context/userContext";
+import Header from "../../layout/home/Header";
+
+
 
 const Message = () => {
   const { userList, currentUser } = useContext(UserContext);
