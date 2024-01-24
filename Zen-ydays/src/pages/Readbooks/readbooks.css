@@ -1,0 +1,31 @@
+/* read-story.css */
+
+.read-books {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .read-books h2 {
+    color: #786146;
+    margin-bottom: 10px;
+  }
+  
+  .read-books img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .read-books p {
+    color: #786146;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+  }
+  
+  /* Ajoutez davantage de styles selon vos besoins */
+  

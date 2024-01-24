@@ -9,6 +9,8 @@ import Profil from "./pages/Profil/Profil.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+import Readbooks from "./pages/Readbooks/readbooks.jsx";
+
 
 const App = () => {
   return (
@@ -27,6 +29,7 @@ const App = () => {
           <Route path="/check/Messages" element={<Message />} />
           <Route path="/check/Profil" element={<Profil />} />
           <Route path="/check/userDifferent" element={<UserDifferent />} />
+          <Route path="/check/Readbooks/:bookId" element={<Readbooks />} />
         </Routes>
       </UserContextProvider>
     </div>

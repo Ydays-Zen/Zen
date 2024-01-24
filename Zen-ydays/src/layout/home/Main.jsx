@@ -16,6 +16,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { firestore } from "../../db/firebase-config";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
@@ -108,8 +109,9 @@ const Main = () => {
     <>
       <main className="mainDisplayBooks">
         {booksList.map((book) => (
-          <div key={book.id} className="displaybooks">
+          <Link to={`/check/Readbooks/${book.id}`} key={book.id} className="displaybooks">
             <h2>{book.title}</h2>
+            
 
             {/* Affichage de la couverture du livre */}
             <img className="couverture" src={book.image} alt="Couverture" />
@@ -117,6 +119,7 @@ const Main = () => {
             <div className="tags">
               <p className="tag">{book.tags}</p>
             </div>
+         
 
             {currentUser && (
               <div className="content">
@@ -162,7 +165,7 @@ const Main = () => {
                 </div>
               </div>
             )}
-          </div>
+              </Link>      
         ))}
       </main>
     </>
