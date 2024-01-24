@@ -109,12 +109,15 @@ const Main = () => {
     <>
       <main className="mainDisplayBooks">
         {booksList.map((book) => (
-          <Link to={`/check/Readbooks/${book.id}`} key={book.id} className="displaybooks">
+          <div key={book.id} className="displaybooks">
+            <Link to={`/check/Readbooks/${book.id}`} className="link">
             <h2>{book.title}</h2>
+               
             
 
             {/* Affichage de la couverture du livre */}
             <img className="couverture" src={book.image} alt="Couverture" />
+          </Link>
 
             <div className="tags">
               <p className="tag">{book.tags}</p>
@@ -165,7 +168,7 @@ const Main = () => {
                 </div>
               </div>
             )}
-              </Link>      
+          </div>  
         ))}
       </main>
     </>

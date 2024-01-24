@@ -1,146 +1,134 @@
 // Readbooks.js
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { firestore } from "../../db/firebase-config.jsx";
-import { doc, getDoc } from "firebase/firestore";
+import { getDoc, getDocs, collection, addDoc, doc } from "firebase/firestore";
 import Nav from "../../components/Nav.jsx";
 import Menu from "../../components/Menu.jsx";
 import NavBar from "../../components/NavBar.jsx";
-import "./Readbooks.css";
+import { UserContext } from "../../context/userContext.jsx";
+import { query, where } from "firebase/firestore";
+import "./readbooks.css";
+
 const Readbooks = () => {
-const { bookId } = useParams();
-const [book, setBook] = useState(null);
-const [comments, setComments,] = useState([]);
-const [newComments, setNewComments] = useState([]);
-const [index, setIndex] = useState(0);
-
-
-  const fetchComments = async () => {
-    try {
-      const commentsRef = collection(firestore, "Comments");
-      const querySnapshot = await getDoc(commentsRef);
-
-      const commentsData = [];
-
-      for (const doc of querySnapshot.docs) {
-        const commentData = doc.data();
-        const commentUid = doc.id;
-
-        const commentsRef = collection(firestore, "Comments");
-        const bookCommentsQuery = query(
-          commentsRef,
-          where("commentUid", "==", commentUid)
-        );
-        const commentsSnapshot = await getDoc(bookCommentsQuery);
-
-        const commentWithComments = {
-          ...commentData,
-          id: commentUid,
-          comments: commentsSnapshot.docs.map((commentDoc) =>
-            commentDoc.data()
-          ),
-        };
-
-        commentsData.push(commentWithComments);
-      }
-
-      setComments(commentsData);
-    } catch (error) {
-      console.error("Erreur lors de la récupération des données :", error);
-    }
-  }
-
-
-  const handleCommentSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const commentRef = collection(firestore, "Comments");
-      const payload = {
-        content: newComments[index],
-        bookUid: book.id,
-        userUid: currentUser.uid,
-      };
-      await addDoc(commentRef, payload);
-
-      setNewComments((prevNewComments) => {
-        const newNewComments = [...prevNewComments];
-        newNewComments[index] = "";
-        return newNewComments;
-      });
-    } catch (error) {
-      console.error("Erreur lors de l'ajout du commentaire :", error);
-    }
-  }
-
-  
-  useEffect(() => {
-    const fetchBook = async () => {
-      try {
-        const bookDoc = await getDoc(doc(firestore, "Books", bookId));
-        if (bookDoc.exists()) {
-          setBook(bookDoc.data());
-        } else {
-          console.log("Aucun livre trouvé avec l'ID spécifié.");
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération du livre :", error);
-      }
-    };
-
-    fetchBook();
-  }, [bookId] , [comments]);
-
-  return (
-    <div>
-      <Nav />
-      <Menu />
-      <NavBar />
-      <div className="read-books">
-        {book ? (
-          <>
-            <h2>{book.title}</h2>
-            <img src={book.image} alt={book.title} />
-            <p>{book.content}</p>
-            {/* Ajoutez d'autres éléments en fonction des détails du livre */}
-          </>
-        ) : (
-          <p>Chargement du livre...</p>
-        )}
-      </div>
-        <div className="comments">
-            <h3>Commentaires</h3>
-            {comments.length ? (
-            comments.map((comment) => (
-                <div key={comment.id}>
-                <p>{comment.content}</p>
-                <p>{comment.userUid}</p>
-                <p>{comment.date}</p>
-                <p>{comment.comments}</p>
-                </div>
-            ))
-            ) : (
-            <p>Aucun commentaire pour le moment.</p>
-            )}
-    </div>
-    <div className="add-comment">
-        <h3>Ajouter un commentaire</h3>
-        <form onSubmit={handleCommentSubmit}>
-            <textarea
-            value={newComments[index]}
-            onChange={(event) => {
-                const newNewComments = [...newComments];
-                newNewComments[index] = event.target.value;
-                setNewComments(newNewComments);
-            }}
-            />
-            <button type="submit">Ajouter</button>
-        </form>
+    const { bookId } = useParams();
+    const [book, setBook] = useState({});
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
+    const { currentUser } = useContext(UserContext);
     
-   </div>
-    </div>
-  );
+    const fetchBook = async () => {
+        try {
+        const bookRef = doc(firestore, "Books", bookId);
+        const bookDoc = await getDoc(bookRef);
+    
+        if (!bookDoc.exists()) {
+            console.log("Ce livre n'existe pas.");
+            return;
+        }
+    
+        const bookData = bookDoc.data();
+        const bookUid = bookDoc.id;
+    
+        const commentsRef = collection(firestore, "Comments");
+        const bookCommentsQuery = query(commentsRef, where("bookUid", "==", bookUid));
+        const commentsSnapshot = await getDocs(bookCommentsQuery);
+    
+        const bookWithComments = {
+            ...bookData,
+            id: bookUid,
+            comments: commentsSnapshot.docs.map((commentDoc) => commentDoc.data()),
+        };
+    
+        setBook(bookWithComments);
+        } catch (error) {
+        console.error("Erreur lors de la récupération du livre :", error);
+        }
+    };
+    
+    const fetchComments = async () => {
+        try {
+        const commentsRef = collection(firestore, "Comments");
+        const commentsQuery = query(commentsRef, where("bookUid", "==", bookId));
+        const commentsSnapshot = await getDocs(commentsQuery);
+    
+        const commentsData = commentsSnapshot.docs.map((doc) => doc.data());
+    
+        setComments(commentsData);
+        } catch (error) {
+        console.error("Erreur lors de la récupération des commentaires :", error);
+        }
+    };
+    
+    useEffect(() => {
+        fetchBook();
+        fetchComments();
+    }, []);
+    
+    const handleComment = async (e) => {
+        e.preventDefault();
+    
+        if (!currentUser) {
+        console.log("Vous devez être connecté pour commenter.");
+        return;
+        }
+    
+        if (!newComment) {
+        console.log("Vous ne pouvez pas commenter un champ vide.");
+        return;
+        }
+    
+        try {
+        const commentsRef = collection(firestore, "Comments");
+        await addDoc(commentsRef, {
+            bookUid: bookId,
+            content: newComment,
+            createdAt: new Date().toISOString(),
+            userUid: currentUser.uid,
+        });
+        
+        setNewComment("");
+        fetchComments();
+        } catch (error) {
+        console.error("Erreur lors de la soumission du commentaire :", error);
+        }
+    }
+
+    return (
+        <div>
+            <Nav />
+            <Menu />
+            <NavBar />
+            <div className="readbooks">
+                <div className="readbooks__book">
+                    <div className="readbooks__book__image">
+                        <img src={book.image} alt={book.title} />
+                    </div>
+                    <div className="readbooks__book__content">
+                        <h1>{book.title}</h1>
+                        <p>{book.content}</p>
+                    </div>
+                </div>
+                <div className="readbooks__comments">
+                    <h2>Commentaires</h2>
+                    <form onSubmit={handleComment}>
+                        <textarea
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                        />
+                        <button type="submit">Commenter</button>
+                    </form>
+                    {comments.map((comment) => (
+                        <div className="readbooks__comments__comment">
+                            <p>{comment.content}</p>
+                            <p>{comment.createdAt}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default Readbooks;
