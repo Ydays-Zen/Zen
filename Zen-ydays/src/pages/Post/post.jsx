@@ -11,6 +11,11 @@ import './post.css';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
+
+
+
+
+
 const Post = () => {
   const { currentUser } = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -93,11 +98,23 @@ const Post = () => {
     }
   };
 
+  // Aperçu du livre
+  const preview = {
+    title,
+    resume,
+    imageUrl,
+    tags: tags.split(",").map((tag) => tag.trim()),
+    content,
+  };
+
+
+
   return (
     <div>
       <Nav />
       <Menu />
       <NavBar />
+      <div className="Body_Post">
       <div className="post">
         <h2>Poster un Livre</h2>
         <form onSubmit={handleSubmit}>
@@ -160,21 +177,22 @@ const Post = () => {
           <button type="submit">Poster le Livre</button>
         </form>
       </div>
-               {/* Aperçu du livre  
-      <div className="book-preview">
-        <h2>Aperçu du Livre</h2>
-        {preview && (
-          <div>
-            <h3>{preview.title}</h3>
-            <p>{preview.resume}</p>
-            <img src={preview.imageUrl} alt="Aperçu du livre"/>
-            <p>{preview.tags.join(", ")}</p>
+               { /* Aperçu du livre  */
+                 <div className="book-preview">
+                   <button className="FullScreen">Full screen</button>
+                   <h2>Aperçu du Livre</h2>
+                   {preview && (
+                       <div>
+                         <p className="Preview_Title"><strong>Titre:</strong> {preview.title}</p>
+                         <p className="Preview_Resume"><strong>Résumé:</strong> {preview.resume}</p>
+                         <img src={preview.imageUrl} alt="Aperçu du livre"/>
+                         <p className="Preview_Tags"><strong>Tags:</strong> {preview.tags.join(", ")}</p>
+                         <p className="Preview_Content"><strong>Contenu:</strong> {preview.content}</p>
+                       </div>
+                   )}
 
-          </div>
-        )}
-
-    </div>*/}
-    
+                 </div>}
+      </div>
     </div>
   );
 }
