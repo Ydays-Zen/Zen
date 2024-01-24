@@ -12,6 +12,8 @@ import Result from "./pages/Search/result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+import Readbooks from "./pages/Readbooks/readbooks.jsx";
+
 
 const App = () => {
   return (
@@ -25,19 +27,18 @@ const App = () => {
               <Route path="connected" element={<Connected />} />
             </Route>
 
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/check/Post" element={<Post />} />
-            <Route path="/check/Messages" element={<Message />} />
-            <Route path="/check/Profil" element={<Profil />} />
-            <Route path="/check/userDifferent" element={<UserDifferent />} />
-            <Route path="/result" element={<Result />} />
-            <Route path="/search" element={<Search />} />
-          </Routes>
-        </CategoryProvider>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/check/Post" element={<Post />} />
+          <Route path="/check/Messages" element={<Message />} />
+          <Route path="/check/Profil" element={<Profil />} />
+          <Route path="/check/userDifferent" element={<UserDifferent />} />
+          <Route path="/check/Readbooks/:bookId" element={<Readbooks />} />
+        </Routes>
       </UserContextProvider>
     </div>
   );
 };
+
 
 export default App;

@@ -18,6 +18,7 @@ import Category from "../../components/Category";
 import NavBar from "../../components/NavBar";
 import { UserContext } from "../../context/userContext";
 import { firestore } from "../../db/firebase-config";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
@@ -118,20 +119,22 @@ const Main = () => {
 
   return (
     <>
-      <div className="connected">
-        <Category />
+      <main className="mainDisplayBooks">
+        {booksList.map((book) => (
+          <div key={book.id} className="displaybooks">
+            <Link to={`/check/Readbooks/${book.id}`} className="link">
+            <h2>{book.title}</h2>
+               
+            
 
-        <main className="mainDisplayBooks">
-          {booksList.map((book) => (
-            <div key={book.id} className="displaybooks">
-              <h2>{book.title}</h2>
+            {/* Affichage de la couverture du livre */}
+            <img className="couverture" src={book.image} alt="Couverture" />
+          </Link>
 
-              {/* Affichage de la couverture du livre */}
-              <img className="couverture" src={book.image} alt="Couverture" />
-
-              <div className="tags">
-                <p className="tag">{book.tags}</p>
-              </div>
+            <div className="tags">
+              <p className="tag">{book.tags}</p>
+            </div>
+         
 
               {currentUser && (
                 <div className="content">
@@ -161,27 +164,25 @@ const Main = () => {
                   </button>
                   {/* Affichage du Résumé  */}
 
-                  <div
-                    className={`resume ${
-                      activeResume === book.id ? "active" : ""
-                    }`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faXmark}
-                      size="xl"
-                      onClick={() => handleResumeClick(book.id)}
-                      className={` ${activeResume === book.id ? "active" : ""}`}
-                    />
-                    <h3>Résumé</h3>
-                    <p>{book.resume}</p>
-                  </div>
+                <div
+                  className={`resume ${
+                    activeResume === book.id ? "active" : ""
+                  }`}
+                >
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    size="xl"
+                    onClick={() => handleResumeClick(book.id)}
+                    className={` ${activeResume === book.id ? "active" : ""}`}
+                  />
+                  <h3>Résumé</h3>
+                  <p>{book.resume}</p>
                 </div>
-              )}
-            </div>
-          ))}
-        </main>
-        <NavBar />
-      </div>
+              </div>
+            )}
+          </div>  
+        ))}
+      </main>
     </>
   );
 };
