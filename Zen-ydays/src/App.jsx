@@ -6,13 +6,9 @@ import Connected from "./pages/Connected/checked/Connected.jsx";
 import Check from "./pages/Connected/Check.jsx";
 import Post from "./pages/Post/post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
-<<<<<<< HEAD
 import Message from "./pages/Messages/Message.jsx";
 import { UserContextProvider } from "./context/userContext.jsx";
-=======
-import UserDifferent from "./pages/userDifferent/userDifferent.jsx";
-
->>>>>>> 7e438c0f84660b979cdd97b1c4011bbee6095d40
+import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 
 const App = () => {
   return (

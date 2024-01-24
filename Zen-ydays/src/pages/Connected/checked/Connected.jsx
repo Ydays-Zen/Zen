@@ -17,16 +17,12 @@ const Connected = () => {
   //Recuperation de l'utilisateur connecté
   const { currentUser } = useContext(UserContext);
 
-<<<<<<< HEAD
   const userId = currentUser.uid;
   
 
     console.log('User ID:', userId);
     console.log('Pseudo:', currentUser.displayName);
 
-=======
-  // Deconnexion
->>>>>>> 7e438c0f84660b979cdd97b1c4011bbee6095d40
   const logOut = async () => {
     try {
       await signOut(auth);

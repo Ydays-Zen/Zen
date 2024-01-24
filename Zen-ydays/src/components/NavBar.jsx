@@ -33,14 +33,13 @@ const NavBar = () => {
               <FontAwesomeIcon icon={faHouse} size="xl" color="black" />
             </a>
 
-<<<<<<< HEAD
             <a href="/check/Messages">
               {" "}
               <img className="icon" src={Message} alt="Message" />
-=======
+            </a>
+
             <a href="/messagerie">
               <FontAwesomeIcon icon={faPaperPlane} size="xl" color="black" />{" "}
->>>>>>> 7e438c0f84660b979cdd97b1c4011bbee6095d40
             </a>
 
             <a href="#">
