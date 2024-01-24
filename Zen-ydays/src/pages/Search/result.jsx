@@ -26,7 +26,7 @@ const Result = () => {
         const bookData = bookDoc.data();
         return {
           title: bookData.title,
-          userId: bookData.userId,
+          userId: bookData.userId || '',
           imageUrl: bookData.image || '', // Ajout de la récupération de l'image
           resume: bookData.resume || '', // Ajout de la récupération du résumé
           source: 'Books',
@@ -37,8 +37,8 @@ const Result = () => {
         const userData = userDoc.data();
         return {
           displayName: userData.displayName,
-          userId: userData.userId,
-          source: 'Users',
+          Id: userData.ID,
+          source: 'users',
         };
       }) : [];
 
@@ -77,7 +77,7 @@ const Result = () => {
       <ul>
         {searchResults.map((result, index) => (
           <li key={index}>
-            <strong>{result.title}</strong> posté par {result.postedBy}
+            <strong>{result.title}</strong> posté par {result.postedBy} <br />
             <br />
             Image du livre: <img src={result.imageUrl} alt={`Image de ${result.title}`} />
             <br />
