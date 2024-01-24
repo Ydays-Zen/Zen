@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Search from "./components/Search.jsx";
 import { CategoryProvider } from "./context/CategoryContext.jsx";
 import { UserContextProvider } from "./context/userContext.jsx";
 import Check from "./pages/Connected/Check.jsx";
@@ -7,11 +8,10 @@ import Home from "./pages/Home/Home.jsx";
 import Message from "./pages/Messages/Message.jsx";
 import Post from "./pages/Post/post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
+import Result from "./pages/Search/result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
-import Result from "./pages/Search/result.jsx";
-import Search from "./components/Search.jsx";
 
 const App = () => {
   return (
@@ -31,10 +31,8 @@ const App = () => {
             <Route path="/check/Messages" element={<Message />} />
             <Route path="/check/Profil" element={<Profil />} />
             <Route path="/check/userDifferent" element={<UserDifferent />} />
-            <Route path="/results" element={<Result />} />
+            <Route path="/result" element={<Result />} />
             <Route path="/search" element={<Search />} />
-            
-
           </Routes>
         </CategoryProvider>
       </UserContextProvider>
