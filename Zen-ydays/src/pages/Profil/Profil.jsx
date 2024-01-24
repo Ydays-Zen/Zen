@@ -7,6 +7,7 @@ import Last_lecture_profil from "../../components/last_lecture_profil.jsx";
 import Header from "../../layout/home/Header.jsx";
 
 import "./Profil.css";
+import Nav from "../../layout/Nav.jsx";
 
 function Profil() {
   // const currentUserId = useContext(UserContext);
