@@ -1,7 +1,7 @@
-import Nav from "../../components/Nav";
-import Menu from "../../components/Menu";
-import NavBar from "../../components/NavBar";
 import Category from "../../components/Category";
+import Menu from "../../components/Menu";
+import Nav from "../../components/Nav";
+import NavBar from "../../components/NavBar";
 
 import "./style.css";
 
