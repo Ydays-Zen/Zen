@@ -6,6 +6,7 @@ import Header from "../../layout/home/Header.jsx";
 
 import "./Profil.css";
 
+
 function Profil() {
   // const currentUserId = useContext(UserContext);
 

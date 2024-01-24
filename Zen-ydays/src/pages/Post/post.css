@@ -14,8 +14,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 400px; /* Ajustez la largeur maximale selon vos préférences */
-  width: 100%; /* Utilisez 100% de la largeur disponible */
+  max-width: 400px;
+  width: 100%; 
 }
 
 .post h2 {
@@ -43,8 +43,8 @@ body {
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
-  border: 1px solid #786146;
   background-color: #D3C8B2;
+  border: 1px solid #786146;
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
@@ -53,6 +53,7 @@ body {
 
 .post button {
   background-color: #786146;
+  border: none;
   color: #FFF5E1;
   cursor: pointer;
 }
