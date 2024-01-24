@@ -36,7 +36,13 @@ const SendMessage = ({ selectedUser }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button className="btn_send" onClick={sendMessage}>Send Message</button>
+      <button
+        className="btn_send"
+        onClick={sendMessage}
+        disabled={!message.trim()} // Désactiver le bouton si le message est vide ou composé uniquement d'espaces
+      >
+        Send Message
+      </button>
     </div>
   );
 };
