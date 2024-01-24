@@ -114,7 +114,7 @@ const Post = () => {
       <Nav />
       <Menu />
       <NavBar />
-      <div className="Body_Post">
+      <div className="body_post">
       <div className="post">
         <h2>Poster un Livre</h2>
         <form onSubmit={handleSubmit}>
