@@ -7,7 +7,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate('/results', { state: { searchQuery } });
+    navigate('/result', { state: { searchQuery } });
   };
 
   return (
