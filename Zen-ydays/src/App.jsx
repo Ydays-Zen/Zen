@@ -34,6 +34,7 @@ const App = () => {
             <Route path="/results" element={<Result />} />
             <Route path="/search" element={<Search />} />
             
+
           </Routes>
         </CategoryProvider>
       </UserContextProvider>
