@@ -6,7 +6,6 @@ import Header from "../../layout/home/Header.jsx";
 
 import "./Profil.css";
 
-import SubManager from "../../components/SubManager.jsx";
 
 function Profil() {
   // const currentUserId = useContext(UserContext);
