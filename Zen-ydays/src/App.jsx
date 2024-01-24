@@ -30,6 +30,7 @@ const App = () => {
             <Route path="/check/Messages" element={<Message />} />
             <Route path="/check/Profil" element={<Profil />} />
             <Route path="/check/userDifferent" element={<UserDifferent />} />
+            <Route path="/search" element={<Result />} />
           </Routes>
         </CategoryProvider>
       </UserContextProvider>
