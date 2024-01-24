@@ -1,59 +1,87 @@
 // Messages.jsx
-import React, { useState, useEffect } from 'react';
-import { collection, query, where, onSnapshot, orderBy, doc } from 'firebase/firestore';
-import { firestore } from '../db/firebase-config';
-import './styles/Messages.css'; // Importez le fichier CSS pour les styles
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { firestore } from "../db/firebase-config";
+import "./styles/Messages.css"; // Importez le fichier CSS pour les styles
 
 const Messages = ({ currentUser, selectedUser }) => {
-    const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
-    useEffect(() => {
-        if (!selectedUser) {
-            setMessages([]);
-            return;
-        }
+  useEffect(() => {
+    if (!selectedUser) {
+      setMessages([]);
+      return;
+    }
 
-        const messagesRef = collection(firestore, 'messages');
+    const messagesRef = collection(firestore, "messages");
 
-        const combinedQuery = query(
-            messagesRef,
-            where('participants', 'in', [
-                [currentUser.uid, selectedUser.ID],
-                [selectedUser.ID, currentUser.uid],
-            ]),
-            orderBy('createdAt')
-        );
-
-        const unsubscribe = onSnapshot(combinedQuery, (querySnapshot) => {
-            const newMessages = [];
-            querySnapshot.forEach((doc) => {
-                const messageData = doc.data();
-                console.log('Message ID:', doc.id);
-                newMessages.push(messageData);
-            });
-            setMessages(newMessages);
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, [currentUser, selectedUser]);
-
-    return (
-        <div class="body_messages">
-            <h2 class="chat_h2">Discussion avec {selectedUser.displayName}</h2>
-            <ul class="messages_read">
-                    {messages &&
-                        messages.map((message) => (
-                            <li class="li_messages" key={message.id} className={message.participants[0] === currentUser.uid ? 'sent' : 'received'}>
-                                <span>{message.participants[0] === currentUser.uid ? 'Moi' : selectedUser.displayName}: </span>
-                                <span class="span_text">{message.text}</span>
-                                {/* <span>{message.createdAt && message.createdAt.toDate().toLocaleString()}</span> */}
-                            </li>
-                        ))}
-            </ul>
-        </div>
+    const combinedQuery = query(
+      messagesRef,
+      where("participants", "in", [
+        [currentUser.uid, selectedUser.ID],
+        [selectedUser.ID, currentUser.uid],
+      ]),
+      orderBy("createdAt")
     );
+
+    const unsubscribe = onSnapshot(combinedQuery, (querySnapshot) => {
+      const newMessages = [];
+      querySnapshot.forEach((doc) => {
+        const messageData = doc.data();
+        console.log("Message ID:", doc.id);
+        newMessages.push(messageData);
+      });
+      setMessages(newMessages);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [currentUser, selectedUser]);
+
+  let scrollDiv = document.querySelector(".messages_read");
+
+  useEffect(() => {
+    if (scrollDiv) {
+      scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    }
+  });
+
+  return (
+    <div className="body_messages">
+      <h2 className="chat_h2">Discussion avec {selectedUser.displayName}</h2>
+      <ul className="messages_read">
+        {messages &&
+          messages.map((message) => (
+            <li
+              className={`li_messages ${
+                // eslint-disable-next-line react/prop-types
+                message.participants[0] === currentUser.uid
+                  ? "sent"
+                  : "received"
+              }`}
+              key={message.id}
+            >
+              <span>
+                {message.participants[0] === currentUser.uid
+                  ? "Moi"
+                  : selectedUser.displayName}
+                :{" "}
+              </span>
+              <span className="span_text">{message.text}</span>
+              {/* <span>{message.createdAt && message.createdAt.toDate().toLocaleString()}</span> */}
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Messages;
+
