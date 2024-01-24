@@ -1,8 +1,8 @@
 // Message.jsx
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Chat from '../../components/Chat';
-import SendMessage from '../../components/SendMessage';
 import Messages from '../../components/Messages';
+import SendMessage from '../../components/SendMessage';
 import { UserContext } from '../../context/userContext';
 import HeaderAll from '../../layout/HeaderAll';
 
@@ -29,7 +29,6 @@ const Message = () => {
         )}
       </div>
     </div>
-
   );
 };
 
