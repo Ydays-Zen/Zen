@@ -1,9 +1,15 @@
 import { auth, firestore } from "../db/firebase-config";
 import firebase from 'firebase/compat/app';
+import React from 'react';
 
-class UserInteraction {
-  constructor(currentUserId) {
-    this.currentUserId = currentUserId;
+class Subscription extends React.Component {
+  constructor(props) {
+    super(props);
+    this.currentdisplayName = props.currentdisplayName;
+  }
+
+  render() {
+    return null;
   }
 
   async followUser(targetUserId) {
@@ -13,8 +19,15 @@ class UserInteraction {
         return;
       }
 
-      await this.updateUserSubscriptions(this.currentUserId, targetUserId);
-      await this.updateUserFollowers(targetUserId, this.currentUserId);
+      const currentUserId = await this.getUserIdByDisplayName(this.currentdisplayName);
+
+      if (!currentUserId || !targetUserId) {
+        console.error("Erreur lors de la récupération des identifiants d'utilisateur.");
+        return;
+      }
+
+      await this.updateUserSubscriptions(currentUserId, targetUserId);
+      await this.updateUserFollowers(targetUserId, currentUserId);
 
       console.log('Abonnement réussi');
     } catch (error) {
@@ -29,12 +42,28 @@ class UserInteraction {
         return;
       }
 
-      await this.updateUserSubscriptions(this.currentUserId, targetUserId, true);
-      await this.updateUserFollowers(targetUserId, this.currentUserId, true);
+      const currentUserId = await this.getUserIdByDisplayName(this.currentdisplayName);
+
+      if (!currentUserId || !targetUserId) {
+        console.error("Erreur lors de la récupération des identifiants d'utilisateur.");
+        return;
+      }
+
+      await this.updateUserSubscriptions(currentUserId, targetUserId, true);
+      await this.updateUserFollowers(targetUserId, currentUserId, true);
 
       console.log('Désabonnement réussi');
     } catch (error) {
       console.error('Erreur lors du désabonnement :', error);
+    }
+  }
+
+  async getUserIdByDisplayName(displayName) {
+    const querySnapshot = await firestore.collection('utilisateurs').where('displayName', '==', displayName).get();
+    if (!querySnapshot.empty) {
+      return querySnapshot.docs[0].id;
+    } else {
+      return null;
     }
   }
 
@@ -59,4 +88,4 @@ class UserInteraction {
   }
 }
 
-export default UserInteraction;
+export default Subscription;

@@ -4,6 +4,7 @@ import { getAuth, GoogleAuthProvider, } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+
 // Your Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,

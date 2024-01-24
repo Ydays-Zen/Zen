@@ -1,8 +1,9 @@
-import { followUser } from '../Subscription/Subscription.jsx'; 
+import  Subscription  from "./Subscription.jsx";
 
 const SubManager = {
-  follow: (currentUserId, targetUserId) => {
-    return followUser(currentUserId, targetUserId);
+  follow: (currentdisplayName, targetdisplayName) => {
+    const sub = new Subscription(currentdisplayName);
+    return sub.followUser(targetdisplayName);
   },
 };
 
