@@ -1,19 +1,21 @@
-import { useState, useEffect, useContext } from "react";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHeart as faHeartSolid,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
-  where,
-  doc,
   updateDoc,
-  getDoc,
+  where,
 } from "firebase/firestore";
-import { firestore } from "../../db/firebase-config";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { firestore } from "../../db/firebase-config";
 
 import "./style.css";
 
