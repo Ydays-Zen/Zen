@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { firestore, auth } from '../db/firebase-config';
+import './styles/SendMessage.css';
 
 const SendMessage = ({ selectedUser }) => {
 
@@ -28,13 +29,20 @@ const SendMessage = ({ selectedUser }) => {
   };
 
   return (
-    <div>
+    <div className="message-input-container">
       <input
+        className="input_message"
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button onClick={sendMessage}>Send Message</button>
+      <button
+        className="btn_send"
+        onClick={sendMessage}
+        disabled={!message.trim()} // Désactiver le bouton si le message est vide ou composé uniquement d'espaces
+      >
+        Send Message
+      </button>
     </div>
   );
 };

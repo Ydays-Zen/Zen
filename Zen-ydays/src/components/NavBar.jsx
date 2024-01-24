@@ -10,6 +10,7 @@ import {
   faHouse,
   faMessage,
   faSearch,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -47,6 +48,10 @@ const NavBar = () => {
             <a href="#">
               {" "}
               <FontAwesomeIcon icon={faBookmark} size="xl" color="black" />{" "}
+            </a>
+            <a href="/check/Profil">
+              {" "}
+              <FontAwesomeIcon icon={faUser} size="xl" color="black" />
             </a>
 
             <a href="#"></a>

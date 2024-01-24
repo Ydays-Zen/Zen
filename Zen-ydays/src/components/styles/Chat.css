@@ -1,0 +1,37 @@
+/* Ajoutez ces styles à votre fichier CSS (par exemple, Messages.css) */
+
+.content-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+}
+
+.user_h2 {
+    text-align: center;
+    color: #333;
+    /* Couleur du titre */
+}
+
+.user_read {
+    list-style: none;
+    padding: 0;
+}
+
+.select_user {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    /* Couleur de fond pour chaque utilisateur */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.select_user:hover {
+    background-color: #ddd;
+    /* Couleur de fond lorsqu'un utilisateur est survolé */
+    transition: background-color 0.3s ease;
+}

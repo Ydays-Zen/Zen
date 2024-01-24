@@ -88,13 +88,12 @@ export function UserContextProvider(props) {
         signUp,
         currentUser,
         signIn,
+        userList,
         followerCount,
         followingCount,
-        userList,
       }}
     >
       {!loadingData && props.children}
     </UserContext.Provider>
   );
 }
-

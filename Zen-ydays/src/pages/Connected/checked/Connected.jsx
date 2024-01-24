@@ -18,25 +18,31 @@ const Connected = () => {
   // Récupération de l'utilisateur connecté
   const { currentUser } = useContext(UserContext);
 
-  // Déconnexion
+  const userId = currentUser.uid;
+  
+
+    console.log('User ID:', userId);
+    console.log('Pseudo:', currentUser.displayName);
+
+  // Deconnexion
   const logOut = async () => {
     try {
       await signOut(auth);
       cookies.remove("auth-token");
-      navigate("/signin");
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
   return (
-    <div className="connected">
+    <div>
       <Header />
       <div className="search-bar-container">
         <Search /> {}
       </div>
       {/* {currentUser && <h2>Welcome {currentUser.email}</h2>} */}
-      {currentUser && <button className="logout"onClick={logOut}>Log Out</button>}
+      {currentUser && <button onClick={logOut}>Log Out</button>}
       <Main />
     </div>
   );

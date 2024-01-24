@@ -1,21 +1,28 @@
+<<<<<<< HEAD
 /* post.css */
 
-body {
+.body_post {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; /* Utilisez la hauteur de la vue (viewport height) pour centrer verticalement */
 }
+=======
+>>>>>>> category
 
 .post {
   padding: 20px;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   max-width: 400px;
   width: 100%; 
+
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
 }
 
 .post h2 {
