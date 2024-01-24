@@ -2,6 +2,11 @@ import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import { collection, addDoc } from "firebase/firestore";
+import Nav from "../../components/Nav";
+import Menu from "../../components/Menu";
+import NavBar from "../../components/NavBar";
+import './post.css';
+
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
@@ -40,8 +45,8 @@ const Post = () => {
 
   useEffect(() => {
     console.log("Nouvelle URL dans useEffect :", imageUrl);
-    // Effectuer d'autres actions avec la nouvelle URL si nécessaire
   }, [imageUrl]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,73 +95,88 @@ const Post = () => {
 
   return (
     <div>
-      <h2>Poster un Livre</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Titre:</label>
-        <input
-          type="text"
-          placeholder="Titre"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <Nav />
+      <Menu />
+      <NavBar />
+      <div className="post">
+        <h2>Poster un Livre</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Titre:</label>
+          <input
+            type="text"
+            placeholder="Titre"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <label>Résumé:</label>
-        <textarea
-          placeholder="Résumé"
-          value={resume}
-          onChange={(e) => setResume(e.target.value)}
-        ></textarea>
+          <label>Résumé:</label>
+          <textarea
+            placeholder="Résumé"
+            value={resume}
+            onChange={(e) => setResume(e.target.value)}
+          ></textarea>
 
-        <label>Image (URL):</label>
-        {/* <input
-          type="file"
-          placeholder="Image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        /> */}
+          <label>Image (URL):</label>
+          
 
-        <input
-          type="file"
-          name=""
-          id=""
-          onChange={(event) => {
-            // Utilisez FileReader pour lire le contenu du fichier
-            const selectedFile = event.target.files[0];
+          <input
+            type="file"
+            name=""
+            id=""
+            onChange={(event) => {
+              // Utilisez FileReader pour lire le contenu du fichier
+              const selectedFile = event.target.files[0];
 
-            // Mise à jour de l'état de l'image
-            setImage(selectedFile);
+              // Mise à jour de l'état de l'image
+              setImage(selectedFile);
 
-            // Vous pouvez également afficher l'aperçu de l'image si nécessaire
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              // e.target.result contient l'URL de l'image en base64
-              const imageUrl = e.target.result;
-              console.log("Image Preview URL:", imageUrl);
-            };
-            reader.readAsDataURL(selectedFile);
-          }}
-        />
+              // Vous pouvez également afficher l'aperçu de l'image si nécessaire
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                // e.target.result contient l'URL de l'image en base64
+                const imageUrl = e.target.result;
+                console.log("Image Preview URL:", imageUrl);
+              };
+              reader.readAsDataURL(selectedFile);
+            }}
+          />
 
-        <label>Tags (séparés par des virgules):</label>
-        <input
-          type="text"
-          placeholder="Tags"
-          value={tags}
-          onChange={(e) => setTags(e.target.value)}
-        />
+          <label>Tags (séparés par des virgules):</label>
+          <input
+            type="text"
+            placeholder="Tags"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
+          />
 
-        <label>Contenu:</label>
-        <input
-          type="text"
-          placeholder="Contenu"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+          <label>Contenu:</label>
+          <input
+            type="text"
+            placeholder="Contenu"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
 
-        <button type="submit">Poster le Livre</button>
-      </form>
+          <button type="submit">Poster le Livre</button>
+        </form>
+      </div>
+               {/* Aperçu du livre  
+      <div className="book-preview">
+        <h2>Aperçu du Livre</h2>
+        {preview && (
+          <div>
+            <h3>{preview.title}</h3>
+            <p>{preview.resume}</p>
+            <img src={preview.imageUrl} alt="Aperçu du livre"/>
+            <p>{preview.tags.join(", ")}</p>
+
+          </div>
+        )}
+
+    </div>*/}
+    
     </div>
   );
-};
+}
 
 export default Post;

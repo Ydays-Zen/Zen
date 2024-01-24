@@ -133,7 +133,7 @@ const DisplayBooks = () => {
         <div key={book.id}>
           <p>{book.title}</p>
           {/* Affichege de notre couverture de livre  */}
-          <img src={book.image} alt="" />
+          <img src={book.image} alt="Couverture" />
           <p>Likes: {book.likedBy ? book.likedBy.length : 0}</p>
           <ul>
             {book.comments &&
