@@ -78,7 +78,7 @@ export function UserContextProvider(props) {
         );
       }
     } catch (error) {
-      // console.error("Error fetching follower and following counts:", error);
+      console.error("Error fetching follower and following counts:", error);
     }
   };
 
@@ -88,12 +88,13 @@ export function UserContextProvider(props) {
         signUp,
         currentUser,
         signIn,
-        userList,
         followerCount,
         followingCount,
+        userList,
       }}
     >
       {!loadingData && props.children}
     </UserContext.Provider>
   );
 }
+
