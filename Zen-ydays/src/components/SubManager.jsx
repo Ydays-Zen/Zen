@@ -1,13 +1,9 @@
-/*
-import { followUser } from './firebase'; 
-// import { followUser } from './firebase'; 
+import { followUser } from '../Subscription/Subscription.jsx'; 
 
-// const SubManager = {
-//   follow: (currentUserId, targetUserId) => {
-//     return followUser(currentUserId, targetUserId);
-//   },
-// };
+const SubManager = {
+  follow: (currentUserId, targetUserId) => {
+    return followUser(currentUserId, targetUserId);
+  },
+};
 
-// export default SubManager;
 export default SubManager;
-*/
