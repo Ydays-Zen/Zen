@@ -1,0 +1,36 @@
+.category {
+    width: 200px;
+    height: 100%;
+    background-color: var(--secondary);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.category div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo {
+    width: 150px;
+    height: 100px;
+}
+
+@media  screen and (max-width: 850px) {
+    .category  {
+        display: none;
+    }
+    
+}

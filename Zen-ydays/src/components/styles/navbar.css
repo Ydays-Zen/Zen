@@ -1,0 +1,66 @@
+.navBar {
+    width: 85px;
+    height: 100%;
+    background-color: var(--secondary);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.plume {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute; 
+  
+    width: 80px;
+    height: 80px;
+    top: 100px;
+    right: 40px;
+
+    
+    background-color: var(--tertiary);
+    border-radius:50%;
+    border: 5px solid var(--primary);
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 350px;
+
+}
+
+
+
+.icon, .iconNav {
+    width: 35px;
+    height: 35px;
+}
+
+a {
+    margin: 15px 0;
+
+}
+
+.iconNav {
+    margin-bottom: 20px;
+}
+
+
+@media  screen and (max-width: 850px) {
+    nav .navBar  {
+        display: none;
+    }
+    
+}
