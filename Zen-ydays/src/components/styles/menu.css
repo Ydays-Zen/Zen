@@ -2,12 +2,13 @@
 nav .contenue {
     width: 95%;
     height: 65px;
-    background-color: #D3C8B2;
+    background-color: var(--secondary);
     border-radius: 8px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* padding: 0 20px; */
 
     position: fixed;
     left: 50%;
@@ -37,16 +38,20 @@ nav  .post{
     left:50%;
     transform: translateX(-50%);
     
-    background-color: #786146;
+    background-color: var(--tertiary);
     border-radius:50%;
-    border: 5px solid #FFF5E1;
+    border: 5px solid var(--primary);
 }
 
-.contenue .icon {
-    width: 30px;
-    height: 30px;
-    margin: 0 15px;
+
+.contenue .iconsFa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+    margin: 0 20px;
 }
+
 
 
 .contenue .icon:hover {
@@ -54,7 +59,7 @@ nav  .post{
     transition: cubic-bezier(0.45, 0.73, 0, 0.59) .3s;
 }
 
-@media  screen and (min-width: 768px) {
+@media  screen and (min-width: 850px) {
     nav .contenue  {
         display: none;
     }

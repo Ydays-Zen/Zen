@@ -1,6 +1,7 @@
-import Message from "../assets/Message.svg";
-import Library from "../assets/library.svg";
 import Logo from "../assets/logo_zen.png";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles/Nav.css";
 
@@ -10,16 +11,14 @@ function Nav() {
       <nav>
         <div className="content">
           <img className="logo" src={Logo} alt="Logo Zen" />
-
           <div>
-            <a href="#">
-              {" "}
-              <img src={Library} alt="Library" />
-            </a>
-
             <a href="/messagerie">
               {" "}
-              <img src={Message} alt="Message" />
+              <FontAwesomeIcon
+                icon={faPaperPlane}
+                size="xl"
+                color="black"
+              />{" "}
             </a>
           </div>
         </div>

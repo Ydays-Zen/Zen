@@ -1,0 +1,42 @@
+// SendMessage.jsx
+import React, { useState } from 'react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { firestore, auth } from '../db/firebase-config';
+
+const SendMessage = ({ selectedUser }) => {
+
+  const [message, setMessage] = useState('');
+
+  const sendMessage = async () => {
+    try {
+      if (!selectedUser) {
+        console.error('Selected user is undefined.');
+        return;
+      }
+
+      const messagesRef = collection(firestore, 'messages');
+      await addDoc(messagesRef, {
+        text: message,
+        createdAt: serverTimestamp(),
+        participants: [auth.currentUser.uid, selectedUser.ID],
+      });
+
+      setMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <button onClick={sendMessage}>Send Message</button>
+    </div>
+  );
+};
+
+export default SendMessage;
