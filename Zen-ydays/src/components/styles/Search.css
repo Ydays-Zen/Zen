@@ -1,0 +1,29 @@
+.Search{
+    width: 15em;
+    height: 41px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline: none;
+    color: #FFF5E1;
+    background: #D3C8B2;
+    
+}
+
+.searchButton {
+    height: 41px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline: none;
+    color: #FFF5E1;
+    background: #D3C8B2;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}

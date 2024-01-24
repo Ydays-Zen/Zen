@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // userContext.jsx
 
 import {
@@ -29,12 +30,12 @@ export function UserContextProvider(props) {
         const usersRef = collection(firestore, "users");
         const q = query(usersRef);
         const querySnapshot = await getDocs(q);
-  
+
         const users = [];
         querySnapshot.forEach((doc) => {
           users.push(doc.data());
         });
-  
+
         setUserList(users);
       } catch (error) {
         console.error("Error listing users:", error);
@@ -42,13 +43,13 @@ export function UserContextProvider(props) {
         setLoadingData(false);
       }
     };
-  
+
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       fetchUsers(); // Call the function to retrieve the list of users
-  
+
       setLoadingData(false);
-  
+
       if (user) {
         fetchFollowerFollowingCounts(user.uid);
       } else {
@@ -56,7 +57,7 @@ export function UserContextProvider(props) {
         setFollowingCount(0);
       }
     });
-  
+
     return () => {
       unsubscribeAuth(); // Unsubscribe from onAuthStateChanged
     };
@@ -77,12 +78,21 @@ export function UserContextProvider(props) {
         );
       }
     } catch (error) {
-      // console.error("Error fetching follower and following counts:", error);
+      console.error("Error fetching follower and following counts:", error);
     }
   };
 
   return (
-    <UserContext.Provider value={{ signUp, currentUser, signIn, userList, followerCount, followingCount }}>
+    <UserContext.Provider
+      value={{
+        signUp,
+        currentUser,
+        signIn,
+        followerCount,
+        followingCount,
+        userList,
+      }}
+    >
       {!loadingData && props.children}
     </UserContext.Provider>
   );

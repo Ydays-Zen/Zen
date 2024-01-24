@@ -10,6 +10,8 @@ import Profil from "./pages/Profil/Profil.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+import Result from "./pages/Search/result.jsx";
+import Search from "./components/Search.jsx";
 
 const App = () => {
   return (
@@ -29,6 +31,10 @@ const App = () => {
             <Route path="/check/Messages" element={<Message />} />
             <Route path="/check/Profil" element={<Profil />} />
             <Route path="/check/userDifferent" element={<UserDifferent />} />
+            <Route path="/results" element={<Result />} />
+            <Route path="/search" element={<Search />} />
+            
+
           </Routes>
         </CategoryProvider>
       </UserContextProvider>
