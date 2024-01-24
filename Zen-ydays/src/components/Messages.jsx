@@ -40,17 +40,17 @@ const Messages = ({ currentUser, selectedUser }) => {
     }, [currentUser, selectedUser]);
 
     return (
-        <div>
-            <h2>Discussion avec {selectedUser.displayName}</h2>
-            <ul>
-                {messages &&
-                    messages.map((message) => (
-                        <li key={message.id} className={message.participants.includes(currentUser.uid) ? 'sent' : 'received'}>
-                            <span>{message.participants.includes(currentUser.uid) ? 'Moi' : selectedUser.displayName}: </span>
-                            <span>{message.text}</span>
-                            <span>{message.createdAt && message.createdAt.toDate().toLocaleString()}</span>
-                        </li>
-                    ))}
+        <div class="body_messages">
+            <h2 class="chat_h2">Discussion avec {selectedUser.displayName}</h2>
+            <ul class="messages_read">
+                    {messages &&
+                        messages.map((message) => (
+                            <li class="li_messages" key={message.id} className={message.participants[0] === currentUser.uid ? 'sent' : 'received'}>
+                                <span>{message.participants[0] === currentUser.uid ? 'Moi' : selectedUser.displayName}: </span>
+                                <span class="span_text">{message.text}</span>
+                                {/* <span>{message.createdAt && message.createdAt.toDate().toLocaleString()}</span> */}
+                            </li>
+                        ))}
             </ul>
         </div>
     );

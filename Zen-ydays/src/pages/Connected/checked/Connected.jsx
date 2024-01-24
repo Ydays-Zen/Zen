@@ -28,7 +28,7 @@ const Connected = () => {
     try {
       await signOut(auth);
       cookies.remove("auth-token");
-      navigate("/signin");
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
@@ -38,7 +38,7 @@ const Connected = () => {
     <div className="connected">
       <Header />
       {/* {currentUser && <h2>Welcome {currentUser.email}</h2>} */}
-      {/* {currentUser && <button onClick={logOut}>Log Out</button>} */}
+      {currentUser && <button onClick={logOut}>Log Out</button>}
       <Main />
     </div>
   );

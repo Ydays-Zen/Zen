@@ -1,0 +1,32 @@
+/* Ajoutez ces styles à votre fichier CSS (par exemple, Messages.css) */
+
+.message-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 50%;
+}
+
+.input_message {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn_send {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn_send:hover {
+    background-color: #45a049;
+    transition: background-color 0.3s ease;
+}
