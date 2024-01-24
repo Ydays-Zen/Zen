@@ -5,7 +5,7 @@
   margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   height: 100vh; /* Utilisez la hauteur de la vue (viewport height) pour centrer verticalement */
 }
 =======
@@ -14,6 +14,13 @@
 .post {
   padding: 20px;
   border-radius: 10px;
+<<<<<<< HEAD
+=======
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 30vw;
+>>>>>>> theo_front_page_post
   max-width: 400px;
   width: 100%; 
 
@@ -68,4 +75,40 @@
 .post button:hover {
   transition: all 0.3s ease-in-out;
   background-color: #D3C8B2;
+}
+
+
+
+.book-preview{
+  padding: 20px;
+  max-width: 60vw;
+  word-break: break-word;
+
+
+}
+
+.Preview_Title{
+
+}
+
+.Preview_Resume{
+
+}
+
+.Preview_Tags{
+
+}
+
+.Preview_Content{
+
+}
+
+strong{
+  color: var(--tertiary);
+}
+
+@media screen and (min-width:850px) {
+    .book-preview{
+      margin-right: 8vw;
+    }
 }
