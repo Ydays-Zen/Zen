@@ -21,29 +21,29 @@ const Messages = ({ currentUser, selectedUser }) => {
 
     const messagesRef = collection(firestore, "messages");
 
-    const combinedQuery = query(
-      messagesRef,
-      where("participants", "in", [
-        [currentUser.uid, selectedUser.ID],
-        [selectedUser.ID, currentUser.uid],
-      ]),
-      orderBy("createdAt")
-    );
+        const combinedQuery = query(
+            messagesRef,
+            where('participants', 'in', [
+                [currentUser.uid, selectedUser.ID],
+                [selectedUser.ID, currentUser.uid],
+            ]),
+            orderBy('createdAt')
+        );
 
-    const unsubscribe = onSnapshot(combinedQuery, (querySnapshot) => {
-      const newMessages = [];
-      querySnapshot.forEach((doc) => {
-        const messageData = doc.data();
-        console.log("Message ID:", doc.id);
-        newMessages.push(messageData);
-      });
-      setMessages(newMessages);
-    });
+        const unsubscribe = onSnapshot(combinedQuery, (querySnapshot) => {
+            const newMessages = [];
+            querySnapshot.forEach((doc) => {
+                const messageData = doc.data();
+                console.log('Message ID:', doc.id);
+                newMessages.push(messageData);
+            });
+            setMessages(newMessages);
+        });
 
-    return () => {
-      unsubscribe();
-    };
-  }, [currentUser, selectedUser]);
+        return () => {
+            unsubscribe();
+        };
+    }, [currentUser, selectedUser]);
 
   let scrollDiv = document.querySelector(".messages_read");
 
