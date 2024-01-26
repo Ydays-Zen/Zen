@@ -1,21 +1,21 @@
-// info_userDifferent.jsx
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/userContext';
 import  Subscription  from "./Subscription.jsx";
 import { firestore } from '../db/firebase-config'; 
 
-export function Info_userDifferent({ displayName }) { // Change the prop name to displayName
+export function Info_userDifferent({ displayName }) { 
     const { currentUser } = useContext(UserContext);
     const [profileUser, setProfileUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            const profileUserData = await getProfileUserFromDatabase(displayName); // Change the argument to displayName
+            console.log('Current User:', currentUser); 
+            const profileUserData = await getProfileUserFromDatabase(displayName); 
+            console.log('Profile User Data:', profileUserData);
             setProfileUser(profileUserData);
 
-            // Vérifier si l'utilisateur actuel suit déjà le profil de l'utilisateur sélectionné
-            const isCurrentUserFollowing = currentUser && currentUser.following.includes(displayName); // Change the argument to displayName
+            const isCurrentUserFollowing = currentUser && currentUser.following.includes(displayName); 
             setIsFollowing(isCurrentUserFollowing);
         };
 
@@ -25,18 +25,13 @@ export function Info_userDifferent({ displayName }) { // Change the prop name to
     const handleFollowToggle = async () => {
         try {
             if (isFollowing) {
-                // Désabonner l'utilisateur actuel du profil de l'utilisateur sélectionné
-                await Subscription.unfollowUser(currentUser.displayName, displayName); // Change the arguments to displayName
+                await Subscription.unfollowUser(currentUser.displayName, displayName);
             } else {
-                // Abonner l'utilisateur actuel au profil de l'utilisateur sélectionné
-                await Subscription.followUser(currentUser.displayName, displayName); // Change the arguments to displayName
+                await Subscription.followUser(currentUser.displayName, displayName);
             }
 
-            // Mettre à jour isFollowing après l'action
             setIsFollowing(!isFollowing);
-
-            // Met à jour le compteur personnel d'abonnements sur la page du profil de l'utilisateur actuel
-            const updatedProfileUserData = await getProfileUserFromDatabase(currentUser.displayName); // Change the argument to displayName
+            const updatedProfileUserData = await getProfileUserFromDatabase(currentUser.displayName);
             setProfileUser(updatedProfileUserData);
         } catch (error) {
             console.error('Erreur lors de la gestion d\'abonnement/désabonnement :', error);
@@ -61,8 +56,7 @@ export function Info_userDifferent({ displayName }) { // Change the prop name to
       );
 }
 
-// récupére les informations du profil de l'utilisateur depuis la base de données
-const getProfileUserFromDatabase = async (displayName) => { // Change the argument to displayName
+const getProfileUserFromDatabase = async (displayName) => {
     try {
         const userSnapshot = await firestore.collection('utilisateurs').where('displayName', '==', displayName).get();
 
