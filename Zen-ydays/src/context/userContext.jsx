@@ -19,7 +19,7 @@ export function UserContextProvider(props) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const usersRef = collection(firestore, "utilisateurs");  // Correction ici
+        const usersRef = collection(firestore, "utilisateurs");  // changer utilisateur par ce qu'il faut
         const q = query(usersRef);
         const querySnapshot = await getDocs(q);
 
