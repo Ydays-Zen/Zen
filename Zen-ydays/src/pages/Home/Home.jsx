@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider, firestore } from "../../db/firebase-config.jsx";
@@ -9,17 +10,28 @@ const cookies = new Cookies();
 const Home = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const authToken = cookies.get("auth-token");
+
+    // Vérifier si le cookie auth-token existe
+    if (authToken) {
+      // Utilisateur connecté, rediriger vers la page Connected
+      navigate("/check/connected");
+    }
+  }, [navigate]);
+
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       cookies.set("auth-token", result.user.refreshToken);
       navigate("/check/connected");
-
+  
       const userRef = collection(firestore, "users");
       const userQuery = query(userRef, where("ID", "==", result.user.uid));
       const userSnapshot = await getDocs(userQuery);
-
+  
       if (userSnapshot.empty) {
+        // L'utilisateur n'existe pas, alors ajoutez-le
         await addDoc(userRef, {
           ID: result.user.uid,
           displayName: result.user.displayName,

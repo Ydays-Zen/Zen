@@ -1,10 +1,12 @@
 // Message.jsx
-import React, { useState, useEffect, useContext } from 'react';
-import Header from '../../layout/home/Header';
+import React, { useContext, useState } from 'react';
 import Chat from '../../components/Chat';
-import SendMessage from '../../components/SendMessage';
 import Messages from '../../components/Messages';
+import SendMessage from '../../components/SendMessage';
 import { UserContext } from '../../context/userContext';
+import HeaderAll from '../../layout/HeaderAll';
+
+import './Message.css';
 
 const Message = () => {
   const { userList, currentUser } = useContext(UserContext);
@@ -14,16 +16,19 @@ const Message = () => {
     setSelectedUser(user);
   };
 
+
   return (
-    <div>
-      <Header />
-      <Chat userList={userList} onSelectUser={onSelectUser} />
-      {selectedUser && (
-        <div>
-          <Messages currentUser={currentUser} selectedUser={selectedUser} />
-          <SendMessage selectedUser={selectedUser} />
-        </div>
-      )}
+    <div className="app-container">
+      <HeaderAll />
+      <div className="main-container">
+        <Chat userList={userList} onSelectUser={onSelectUser} />
+        {selectedUser && (
+          <div className="chat-container">
+            <Messages currentUser={currentUser} selectedUser={selectedUser} />
+            <SendMessage selectedUser={selectedUser} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

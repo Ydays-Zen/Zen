@@ -47,22 +47,33 @@ const SignUp = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-
+  
     if (inputs.current[2].value !== inputs.current[3].value) {
       setValidation("Les mots de passe ne correspondent pas");
-    } else if (
-      inputs.current[2].value.length < 6 ||
-      inputs.current[3].value.length < 6
-    ) {
+    } else if (inputs.current[2].value.length < 6 || inputs.current[3].value.length < 6) {
       setValidation("6 caractères minimum");
     } else {
       try {
-        const cred = await signUp(
-          inputs.current[1].value,
-          inputs.current[2].value
-        );
+        const cred = await signUp(inputs.current[1].value, inputs.current[2].value);
+  
+        // Ajoutez la vérification ici pour voir si l'utilisateur existe déjà
+        const userRef = collection(firestore, "users");
+        const userQuery = query(userRef, where("ID", "==", cred.user.uid));
+        const userSnapshot = await getDocs(userQuery);
+  
+        if (userSnapshot.empty) {
+          // L'utilisateur n'existe pas, alors ajoutez-le
+          await addDoc(userRef, {
+            ID: cred.user.uid,
+            displayName: cred.user.displayName || inputs.current[0].value,
+          });
+        }
+  
+        formRef.current.reset();
+        setValidation("");
+        navigate("/check/connected");
       } catch (error) {
-        // ... (your existing error handling code)
+        // ... (votre code de gestion d'erreur existant)
       }
     }
   };

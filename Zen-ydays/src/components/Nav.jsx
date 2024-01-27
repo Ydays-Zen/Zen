@@ -1,7 +1,7 @@
 import Logo from "../assets/logo_zen.png";
 
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles/Nav.css";
 
@@ -12,13 +12,9 @@ function Nav() {
         <div className="content">
           <img className="logo" src={Logo} alt="Logo Zen" />
           <div>
-            <a href="/messagerie">
+            <a href="/check/Messages">
               {" "}
-              <FontAwesomeIcon
-                icon={faPaperPlane}
-                size="xl"
-                color="black"
-              />{" "}
+              <FontAwesomeIcon icon={faMessage} size="xl" color="black" />{" "}
             </a>
           </div>
         </div>

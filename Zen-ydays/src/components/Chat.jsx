@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from "../context/userContext";
+import './styles/Chat.css';
 
 const Chat = ({ userList, onSelectUser }) => {
   const { currentUser } = useContext(UserContext);
@@ -12,15 +13,15 @@ const Chat = ({ userList, onSelectUser }) => {
   const filteredUserList = userList.filter(user => user.ID !== currentUser.uid);
 
   return (
-    <div>
-      <h2>Utilisateurs</h2>
-      <ul>
-        {filteredUserList.map((user) => (
-          <li key={user.ID} onClick={() => onSelectUser(user)}>
-            {user.displayName}
-          </li>
-        ))}
-      </ul>
+    <div className="content-user">
+          <h2 class="user_h2">Utilisateurs</h2>
+          <ul class="user_read">
+            {filteredUserList.map((user) => (
+              <li class="select_user" key={user.ID} onClick={() => onSelectUser(user)}>
+                {user.displayName}
+              </li>
+            ))}
+          </ul>
     </div>
   );
 };
