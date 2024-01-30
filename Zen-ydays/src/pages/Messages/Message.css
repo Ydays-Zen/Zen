@@ -5,21 +5,22 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 1200px; /* Ajustez la largeur maximale selon vos préférences */
+    max-width: 1200px;
+    /* Ajustez la largeur maximale selon vos préférences */
     margin: 0 auto;
-  }
-  
-  .main-container {
+}
+
+.main-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
-  
-  .chat-container {
+}
+
+.chat-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 20px; /* Ajustez la marge selon vos préférences */
-  }
-  
+    margin-left: 20px;
+    /* Ajustez la marge selon vos préférences */
+}
