@@ -13,45 +13,41 @@ const Result = () => {
       const booksRef = collection(firestore, 'Books');
       const usersRef = collection(firestore, 'users');
 
-      // Requête pour les documents dans la table 'Books' où le champ 'title' correspond à searchQuery
       const booksQuery = query(booksRef, where('title', '==', searchQuery));
       const usersQuery = query(usersRef, where('displayName', '==', searchQuery));
 
-      // Exécutez les deux requêtes
       const booksSnapshot = await getDocs(booksQuery);
       const usersSnapshot = await getDocs(usersQuery);
 
-      // Vérifiez si les résultats existent avant de les traiter avec 'map'
-      const booksResults = booksSnapshot.docs.length > 0 ? booksSnapshot.docs.map(bookDoc => {
+      const booksResults = booksSnapshot.docs.map(bookDoc => {
         const bookData = bookDoc.data();
         return {
           title: bookData.title,
           userId: bookData.userId || '',
-          imageUrl: bookData.image || '', // Ajout de la récupération de l'image
-          resume: bookData.resume || '', // Ajout de la récupération du résumé
+          imageUrl: bookData.image || '',
+          resume: bookData.resume || '',
           source: 'Books',
         };
-      }) : [];
+      });
 
-      const usersResults = usersSnapshot.docs.length > 0 ? usersSnapshot.docs.map(userDoc => {
+      const usersResults = usersSnapshot.docs.map(userDoc => {
         const userData = userDoc.data();
         return {
           displayName: userData.displayName,
           Id: userData.ID,
           source: 'users',
         };
-      }) : [];
+      });
 
-      // Combinez les résultats des deux tables
       const combinedResults = [...booksResults, ...usersResults];
 
-      // Pour chaque résultat, récupérez le nom de l'utilisateur, l'URL de l'image, le résumé et d'autres détails
       const resultsWithDetails = await Promise.all(
         combinedResults.map(async (result) => {
           if (result.source === 'Books') {
-            // Récupérez le nom de l'utilisateur, l'URL de l'image, le résumé et d'autres détails à partir de la table Users et Books
             const userDoc = await getDoc(doc(usersRef, result.userId));
             const userData = userDoc.exists() ? userDoc.data() : {};
+
+            console.log('User name:', userData.displayName);
 
             return {
               ...result,
@@ -64,7 +60,6 @@ const Result = () => {
         })
       );
 
-      // Mettez à jour l'état avec les résultats combinés
       setSearchResults(resultsWithDetails);
     };
 
