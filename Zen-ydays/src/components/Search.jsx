@@ -13,18 +13,20 @@ const Search = () => {
 
   return (
     <>
-      <input
-        className="Search"
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Rechercher..."
-      />
-      <button className="searchButton" onClick={handleSearch}>
-        Rechercher
-      </button>
-
       <HeaderAll />
+
+      <div className="searchBar">
+        <input
+          className="Search"
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Rechercher..."
+        />
+        <button className="searchButton" onClick={handleSearch}>
+          Rechercher
+        </button>
+      </div>
     </>
   );
 };
