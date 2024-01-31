@@ -1,29 +1,24 @@
 .Search{
-    width: 15em;
-    height: 41px;
-    padding: 0 10px 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    outline: none;
-    color: #FFF5E1;
-    background: #D3C8B2;
+    padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background-color: #D3C8B2;
+  border: 1px solid #786146;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #786146;
     
 }
 
-.searchButton {
-    height: 41px;
-    padding: 0 10px 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    outline: none;
-    color: #FFF5E1;
-    background: #D3C8B2;
-    cursor: pointer;
-    transition: border-color 0.25s;
+.searchButton  {
+  background-color: #786146;
+  border: none;
+  color: #FFF5E1;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #D3C8B2;
 }

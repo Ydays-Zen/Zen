@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { UserContext } from "../../../context/userContext.jsx";
 import { auth } from "../../../db/firebase-config.jsx";
-import Search from "../../../components/Search.jsx"; // Assurez-vous d'ajuster le chemin
 const cookies = new Cookies();
 
 import "./style.css";
@@ -38,11 +37,11 @@ const Connected = () => {
   return (
     <div>
       <Header />
-      <div className="search-bar-container">
-      {currentUser && <button class="btn_logout" onClick={logOut}>Log Out</button>}
-        <Search /> {}
-      </div>
-      {/* {currentUser && <h2>Welcome {currentUser.email}</h2>} */}
+      {currentUser && (
+        <button className="btn_logout" onClick={logOut}>
+          Log Out
+        </button>
+      )}
       <Main />
     </div>
   );

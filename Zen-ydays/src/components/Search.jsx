@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../components/styles/Search.css"; 
+import "../components/styles/Search.css";
+import HeaderAll from "../layout/HeaderAll.jsx";
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate('/result', { state: { searchQuery } });
+    navigate("/result", { state: { searchQuery } });
   };
 
   return (
-
-    <div>
+    <>
       <input
         className="Search"
         type="text"
@@ -20,8 +20,12 @@ const Search = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Rechercher..."
       />
-      <button className="searchButton" onClick={handleSearch}>Rechercher</button>
-    </div>
+      <button className="searchButton" onClick={handleSearch}>
+        Rechercher
+      </button>
+
+      <HeaderAll />
+    </>
   );
 };
 
