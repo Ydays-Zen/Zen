@@ -1,31 +1,83 @@
-/* read-story.css */
 
-.read-story {
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+
+.readbooks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.readbooks__book {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.readbooks__book__image {
+  margin-right: 20px;
+}
+
+.readbooks__book__image img {
+  max-width: 200px;
+  height: auto;
+}
+
+.readbooks__book__content {
+  max-width: 600px;
+}
+
+.readbooks__book h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.readbooks__book p {
+  font-size: 16px;
+}
+
+.readbooks__comments {
+  width: 100%;
+  max-width: 800px;
+}
+
+.readbooks__comments h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.readbooks__comments form {
+  margin-bottom: 20px;
+}
+
+.readbooks__comments textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.readbooks__comments button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.readbooks__comments button:hover {
+  background-color: #2980b9;
+}
+
+.readbooks__comments__comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
   
-  .read-story h2 {
-    color: #786146;
-    margin-bottom: 10px;
-  }
-  
-  .read-story img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-  
-  .read-story p {
-    color: #786146;
-    font-size: 16px;
-    line-height: 1.5;
-    text-align: left;
-  }
-  
-  /* Add more styles as needed */
-  
+}
+
+.readbooks__comments__comment p {
+  margin: 0;
+}
+
+/* Add more styles as needed */

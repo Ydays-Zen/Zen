@@ -7,7 +7,7 @@ import Check from "./pages/Connected/Check.jsx";
 import Post from "./pages/Post/post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
 import UserDifferent from "./pages/userDifferent/userDifferent.jsx";
-import Readbooks from "./pages/Readbooks/Readbooks.jsx";
+import Readbooks from "./pages/ReadBooks/Readbooks.jsx";
 
 
 const App = () => {
