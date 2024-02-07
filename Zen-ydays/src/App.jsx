@@ -7,11 +7,12 @@ import Check from "./pages/Connected/Check.jsx";
 import Post from "./pages/Post/post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
 import UserDifferent from "./pages/userDifferent/userDifferent.jsx";
+import Readbooks from "./pages/Readbooks/Readbooks.jsx";
 
 
 const App = () => {
   return (
-    <div>
+    <div>0
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/check/Post" element={<Post />} />
         <Route path="/check/Profil" element={<Profil />} />
         <Route path="/check/userDifferent" element={<UserDifferent />} />
+        <Route path="/check/Readbooks" element={<Readbooks />} />
 
       </Routes>
     </div>

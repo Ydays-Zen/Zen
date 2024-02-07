@@ -1,0 +1,31 @@
+/* read-story.css */
+
+.read-story {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .read-story h2 {
+    color: #786146;
+    margin-bottom: 10px;
+  }
+  
+  .read-story img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .read-story p {
+    color: #786146;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+  }
+  
+  /* Add more styles as needed */
+  
