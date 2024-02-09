@@ -5,12 +5,14 @@ import Plume from "../assets/plume.svg";
 // import User from "../assets/user.svg";
 // import Message from "../assets/Message.svg";
 
+import {
+  faBookmark,
+  faHouse,
+  faMessage,
+  faSearch,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles/navbar.css";
 
@@ -27,17 +29,18 @@ const NavBar = () => {
           </div>
 
           <div className="icons">
-            <a href="#">
+            <a href="/check/connected">
               {" "}
               {/* <img className="icon" src={Home} alt="home" /> */}
               <FontAwesomeIcon icon={faHouse} size="xl" color="black" />
             </a>
 
-            <a href="/messagerie">
-              <FontAwesomeIcon icon={faPaperPlane} size="xl" color="black" />{" "}
+            <a href="/check/Messages">
+              {" "}
+              <FontAwesomeIcon icon={faMessage} size="xl" color="black" />{" "}
             </a>
 
-            <a href="#">
+            <a href="/search">
               {" "}
               <FontAwesomeIcon icon={faSearch} size="xl" color="black" />{" "}
             </a>
@@ -46,10 +49,12 @@ const NavBar = () => {
               {" "}
               <FontAwesomeIcon icon={faBookmark} size="xl" color="black" />{" "}
             </a>
-
-            <a href="#">
+            <a href="/check/Profil">
+              {" "}
               <FontAwesomeIcon icon={faUser} size="xl" color="black" />
             </a>
+
+            <a href="#"></a>
           </div>
         </div>
       </nav>

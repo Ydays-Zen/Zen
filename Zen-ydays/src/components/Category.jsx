@@ -1,9 +1,13 @@
 import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useCategory } from "../context/CategoryContext";
 import { firestore } from "../db/firebase-config";
-import { useState, useEffect } from "react";
 import "./styles/category.css";
 
+const btnValue = "";
+
 const Category = () => {
+  const { setBtnValue } = useCategory();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -17,6 +21,9 @@ const Category = () => {
           ...doc.data(),
         }));
 
+        // Triez les catégories par ordre alphabétique des tags
+        categoriesData.sort((a, b) => a.tags.localeCompare(b.tags));
+
         setCategories(categoriesData);
       } catch (error) {
         console.error("Erreur lors de la récupération des catégories :", error);
@@ -24,21 +31,32 @@ const Category = () => {
     };
 
     fetchCategories();
-  }, []); // Le tableau de dépendances vide assure que le code s'exécute une seule fois après le montage
+  }, []);
+
+  const handleClick = (tags) => {
+    // Utilisez setBtnValue pour mettre à jour la valeur dans le contexte
+    setBtnValue(tags);
+  };
+
+  const displayCategory = () => {
+    return categories.map((category) => (
+      <div className="categoryButton" key={category.id}>
+        <button onClick={() => handleClick(category.tags)} id={category.tags}>
+          {category.tags}
+        </button>
+      </div>
+    ));
+  };
 
   return (
     <>
-      <img className="logo" src="../../public/logo_zen.png" alt="Logo" />
-
       <div className="category">
         <div>
           <h2>Category</h2>
 
-          {categories.map((category) => (
-            <div className="categoryButton" key={category.id}>
-              <button> {category.tags}</button>
-            </div>
-          ))}
+          {displayCategory()}
+
+          <p>{btnValue}</p>
         </div>
       </div>
     </>

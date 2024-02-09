@@ -1,17 +1,21 @@
-.connected {
-
-    height: 100vh;
-    width: 80%;
-
-    margin: 0 auto;
-}
-
-
-
 @media  screen and (max-width: 768px) {
     .connected {
         width: 100%;
         margin: 0;
     }
     
+}
+
+.btn_logout {
+    position: absolute;
+    left: 50%;
+}
+
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 25em;
+    height: 80px;
 }

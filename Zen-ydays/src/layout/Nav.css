@@ -1,4 +1,4 @@
-nav{
+/* nav{
     display: flex;
     justify-content: space-around;
     position: absolute;
@@ -30,14 +30,15 @@ nav>img{
 }
 
 
+
 .Menu img.selected::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 2px; /* Épaisseur de la bordure inférieure */
-    background-color: #fff; /* Couleur de la bordure inférieure */
-    border-radius: 0 0 10px 10px; /* Ajoute des coins arrondis à la bordure inférieure */
+    height: 2px; 
+    background-color: #fff; 
+    border-radius: 0 0 10px 10px; 
 }
-
+ */

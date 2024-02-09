@@ -1,7 +1,5 @@
-import Nav from "../../components/Nav";
 import Menu from "../../components/Menu";
-import NavBar from "../../components/NavBar";
-import Category from "../../components/Category";
+import Nav from "../../components/Nav";
 
 import "./style.css";
 
@@ -11,9 +9,6 @@ export function Header() {
       <header>
         <Nav />
         <Menu />
-
-        <Category />
-        <NavBar />
       </header>
     </>
   );

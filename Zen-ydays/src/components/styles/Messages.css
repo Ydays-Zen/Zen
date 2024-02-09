@@ -1,0 +1,44 @@
+.body_messages {
+    width: 50%;
+}
+
+.messages_read {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-height: 400px; /* ajustez cette valeur selon vos préférences */
+    overflow-y: auto; /* "auto" pour activer le défilement uniquement si nécessaire */
+    scroll-behavior: smooth;
+    transition: all 0.5s ease-in-out;
+}
+
+.li_messages {
+    margin-bottom: 10px;
+}
+
+.sent {
+    text-align: right;
+    /* Couleur de fond pour les messages de l'utilisateur actuel */
+    color: #31a01d;
+    /* Couleur du texte pour les messages de l'utilisateur actuel */
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.received {
+    text-align: left;
+    /* Couleur de fond pour les messages de l'autre utilisateur */
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.span_text {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.chat_h2 {
+    text-align: center;
+    color: #333;
+    /* Couleur du titre */
+}
