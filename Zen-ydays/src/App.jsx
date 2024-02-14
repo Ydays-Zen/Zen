@@ -15,9 +15,6 @@ import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 
 const App = () => {
   return (
-    <div>0
-      <Routes>
-        <Route path="/" element={<Home />} />
     <div>
       <UserContextProvider>
         <CategoryProvider>
@@ -28,14 +25,6 @@ const App = () => {
               <Route path="connected" element={<Connected />} />
             </Route>
 
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/check/Post" element={<Post />} />
-        <Route path="/check/Profil" element={<Profil />} />
-        <Route path="/check/userDifferent" element={<UserDifferent />} />
-        <Route path="/check/Readbooks" element={<Readbooks />} />
-
-      </Routes>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/check/Post" element={<Post />} />
