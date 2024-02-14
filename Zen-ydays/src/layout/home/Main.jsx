@@ -150,7 +150,7 @@ const Main = () => {
                   <p>{book.likedBy ? book.likedBy.length : 0}</p>
                 </div>
                 {/* Resume */}
-                <button onClick={() => handleResumeClick(book.id)}>
+                <button className="Resume_button" onClick={() => handleResumeClick(book.id)}>
                   Résumé
                 </button>
                 {/* Affichage du Résumé  */}
