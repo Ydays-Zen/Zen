@@ -22,6 +22,8 @@ const Connected = () => {
 
     console.log('User ID:', userId);
     console.log('Pseudo:', currentUser.displayName);
+    console.log("Photo:", currentUser.photoURL);
+    
 
   // Deconnexion
   const logOut = async () => {
