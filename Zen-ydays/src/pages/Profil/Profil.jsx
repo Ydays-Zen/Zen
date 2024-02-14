@@ -4,7 +4,7 @@ import Last_lecture_profil from "../../components/Last_lecture_profil.jsx";
 import Oeuvres_profil from "../../components/Oeuvres_profil.jsx";
 import Header from "../../layout/home/Header.jsx";
 
-import "./Profil.css";
+import "./profil.css";
 
 
 function Profil() {
