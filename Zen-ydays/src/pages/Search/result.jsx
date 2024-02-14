@@ -48,7 +48,7 @@ const Result = () => {
         const userData = userDoc.data();
         return {
           displayName: userData.displayName,
-          Id: userData.ID,
+          ID: userData.ID,
           source: "users",
         };
       });
@@ -57,12 +57,12 @@ const Result = () => {
 
       const resultsWithDetails = await Promise.all(
         combinedResults.map(async (result) => {
-          if (result.source === "Books") {
+          if (result.source === "Books" && result.userId) {
             const userDoc = await getDoc(doc(usersRef, result.userId));
             const userData = userDoc.exists() ? userDoc.data() : {};
-
+      
             console.log("User name:", userData.displayName);
-
+      
             return {
               ...result,
               postedBy: userData.displayName || "Utilisateur sans nom",
@@ -98,7 +98,6 @@ const Result = () => {
             <p>Posté par {result.postedBy} </p>
             <p> Image du livre: </p>
             <img src={result.imageUrl} alt={`Image de ${result.title}`} />
-
             <p className="resume">Résumé du livre: {result.resume}</p>
           </div>
         ))}
