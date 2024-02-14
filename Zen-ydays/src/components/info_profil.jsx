@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from '../context/userContext';
 
-import '../pages/Profil/profil.css';
+import '../pages/Profil/Profil.css';
 import profil from "../assets/profil.png";
 import edit_image from "../assets/edit.svg";
 

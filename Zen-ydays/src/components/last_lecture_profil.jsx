@@ -1,4 +1,4 @@
-import '../pages/Profil/profil.css'
+import '../pages/Profil/Profil.css'
 import Couverture1 from "../assets/couverture 1.jpg";
 import Couverture2 from "../assets/couverture 2.webp";
 import Couverture3 from "../assets/couverture 3.jpg";

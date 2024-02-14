@@ -2,9 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import { collection, addDoc } from "firebase/firestore";
-import Nav from "../../components/Nav";
-import Menu from "../../components/Menu";
-import NavBar from "../../components/NavBar";
+import Nav from "../../components/Nav.jsx";
+import Menu from "../../components/Menu.jsx";
+import NavBar from "../../components/NavBar.jsx";
 import './post.css';
 
 

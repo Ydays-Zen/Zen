@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/userContext';
-import { followUser, unfollowUser } from '../../src/Subscription/Subscription';
+import { followUser, unfollowUser } from '../Subscription/Subscription';
 
 export function Info_userDifferent({ userId }) {
     const { currentUser } = useContext(UserContext);

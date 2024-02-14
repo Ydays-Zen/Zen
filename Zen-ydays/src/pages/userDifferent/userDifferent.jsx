@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Info_userDifferent from "../../components/info_userDifferent.jsx";
+import Info_userDifferent from "../../components/Info_userDifferent.jsx";
 import "./userDifferent.css";
 
 class UserDifferent extends Component {

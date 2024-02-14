@@ -6,12 +6,13 @@ import Check from "./pages/Connected/Check.jsx";
 import Connected from "./pages/Connected/checked/Connected.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Message from "./pages/Messages/Message.jsx";
-import Post from "./pages/Post/post.jsx";
+import Post from "./pages/Post/Post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
-import Result from "./pages/Search/result.jsx";
+import Result from "./pages/Search/Result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+
 
 const App = () => {
   return (
