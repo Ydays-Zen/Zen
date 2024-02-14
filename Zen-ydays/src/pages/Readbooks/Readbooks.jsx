@@ -110,6 +110,7 @@ const Readbooks = () => {
                         <p>{book.content}</p>
                     </div>
                 </div>
+                <hr/>
                 <div className="readbooks__comments">
                     <h2>Commentaires</h2>
                     <form onSubmit={handleComment}>
@@ -121,8 +122,8 @@ const Readbooks = () => {
                     </form>
                     {comments.map((comment) => (
                         <div className="readbooks__comments__comment">
-                            <p>{comment.content}</p>
-                            <p>{comment.createdAt}</p>
+                            <p className="info_comment">{comment.createdAt}</p>
+                            <p className="content_comment">{comment.content}</p>
                         </div>
                     ))}
                 </div>
