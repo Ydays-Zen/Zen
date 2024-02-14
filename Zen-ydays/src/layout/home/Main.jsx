@@ -132,7 +132,7 @@ const Main = () => {
                 {/* Système de like */}
 
                 <div className="likes">
-                  <FontAwesomeIcon
+                  <FontAwesomeIcon className="like_img"
                     onClick={() => handleLikeSubmit(book.id)}
                     icon={
                       book.likedBy && book.likedBy.includes(currentUser.uid)

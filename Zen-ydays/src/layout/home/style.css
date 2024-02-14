@@ -50,6 +50,15 @@
     justify-content: start;
 }
 
+.like_img{
+    transition: 0.3s;
+}
+
+.like_img:hover{
+    color: red;
+    transform: scale(1.2);
+}
+
 .displaybooks .content {
     display: flex;
     justify-content: space-between;
