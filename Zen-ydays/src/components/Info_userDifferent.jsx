@@ -1,40 +1,37 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/userContext';
-import { followUser, unfollowUser } from '../Subscription/Subscription';
+import  Subscription  from "./Subscription.jsx";
+import { firestore } from '../db/firebase-config'; 
 
-export function Info_userDifferent({ userId }) {
+export function Info_userDifferent({ displayName }) { 
     const { currentUser } = useContext(UserContext);
     const [profileUser, setProfileUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            const profileUserData = await getProfileUserFromDatabase(userId);
+            console.log('Current User:', currentUser); 
+            const profileUserData = await getProfileUserFromDatabase(displayName); 
+            console.log('Profile User Data:', profileUserData);
             setProfileUser(profileUserData);
 
-            // Vérifier si l'utilisateur actuel suit déjà le profil de l'utilisateur sélectionné
-            const isCurrentUserFollowing = currentUser && currentUser.following.includes(userId);
+            const isCurrentUserFollowing = currentUser && currentUser.following.includes(displayName); 
             setIsFollowing(isCurrentUserFollowing);
         };
 
         fetchData();
-    }, [currentUser, userId]);
+    }, [currentUser, displayName]);
 
     const handleFollowToggle = async () => {
         try {
             if (isFollowing) {
-                // Désabonner l'utilisateur actuel du profil de l'utilisateur sélectionné
-                await unfollowUser(currentUser.uid, userId);
+                await Subscription.unfollowUser(currentUser.displayName, displayName);
             } else {
-                // Abonner l'utilisateur actuel au profil de l'utilisateur sélectionné
-                await followUser(currentUser.uid, userId);
+                await Subscription.followUser(currentUser.displayName, displayName);
             }
 
-            // Mettre à jour isFollowing après l'action
             setIsFollowing(!isFollowing);
-
-            // Met à jour le compteur personnel d'abonnements sur la page du profil de l'utilisateur actuel
-            const updatedProfileUserData = await getProfileUserFromDatabase(currentUser.uid);
+            const updatedProfileUserData = await getProfileUserFromDatabase(currentUser.displayName);
             setProfileUser(updatedProfileUserData);
         } catch (error) {
             console.error('Erreur lors de la gestion d\'abonnement/désabonnement :', error);
@@ -57,16 +54,14 @@ export function Info_userDifferent({ userId }) {
           </button>
         </div>
       );
-    }
-    
+}
 
-// récupére les informations du profil de l'utilisateur depuis la base de données
-const getProfileUserFromDatabase = async (userId) => {
+const getProfileUserFromDatabase = async (displayName) => {
     try {
-        const userSnapshot = await firestore.collection('utilisateurs').doc(userId).get();
+        const userSnapshot = await firestore.collection('utilisateurs').where('displayName', '==', displayName).get();
 
-        if (userSnapshot.exists) {
-            const userData = userSnapshot.data();
+        if (userSnapshot.size > 0) {
+            const userData = userSnapshot.docs[0].data();
             return {
                 name: userData.name || 'Nom de l\'utilisateur',
                 followersCount: userData.followers ? userData.followers.length : 0,
@@ -81,4 +76,5 @@ const getProfileUserFromDatabase = async (userId) => {
         return null;
     }
 };
+
 export default Info_userDifferent;
