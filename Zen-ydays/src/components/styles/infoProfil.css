@@ -1,0 +1,65 @@
+.container_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid black;
+  border-width: 1px 0;
+
+  width: 100%;
+  padding: 10px;
+}
+
+.info_profil {
+  display: flex;
+  flex-direction: column;
+  width: 55vw;
+  max-width: 300px;
+  height: 100%;
+}
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgProfil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.imgProfil img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.info_follow {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.following,
+.followers {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.following > p,
+.followers > p {
+  margin: 2px;
+  font-weight: bold;
+}
+.edit_profil {
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  width: 15vw;
+}
+
+.edit_profil > img {
+  width: 30px;
+  margin: 10px 10px 0 0;
+}

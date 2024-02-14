@@ -1,5 +1,6 @@
 import Info_profil from "../../components/Info_profil.jsx";
 import Oeuvres_profil from "../../components/Oeuvres_profil.jsx";
+import "./style.css";
 
 const Main = () => {
   return (

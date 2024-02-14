@@ -11,9 +11,9 @@ import Profil from "./pages/Profil/Profil.jsx";
 import Result from "./pages/Search/Result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
-import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
-import Readbooks from "./pages/Readbooks/Readbooks.jsx";
+// import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
+import Readbooks from "./pages/Readbooks/Readbooks.jsx";
 
 
 
@@ -34,11 +34,14 @@ const App = () => {
             <Route path="/check/Post" element={<Post />} />
             <Route path="/check/Messages" element={<Message />} />
             <Route path="/check/Profil" element={<Profil />} />
-            <Route path="/check/userDifferent" element={<UserDifferent />} />
+            {/* <Route path="/check/userDifferent" element={<UserDifferent />} /> */}
             <Route path="/result" element={<Result />} />
             <Route path="/search" element={<Search />} />
             <Route path="/check/readbooks/:bookId" element={<Readbooks />} />
-            <Route path="/check/published_book/"element={<Published_books />} />
+            <Route
+              path="/check/published_book/"
+              element={<Published_books />}
+            />
           </Routes>
         </CategoryProvider>
       </UserContextProvider>
