@@ -11,7 +11,7 @@ import Profil from "./pages/Profil/Profil.jsx";
 import Result from "./pages/Search/Result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
-import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+import UserDifferent from "./pages/userDifferent/UserDifferent.jsx";
 import Readbooks from "./pages/Readbooks/Readbooks.jsx";
 
 
