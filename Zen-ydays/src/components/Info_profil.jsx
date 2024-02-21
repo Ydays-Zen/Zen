@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from '../context/userContext';
 
-// import "./styles/infoProfil.css";
+import "./styles/infoProfil.css";
 
 export function Info_profil() {
   const { followerCount, followingCount, currentUser } =

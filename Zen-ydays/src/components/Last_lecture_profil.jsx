@@ -1,8 +1,8 @@
-import '../pages/Profil/Profil.css'
 import Couverture1 from "../assets/couverture 1.jpg";
 import Couverture2 from "../assets/couverture 2.webp";
 import Couverture3 from "../assets/couverture 3.jpg";
 import Couverture4 from "../assets/couverture 4.jpg";
+import "../pages/Profil/Profil.css";
 
 export function Last_lecture_profil() {
   return (
