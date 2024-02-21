@@ -1,13 +1,13 @@
 // Readbooks.js
 
 import {
-    addDoc,
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    query,
-    where,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -16,7 +16,7 @@ import Nav from "../../components/Nav.jsx";
 import NavBar from "../../components/NavBar.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore } from "../../db/firebase-config.jsx";
-import "./Readbooks.css";
+import "./Readbook.css";
 
 const Readbooks = () => {
   const { bookId } = useParams();
@@ -105,41 +105,41 @@ const Readbooks = () => {
     }
   };
 
-    return (
-        <div>
-            <Nav />
-            <Menu />
-            <NavBar />
-            <div className="readbooks">
-                <div className="readbooks__book">
-                    <div className="readbooks__book__image">
-                        <img src={book.image} alt={book.title} />
-                    </div>
-                    <div className="readbooks__book__content">
-                        <h1>{book.title}</h1>
-                        <p>{book.content}</p>
-                    </div>
-                </div>
-                <hr/>
-                <div className="readbooks__comments">
-                    <h2>Commentaires</h2>
-                    <form onSubmit={handleComment}>
-                        <textarea
-                            value={newComment}
-                            onChange={(e) => setNewComment(e.target.value)}
-                        />
-                        <button type="submit">Commenter</button>
-                    </form>
-                    {comments.map((comment) => (
-                        <div className="readbooks__comments__comment">
-                            <p className="info_comment">{comment.createdAt}</p>
-                            <p className="content_comment">{comment.content}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+  return (
+    <div>
+      <Nav />
+      <Menu />
+      <NavBar />
+      <div className="readbooks">
+        <div className="readbooks__book">
+          <div className="readbooks__book__image">
+            <img src={book.image} alt={book.title} />
+          </div>
+          <div className="readbooks__book__content">
+            <h1>{book.title}</h1>
+            <p>{book.content}</p>
+          </div>
         </div>
-    );
-}
+        <hr />
+        <div className="readbooks__comments">
+          <h2>Commentaires</h2>
+          <form onSubmit={handleComment}>
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button type="submit">Commenter</button>
+          </form>
+          {comments.map((comment) => (
+            <div className="readbooks__comments__comment">
+              <p className="info_comment">{comment.createdAt}</p>
+              <p className="content_comment">{comment.content}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Readbooks;
