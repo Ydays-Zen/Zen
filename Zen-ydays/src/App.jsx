@@ -11,12 +11,8 @@ import Profil from "./pages/Profil/Profil.jsx";
 import Result from "./pages/Search/Result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
-<<<<<<< HEAD
 // import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
-=======
-import UserDifferent from "./pages/userDifferent/UserDifferent.jsx";
->>>>>>> 44d734d00dd3d30c28039fd40a4de4860989044a
 import Readbooks from "./pages/Readbooks/Readbooks.jsx";
 
 
