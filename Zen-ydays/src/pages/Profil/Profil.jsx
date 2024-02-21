@@ -38,9 +38,8 @@ function Profil() {
   return (
     <>
       <Header />
-      <Info_profil />
-      <Oeuvres_profil />
-      <Last_lecture_profil />
+      <Main/>
+      
       <Subscription onFollow={handleFollow} />
     </>
   );
