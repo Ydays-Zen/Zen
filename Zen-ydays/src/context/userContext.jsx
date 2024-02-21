@@ -8,17 +8,18 @@ export const UserContext = createContext();
 export function UserContextProvider(props) {
   const [currentUser, setCurrentUser] = useState();
   const [loadingData, setLoadingData] = useState(true);
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState([]); // Utiliser l'état pour stocker la liste des utilisateurs
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
 
-  const signUp = (email, pwd) => createUserWithEmailAndPassword(auth, email, pwd);
+  const signUp = (email, pwd) =>
+    createUserWithEmailAndPassword(auth, email, pwd);
   const signIn = (email, pwd) => signInWithEmailAndPassword(auth, email, pwd);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const usersRef = collection(firestore, "utilisateurs");
+        const usersRef = collection(firestore, "users");
         const q = query(usersRef);
         const querySnapshot = await getDocs(q);
 
