@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/userContext';
-import  Subscription  from "./Subscription.jsx";
+import  Subscription   from './Subscription.jsx';
 import { firestore } from '../db/firebase-config'; 
 
 export function Info_userDifferent({ displayName }) { 
