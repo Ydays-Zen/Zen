@@ -12,6 +12,7 @@ import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 import Result from "./pages/Search/result.jsx";
+import Readbooks from "./pages/Readbooks/readbooks.jsx";
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/check/userDifferent" element={<UserDifferent />} />
             <Route path="/result" element={<Result />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/check/readbooks/:bookId" element={<Readbooks />} />
           </Routes>
         </CategoryProvider>
       </UserContextProvider>
