@@ -84,4 +84,3 @@ const Messages = ({ currentUser, selectedUser }) => {
 };
 
 export default Messages;
-
