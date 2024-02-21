@@ -132,7 +132,7 @@ const Main = () => {
                 {/* Système de like */}
 
                 <div className="likes">
-                  <FontAwesomeIcon
+                  <FontAwesomeIcon className="like_img"
                     onClick={() => handleLikeSubmit(book.id)}
                     icon={
                       book.likedBy && book.likedBy.includes(currentUser.uid)
@@ -150,7 +150,7 @@ const Main = () => {
                   <p>{book.likedBy ? book.likedBy.length : 0}</p>
                 </div>
                 {/* Resume */}
-                <button onClick={() => handleResumeClick(book.id)}>
+                <button className="Resume_button" onClick={() => handleResumeClick(book.id)}>
                   Résumé
                 </button>
                 {/* Affichage du Résumé  */}
