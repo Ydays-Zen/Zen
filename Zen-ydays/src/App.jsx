@@ -6,13 +6,15 @@ import Check from "./pages/Connected/Check.jsx";
 import Connected from "./pages/Connected/checked/Connected.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Message from "./pages/Messages/Message.jsx";
-import Post from "./pages/Post/post.jsx";
+import Post from "./pages/Post/Post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
-import Result from "./pages/Search/result.jsx";
+import Result from "./pages/Search/Result.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
-import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
-import Readbooks from "./pages/Readbooks/readbooks.jsx";
+// import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+import Published_books from "./pages/Published_book/Published_books.jsx";
+import Readbooks from "./pages/Readbooks/Readbooks.jsx";
+
 
 
 const App = () => {
@@ -27,18 +29,24 @@ const App = () => {
               <Route path="connected" element={<Connected />} />
             </Route>
 
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/check/Post" element={<Post />} />
-          <Route path="/check/Messages" element={<Message />} />
-          <Route path="/check/Profil" element={<Profil />} />
-          <Route path="/check/userDifferent" element={<UserDifferent />} />
-          <Route path="/check/Readbooks/:bookId" element={<Readbooks />} />
-        </Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/check/Post" element={<Post />} />
+            <Route path="/check/Messages" element={<Message />} />
+            <Route path="/check/Profil" element={<Profil />} />
+            {/* <Route path="/check/userDifferent" element={<UserDifferent />} /> */}
+            <Route path="/result" element={<Result />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/check/readbooks/:bookId" element={<Readbooks />} />
+            <Route
+              path="/check/published_book/"
+              element={<Published_books />}
+            />
+          </Routes>
+        </CategoryProvider>
       </UserContextProvider>
     </div>
   );
 };
-
 
 export default App;

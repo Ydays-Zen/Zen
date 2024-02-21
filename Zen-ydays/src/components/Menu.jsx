@@ -20,7 +20,7 @@ const Menu = () => {
               <FontAwesomeIcon icon={faHouse} size="xl" color="black" />
             </a>
 
-            <a href="#">
+            <a href="/result">
               {" "}
               <FontAwesomeIcon icon={faSearch} size="xl" color="black" />{" "}
             </a>

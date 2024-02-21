@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider, firestore } from "../../db/firebase-config.jsx";
-import { collection, getDocs, addDoc, where, query} from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth, firestore, provider } from "../../db/firebase-config.jsx";
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -25,16 +25,17 @@ const Home = () => {
       const result = await signInWithPopup(auth, provider);
       cookies.set("auth-token", result.user.refreshToken);
       navigate("/check/connected");
-  
+
       const userRef = collection(firestore, "users");
       const userQuery = query(userRef, where("ID", "==", result.user.uid));
       const userSnapshot = await getDocs(userQuery);
-  
+
       if (userSnapshot.empty) {
         // L'utilisateur n'existe pas, alors ajoutez-le
         await addDoc(userRef, {
           ID: result.user.uid,
           displayName: result.user.displayName,
+          img: result.user.photoURL,
         });
       }
     } catch (err) {

@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { UserContext } from "../../../context/userContext.jsx";
 import { auth } from "../../../db/firebase-config.jsx";
-import Search from "../../../components/Search.jsx"; // Assurez-vous d'ajuster le chemin
 const cookies = new Cookies();
 
 import "./style.css";
-
+import LogOut from  "../../../assets/LogOut.svg"
 import Header from "../../../layout/home/Header.jsx";
 import Main from "../../../layout/home/Main.jsx";
 
@@ -23,6 +22,8 @@ const Connected = () => {
 
     console.log('User ID:', userId);
     console.log('Pseudo:', currentUser.displayName);
+    console.log("Photo:", currentUser.photoURL);
+    
 
   // Deconnexion
   const logOut = async () => {
@@ -38,11 +39,11 @@ const Connected = () => {
   return (
     <div>
       <Header />
-      <div className="search-bar-container">
-      {currentUser && <button class="btn_logout" onClick={logOut}>Log Out</button>}
-        <Search /> {}
-      </div>
-      {/* {currentUser && <h2>Welcome {currentUser.email}</h2>} */}
+      {currentUser && (
+        <button className="btn_logout" onClick={logOut}>
+          <img src={LogOut} alt="Log Out"/>
+        </button>
+      )}
       <Main />
     </div>
   );

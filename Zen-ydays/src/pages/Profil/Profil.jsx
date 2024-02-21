@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import Subscription  from "../../components/Subscription.jsx";
 import SubManager from "../../components/SubManager.jsx";
-import Info_profil from "../../components/info_profil.jsx";
 import Last_lecture_profil from "../../components/last_lecture_profil.jsx";
-import Oeuvres_profil from "../../components/oeuvres_profil.jsx";
+// import SubManager from "../../components/SubManager.jsx";
+import Info_profil from "../../components/Info_profil.jsx";
+import Oeuvres_profil from "../../components/Oeuvres_profil.jsx";
 import Header from "../../layout/home/Header.jsx";
 import "./Profil.css";
 

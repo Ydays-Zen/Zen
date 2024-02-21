@@ -1,14 +1,13 @@
-import { useState, useContext, useEffect } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import Menu from "../../components/Menu.jsx";
+import Nav from "../../components/Nav.jsx";
+import NavBar from "../../components/NavBar.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
-import { collection, addDoc } from "firebase/firestore";
-import Nav from "../../components/Nav";
-import Menu from "../../components/Menu";
-import NavBar from "../../components/NavBar";
-import './post.css';
+import "./post.css";
 
-
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
 const Post = () => {
@@ -25,7 +24,10 @@ const Post = () => {
   const uploadImg = async () => {
     if (!image) return "";
 
-    const imgRef = ref(storage, `images/${currentUser.uid}/${image.name + v4()}`);
+    const imgRef = ref(
+      storage,
+      `images/${currentUser.uid}/${image.name + v4()}`
+    );
 
     try {
       await uploadBytes(imgRef, image);
@@ -46,7 +48,6 @@ const Post = () => {
   useEffect(() => {
     console.log("Nouvelle URL dans useEffect :", imageUrl);
   }, [imageUrl]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,7 +120,6 @@ const Post = () => {
 
             <label>Image (URL):</label>
 
-
             <input
               type="file"
               name=""
@@ -178,6 +178,6 @@ const Post = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Post;
