@@ -142,13 +142,21 @@ const Post = () => {
               }}
             />
 
-            <label>Tags (séparés par des virgules):</label>
-            <input
-              type="text"
-              placeholder="Tags"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-            />
+              <label>Tags:</label>
+              <select
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+              >
+                <option value="">Choisir un tag</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Romance">Romance</option>
+                <option value="Horreur">Horreur</option>
+                <option value="aventure">Aventure</option>
+                <option value="Drame">Drame</option>
+                <option value="Comédie">Comédie</option>
+              </select>
+              
+
 
             <label>Contenu:</label>
             <input
@@ -161,6 +169,7 @@ const Post = () => {
             <button type="submit">Poster le Livre</button>
           </form>
         </div>
+
         {/* Aperçu du livre  
       <div className="book-preview">
         <h2>Aperçu du Livre</h2>

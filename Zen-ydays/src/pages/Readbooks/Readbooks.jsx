@@ -71,6 +71,20 @@ const Readbooks = () => {
     }
   };
 
+    const fetchUserInfo = async (userUid) => {
+    try {
+      const userDoc = await getDoc(doc(firestore, "users", userUid));
+      if (userDoc.exists()) {
+        return userDoc.data();
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération des informations de l'utilisateur :", error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     fetchBook();
     fetchComments();
@@ -110,36 +124,40 @@ const Readbooks = () => {
             <Nav />
             <Menu />
             <NavBar />
-            <div className="readbooks">
-                <div className="readbooks__book">
-                    <div className="readbooks__book__image">
-                        <img src={book.image} alt={book.title} />
-                    </div>
-                    <div className="readbooks__book__content">
-                        <h1>{book.title}</h1>
-                        <p>{book.content}</p>
-                    </div>
+            <div className="readbooks__book">
+              {book.image && (
+                <div className="readbooks__book__image">
+                  <img src={book.image} alt={book.title} />
                 </div>
-                <hr/>
-                <div className="readbooks__comments">
-                    <h2>Commentaires</h2>
-                    <form onSubmit={handleComment}>
-                        <textarea
-                            value={newComment}
-                            onChange={(e) => setNewComment(e.target.value)}
-                        />
-                        <button type="submit">Commenter</button>
-                    </form>
-                    {comments.map((comment) => (
-                        <div className="readbooks__comments__comment">
-                            <p className="info_comment">{comment.createdAt}</p>
-                            <p className="content_comment">{comment.content}</p>
-                        </div>
-                    ))}
-                </div>
+              )}
+              <div className="readbooks__book__content">
+                <h1>{book.title}</h1>
+                <p>{book.content}</p>
+              </div>
+            </div>
+            <hr/>
+            <div className="readbooks__comments">
+              <h2>Commentaires</h2>
+              <form onSubmit={handleComment}>
+                <textarea
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+                <button type="submit">Commenter</button>
+              </form>
+              {comments.map(async (comment) => {
+                const userInfo = await fetchUserInfo(comment.userUid);
+                return (
+                  <div className="readbooks__comments__comment">
+                    <p className="info_comment">{comment.createdAt}</p>
+                    <p className="content_comment">{comment.content}</p>
+                    <p className="user_info">{userInfo ? userInfo.displayName : "Utilisateur inconnu"}</p>
+                  </div>
+                );
+              })}
             </div>
         </div>
     );
-}
+};
 
 export default Readbooks;
