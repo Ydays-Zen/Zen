@@ -1,34 +1,32 @@
-/*
 import { Component } from "react";
-import Info_userDifferent from "../../components/Info_userDifferent.jsx";
+import { useParams } from "react-router-dom";
+import Info_userDifferent from "../../components/Info_userDifferent";
 import "./userDifferent.css";
 
 class UserDifferent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [],
       currentUserId: 1,
-      targetUserId: 2,
+      targetUserId: null, // Mettez le targetUserId à null par défaut
     };
-
-    this.subscriptionInstance = new Subscription("NomUtilisateur");  // Utiliser le nom d'utilisateur approprié
   }
 
-  // Méthode pour suivre l'utilisateur cible
-  handleFollow = async () => {
-    const targetUserId = this.state.targetUserId;
-    await this.subscriptionInstance.followUser(targetUserId);
+  componentDidMount() {
+    const { userId } = this.props.match.params; // Récupérer l'identifiant de l'utilisateur cible depuis les paramètres d'URL
+    this.setState({ targetUserId: userId });
+  }
 
+  handleFollow = () => {
+    const targetUserId = this.state.targetUserId;
     console.log(`Vous suivez l'utilisateur avec l'ID : ${targetUserId}`);
+    // Ajoutez ici la logique pour suivre l'utilisateur avec l'ID targetUserId
   };
 
-  // Méthode pour se désabonner de l'utilisateur cible
-  handleUnfollow = async () => {
+  handleUnfollow = () => {
     const targetUserId = this.state.targetUserId;
-    await this.subscriptionInstance.unfollowUser(targetUserId);
-
     console.log(`Vous ne suivez plus l'utilisateur avec l'ID : ${targetUserId}`);
+    // Ajoutez ici la logique pour ne plus suivre l'utilisateur avec l'ID targetUserId
   };
 
   render() {
@@ -43,4 +41,3 @@ class UserDifferent extends Component {
 }
 
 export default UserDifferent;
-*/

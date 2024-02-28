@@ -1,5 +1,6 @@
+// Result.jsx
+import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { firestore } from "../../db/firebase-config";
 import HeaderAll from "../../layout/HeaderAll";
@@ -29,7 +30,7 @@ const Result = () => {
           where("displayName", "==", searchQuery)
         );
         const usersSnapshot = await getDocs(usersQuery);
-        const usersData = usersSnapshot.docs.map((doc) => doc.data());
+        const usersData = usersSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })); // Ajoutez l'ID de l'utilisateur
         setUserResults(usersData);
       } catch (error) {
         console.error("Erreur lors de la récupération des résultats :", error);
