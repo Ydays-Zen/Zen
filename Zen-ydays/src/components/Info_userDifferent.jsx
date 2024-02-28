@@ -78,3 +78,4 @@ const getProfileUserFromDatabase = async (displayName) => {
 };
 
 export default Info_userDifferent;
+
