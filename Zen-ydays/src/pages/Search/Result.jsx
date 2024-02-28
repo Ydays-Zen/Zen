@@ -1,7 +1,6 @@
-// Result.jsx
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { firestore } from "../../db/firebase-config";
 import HeaderAll from "../../layout/HeaderAll";
 import BookResult from "./BookResult";
