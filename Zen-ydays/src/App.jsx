@@ -16,8 +16,6 @@ import UserDifferent from "./pages/userDifferent/UserDifferent.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
 import Readbooks from "./pages/Readbooks/Readbook.jsx";
 
-
-
 const App = () => {
   return (
     <div>
@@ -25,24 +23,19 @@ const App = () => {
         <CategoryProvider>
           <Routes>
             <Route path="/" element={<Home />} />
-
             <Route path="/check" element={<Check />}>
               <Route path="connected" element={<Connected />} />
             </Route>
-
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/check/Post" element={<Post />} />
             <Route path="/check/Messages" element={<Message />} />
             <Route path="/check/Profil" element={<Profil />} />
-            <Route path="/check/userDifferent" element={<UserDifferent />} />
+            <Route path="/check/userDifferent/:userId" element={<UserDifferent />} /> 
             <Route path="/result" element={<Result />} />
             <Route path="/search" element={<Search />} />
             <Route path="/check/readbooks/:bookId" element={<Readbooks />} />
-            <Route
-              path="/check/published_book/"
-              element={<Published_books />}
-            />
+            <Route path="/check/published_book/" element={<Published_books />} />
           </Routes>
         </CategoryProvider>
       </UserContextProvider>

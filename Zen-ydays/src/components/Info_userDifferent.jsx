@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { firestore } from '../db/firebase-config';
+import { UserContext } from '../context/userContext'; // Assurez-vous que le chemin d'importation est correct
 
 export function Info_userDifferent({ userId }) { 
     const [profileUser, setProfileUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
+    const { currentUser } = useContext(UserContext); // Utilisation de UserContext pour obtenir currentUser
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!currentUser) return; // Vérifiez si currentUser est défini
+            
             try {
                 const profileUserData = await getProfileUserFromDatabase(userId); 
                 setProfileUser(profileUserData);
@@ -20,19 +24,17 @@ export function Info_userDifferent({ userId }) {
         };
 
         fetchData();
-    }, [userId]);
+    }, [userId, currentUser]); // Ajoutez currentUser comme dépendance
 
     const handleFollowToggle = async () => {
+        if (!currentUser) return; // Empêchez l'action si aucun utilisateur n'est connecté
+        
         try {
             if (isFollowing) {
-                // Si l'utilisateur suit déjà, arrêtez de suivre
                 await unfollowUser(currentUser.uid, userId);
             } else {
-                // Sinon, commencez à suivre
                 await followUser(currentUser.uid, userId);
             }
-
-            // Met à jour l'état après le suivi / non-suivi réussi
             setIsFollowing(!isFollowing);
         } catch (error) {
             console.error('Erreur lors de la gestion d\'abonnement/désabonnement :', error);
