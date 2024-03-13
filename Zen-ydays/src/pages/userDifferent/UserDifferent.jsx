@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import Info_userDifferent from "../../components/Info_userDifferent";
-import Oeuvres_profil from "../../components/Oeuvres_Profil"; // Assurez-vous que ce composant accepte un userId comme prop
+import Oeuvres_profil, { Oeuvres_profilDifferent } from "../../components/Oeuvres_profilDifferent"; 
 import { firestore } from "../../db/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 
 const UserDifferent = ({ match }) => {
   const [targetUser, setTargetUser] = useState(null);
   const { userId } = match.params;
+  console.log(userId);
 
   const fetchUserData = async () => {
     const userDocRef = doc(firestore, "utilisateurs", userId);
@@ -25,7 +26,7 @@ const UserDifferent = ({ match }) => {
   return (
     <>
       {targetUser && <Info_userDifferent user={targetUser} />}
-      {targetUser && <Oeuvres_profil userId={userId} />}
+      {targetUser && <Oeuvres_profilDifferent userId={userId} />}
     </>
   );
 };

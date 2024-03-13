@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../db/firebase-config";
-import { Link } from "react-router-dom"; // Importation de Link
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom"; 
 
 const BookResult = ({ book }) => {
   const [userData, setUserData] = useState(null);
@@ -12,13 +12,12 @@ const BookResult = ({ book }) => {
     const userSnapshot = await getDocs(usersCol);
     const usersList = userSnapshot.docs.map((doc) => doc.data());
     const userData = usersList.find((user) => user.ID === book.userId);
-    console.log(userData);
     setUserData(userData);
   };
 
   useEffect(() => {
     fetchUserData();
-  }, [book.userId]); // Je vous recommande d'ajouter book.userId ici pour ré-exécuter l'effet si l'ID de l'utilisateur change, c'est plus optimisé.
+  }, [book.userId]); 
 
   return (
     <div className="book-result">
@@ -26,7 +25,7 @@ const BookResult = ({ book }) => {
       <h3>{book.title}</h3>
       <p>{book.resume}</p>
       {userData && (
-        <p>Posté par : <Link to={`/user/${userData.ID}`}>{userData.displayName}</Link></p> // Utilisation de Link ici
+        <p>Posté par : <Link to={`/check/userDifferent/${userData.ID}`}>{userData.displayName}</Link></p>
       )}
     </div>
   );
