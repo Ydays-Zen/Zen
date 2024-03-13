@@ -1,14 +1,6 @@
-/* eslint-disable react/prop-types */
-// userContext.jsx
-
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { collection, getDocs, query } from "firebase/firestore";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
-
 import { auth, firestore } from "../db/firebase-config";
 
 export const UserContext = createContext();
@@ -46,7 +38,7 @@ export function UserContextProvider(props) {
 
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      fetchUsers(); // Call the function to retrieve the list of users
+      fetchUsers();
 
       setLoadingData(false);
 
@@ -59,23 +51,19 @@ export function UserContextProvider(props) {
     });
 
     return () => {
-      unsubscribeAuth(); // Unsubscribe from onAuthStateChanged
+      unsubscribeAuth();
     };
   }, []);
 
   const fetchFollowerFollowingCounts = async (userId) => {
     try {
-      const userDoc = await firestore
-        .collection("utilisateurs")
-        .doc(userId)
-        .get();
-      const userData = userDoc.data();
+      const userDocRef = doc(firestore, "utilisateurs", userId);
+      const userDocSnapshot = await getDoc(userDocRef);
+      const userData = userDocSnapshot.data();
 
       if (userData) {
         setFollowerCount(userData.abonnes ? userData.abonnes.length : 0);
-        setFollowingCount(
-          userData.abonnements ? userData.abonnements.length : 0
-        );
+        setFollowingCount(userData.abonnements ? userData.abonnements.length : 0);
       }
     } catch (error) {
       console.error("Error fetching follower and following counts:", error);
@@ -97,4 +85,3 @@ export function UserContextProvider(props) {
     </UserContext.Provider>
   );
 }
-
