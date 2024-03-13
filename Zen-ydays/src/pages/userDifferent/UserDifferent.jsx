@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { firestore } from '../../db/firebase-config'; // Ajustez le chemin selon votre structure de projet
+import { firestore } from '../../db/firebase-config';
 
 const UserDifferent = () => {
   const { userId } = useParams();
@@ -12,8 +12,8 @@ const UserDifferent = () => {
   useEffect(() => {
     const fetchUser = async () => {
       setLoading(true);
+      console.log(`Fetching user data for ID: ${userId}`);
       try {
-        console.log(`Fetching user data for ID: ${userId}`);
         const userRef = doc(firestore, "users", userId);
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
@@ -30,21 +30,30 @@ const UserDifferent = () => {
         setLoading(false);
       }
     };
-  
+
     fetchUser();
   }, [userId]);
-  
 
-  if (loading) return <div>Loading user data...</div>;
-  if (error) return <div>Erreur : {error}</div>;
+  if (loading) {
+    return <div>Chargement des données de l'utilisateur...</div>;
+  }
 
-  
+  if (error) {
+    return <div>Erreur : {error}</div>;
+  }
+
   return (
     <div>
-      <h2>Profil Utilisateur</h2>
-      <div>Nom : {user?.name}</div>
-      <div>Email : {user?.email}</div>
-      <div>Bio : {user?.bio}</div>
+      {user ? (
+        <div>
+          <h2>Profil de l'utilisateur</h2>
+          <p>Nom : {user.displayName}</p>
+          <div>Email : {user?.email}</div>
+          <div>Bio : {user?.bio}</div>
+        </div>
+      ) : (
+        <p>Utilisateur non trouvé.</p>
+      )}
     </div>
   );
 };
