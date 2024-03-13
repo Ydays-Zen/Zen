@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const UserResult = ({ user }) => {
+  if (!user) {
+    return <p>Utilisateur non trouvé.</p>;
+  }
+
   const { displayName, id } = user;
 
   if (!displayName || !id) {
@@ -16,11 +20,5 @@ const UserResult = ({ user }) => {
   );
 };
 
-UserResult.propTypes = {
-  user: PropTypes.shape({
-    displayName: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default UserResult;

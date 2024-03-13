@@ -1,33 +1,51 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/userContext";
-import Info_userDifferent from "../../components/Info_userDifferent";
-import Oeuvres_profil, { Oeuvres_profilDifferent } from "../../components/Oeuvres_profilDifferent"; 
-import { firestore } from "../../db/firebase-config";
-import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { firestore } from '../../db/firebase-config'; // Ajustez le chemin selon votre structure de projet
 
-const UserDifferent = ({ match }) => {
-  const [targetUser, setTargetUser] = useState(null);
-  const { userId } = match.params;
-  console.log(userId);
-
-  const fetchUserData = async () => {
-    const userDocRef = doc(firestore, "utilisateurs", userId);
-    const docSnap = await getDoc(userDocRef);
-    if (docSnap.exists()) {
-      setTargetUser(docSnap.data());
-    } else {
-      console.log("No such document!");
-    }
-  };
+const UserDifferent = () => {
+  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchUserData();
-  }, [userId]); 
+    const fetchUser = async () => {
+      setLoading(true);
+      try {
+        console.log(`Fetching user data for ID: ${userId}`);
+        const userRef = doc(firestore, "users", userId);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          console.log("User data:", userSnap.data());
+          setUser(userSnap.data());
+        } else {
+          console.log("No such user!");
+          setError('Aucun utilisateur trouvé avec cet ID.');
+        }
+      } catch (err) {
+        console.error("Erreur lors de la récupération des données de l'utilisateur :", err);
+        setError('Erreur lors de la récupération des données de l’utilisateur.');
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchUser();
+  }, [userId]);
+  
+
+  if (loading) return <div>Loading user data...</div>;
+  if (error) return <div>Erreur : {error}</div>;
+
+  
   return (
-    <>
-      {targetUser && <Info_userDifferent user={targetUser} />}
-      {targetUser && <Oeuvres_profilDifferent userId={userId} />}
-    </>
+    <div>
+      <h2>Profil Utilisateur</h2>
+      <div>Nom : {user?.name}</div>
+      <div>Email : {user?.email}</div>
+      <div>Bio : {user?.bio}</div>
+    </div>
   );
 };
 
