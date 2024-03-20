@@ -23,24 +23,41 @@ useEffect(() => {
     } finally {
       setLoading(false);
     }
-  };
+  
+    return (
+      <div>
+        {loading ? (
+          <p>Chargement...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <div>
+            <h2>Profil de {displayName}</h2>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   fetchUser();
-}, [userId, displayName]);
+}, [displayName]);
 
-return (
-  <div>
-    {loading ? (
-      <p>Chargement...</p>
-    ) : error ? (
-      <p>{error}</p>
-    ) : (
-      <div>
-        <h2>Profil de {displayName}</h2>
-      </div>
-    )}
-  </div>
-);
+
+
+// return (
+//   <div>
+//     {loading ? (
+//       <p>Chargement...</p>
+//     ) : error ? (
+//       <p>{error}</p>
+//     ) : (
+//       <div>
+//         <h2>Profil de {displayName}</h2>
+//       </div>
+//     )}
+//   </div>
+// );
+
 
 
 export default UserDifferent;
