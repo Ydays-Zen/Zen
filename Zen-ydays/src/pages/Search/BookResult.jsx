@@ -11,9 +11,12 @@ const BookResult = ({ book }) => {
     const usersCol = collection(firestore, "users");
     const userSnapshot = await getDocs(usersCol);
     const usersList = userSnapshot.docs.map((doc) => doc.data());
+    console.log("Liste des utilisateurs:", usersList); 
     const userData = usersList.find((user) => user.ID === book.userId);
+    console.log("Données utilisateur trouvées:", userData); 
     setUserData(userData);
   };
+  
 
   useEffect(() => {
     fetchUserData();

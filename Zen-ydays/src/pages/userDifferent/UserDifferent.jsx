@@ -14,8 +14,10 @@ const UserDifferent = () => {
       setLoading(true);
       console.log(`Fetching user data for ID: ${userId}`);
       try {
-        const userRef = doc(firestore, "users", userId);
+        const userRef = doc(firestore, "users", userId );
+        console.log("userRef:", userRef); 
         const userSnap = await getDoc(userRef);
+        console.log("userSnap:", userSnap); 
         if (userSnap.exists()) {
           console.log("User data:", userSnap.data());
           setUser(userSnap.data());
@@ -30,9 +32,10 @@ const UserDifferent = () => {
         setLoading(false);
       }
     };
-
+  
     fetchUser();
   }, [userId]);
+  
 
   if (loading) {
     return <div>Chargement des données de l'utilisateur...</div>;
