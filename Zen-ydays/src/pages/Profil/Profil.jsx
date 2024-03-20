@@ -2,7 +2,7 @@
 import Header from "../../layout/profil/Header.jsx";
 import Main from "../../layout/profil/Main.jsx";
 
-import "./profil.css";
+import "./Profil.css";
 
 function Profil() {
   return (

@@ -11,9 +11,9 @@ import Profil from "./pages/Profil/Profil.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 // import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
-import Result from "./pages/Search/result.jsx";
-import Readbooks from "./pages/Readbooks/readbooks.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
+import Readbooks from "./pages/Readbooks/Readbooks.jsx";
+import Result from "./pages/Search/Result.jsx";
 
 
 const App = () => {
