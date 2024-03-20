@@ -40,7 +40,7 @@ const NavBar = () => {
               <FontAwesomeIcon icon={faMessage} size="xl" color="black" />{" "}
             </a>
 
-            <a href="#">
+            <a href="/search">
               {" "}
               <FontAwesomeIcon icon={faSearch} size="xl" color="black" />{" "}
             </a>

@@ -45,16 +45,28 @@ const SignUp = () => {
     return () => unsubscribe();
   }, [UserRef, navigate]);
 
+  function isValidPassword(password) {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    return hasUpperCase && hasNumber && hasSpecialChar;
+  }
+
   const handleForm = async (e) => {
     e.preventDefault();
 
     if (inputs.current[2].value !== inputs.current[3].value) {
       setValidation("Les mots de passe ne correspondent pas");
     } else if (
-      inputs.current[2].value.length < 6 ||
-      inputs.current[3].value.length < 6
+      inputs.current[2].value.length < 8 ||
+      (inputs.current[3].value.length < 8 &&
+        !isValidPassword(inputs.current[2].value)) ||
+      !isValidPassword(inputs.current[3].value)
     ) {
-      setValidation("Le mot de passe doit avoir 6 caractères minimum");
+      setValidation(
+        "Le mot de passe doit avoir 8 caractères minimum, une lettre majuscule, un chiffre et un caractère spécial"
+      );
     } else if (inputs.current[0].value.length < 3) {
       setValidation("Le pseudo doit avoir 3 caractères minimum");
     } else if (

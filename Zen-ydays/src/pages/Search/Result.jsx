@@ -1,6 +1,7 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Search from "../../components/Search";
 import { firestore } from "../../db/firebase-config";
 import HeaderAll from "../../layout/HeaderAll";
 import BookResult from "./BookResult";
@@ -42,6 +43,7 @@ const Result = () => {
   return (
     <>
       <HeaderAll />
+      <Search />
       <div className="resultContainer">
         <h2>Résultats de recherche pour `{searchQuery}`</h2>
         <div className="bookResults">
