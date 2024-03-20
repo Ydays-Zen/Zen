@@ -8,39 +8,41 @@ const UserDifferent = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [displayName, setDisplayName] = useState('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userDoc = doc(firestore, 'users', userId);
+        const userSnapshot = await getDoc(userDoc);
+        if (userSnapshot.exists()) {
+          setUser(userSnapshot.data());
+        } else {
+          setError('Utilisateur non trouvé.');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données utilisateur:', error);
+        setError('Erreur lors de la récupération des données utilisateur.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [userId]);
+
+  return (
+    <div>
+      {loading ? (
+        <p>Chargement...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <div>
+          <h2>Profil de {user.displayName}</h2>
+        </div>
+      )}
+    </div>
+  );
 };
-
-useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const userDoc = doc(firestore, 'users', userId);
-      const userSnapshot = await getDoc(userDoc);
-      setUser(userSnapshot.data());
-      setDisplayName(userSnapshot.data().displayName);
-    } catch (error) {
-      setError('Erreur lors de la récupération des données utilisateur.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchUser();
-}, [userId, displayName]);
-
-return (
-  <div>
-    {loading ? (
-      <p>Chargement...</p>
-    ) : error ? (
-      <p>{error}</p>
-    ) : (
-      <div>
-        <h2>Profil de {displayName}</h2>
-      </div>
-    )}
-  </div>
-);
-
 
 export default UserDifferent;
