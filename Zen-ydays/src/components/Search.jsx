@@ -8,7 +8,17 @@ const Search = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate("/result", { state: { searchQuery } });
+    if (searchQuery.trim() !== "") {
+      navigate("/result", { state: { searchQuery } });
+    } else {
+      alert("Veuillez entrer une requête de recherche valide.");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -21,6 +31,7 @@ const Search = () => {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder="Rechercher..."
         />
         <button className="searchButton" onClick={handleSearch}>
@@ -30,7 +41,5 @@ const Search = () => {
     </>
   );
 };
-
-
 
 export default Search;

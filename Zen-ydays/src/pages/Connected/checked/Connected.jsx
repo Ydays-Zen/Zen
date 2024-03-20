@@ -7,7 +7,7 @@ import { auth } from "../../../db/firebase-config.jsx";
 const cookies = new Cookies();
 
 import "./style.css";
-
+import LogOut from  "../../../assets/LogOut.svg"
 import Header from "../../../layout/home/Header.jsx";
 import Main from "../../../layout/home/Main.jsx";
 
@@ -22,6 +22,8 @@ const Connected = () => {
 
     console.log('User ID:', userId);
     console.log('Pseudo:', currentUser.displayName);
+    console.log("Photo:", currentUser.photoURL);
+    
 
   // Deconnexion
   const logOut = async () => {
@@ -39,7 +41,7 @@ const Connected = () => {
       <Header />
       {currentUser && (
         <button className="btn_logout" onClick={logOut}>
-          Log Out
+          <img src={LogOut} alt="Log Out"/>
         </button>
       )}
       <Main />

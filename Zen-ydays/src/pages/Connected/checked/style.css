@@ -8,8 +8,43 @@
 
 .btn_logout {
     position: absolute;
-    left: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s;
 }
+
+.btn_logout:hover{
+    background-color: red;
+    color: white;
+}
+
+.btn_logout>img{
+    width: 24px;
+}
+
+@media screen and (min-width: 1400px) {
+    .btn_logout{
+        top: 2%;
+        left: 90%;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1399px) {
+    .btn_logout{
+        top: 2%;
+        left: 85%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .btn_logout{
+        top: 10%;
+        left: 83%;
+    }
+}
+
 
 .search-bar-container {
     display: flex;
