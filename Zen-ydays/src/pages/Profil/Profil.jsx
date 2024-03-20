@@ -6,7 +6,7 @@ import { UserContext } from "../../context/userContext";
 import Header from "../../layout/profil/Header.jsx";
 import Main from "../../layout/profil/Main.jsx";
 
-import "./profil.css";
+import "./Profil.css";
 
 function Profil() {
   const { currentUser } = useContext(UserContext);
