@@ -32,6 +32,8 @@ const SignIn = () => {
         inputs.current[1].value
       );
 
+      console.log("Cred:", cred);
+
       formRef.current.reset();
       setValidation("");
       navigate("/check/connected");
