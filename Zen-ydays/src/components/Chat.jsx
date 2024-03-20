@@ -6,10 +6,12 @@ import {
   getDocs,
   query,
   where,
+  doc,
+  updateDoc,
 } from "firebase/firestore";
 import './styles/Chat.css';
 
-const Chat = ({ onSelectUser }) => {
+const Chat = ({ onSelectUser, updateMessageViews }) => {
   const { currentUser } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [userList, setUserList] = useState([]);
@@ -60,16 +62,20 @@ const Chat = ({ onSelectUser }) => {
 
   return (
     <div className="content-user">
+      <h2 className="title-Messages">Message</h2>
       <input
         type="text"
-        placeholder="Rechercher un utilisateur..."
+        className="search_user"
+        placeholder="Search..."
         value={searchTerm}
         onChange={handleSearchChange}
       />
-      <h2 className="user_h2">Utilisateurs</h2>
       <ul className="user_read">
         {filteredUserList.map((user) => (
-          <li className="select_user" key={user.ID} onClick={() => onSelectUser(user)}>
+          <li className="select_user" key={user.ID} onClick={() => {
+            onSelectUser(user);
+            updateMessageViews(user); // Appel de la fonction pour mettre à jour les vues
+          }}>
             {user.displayName}
           </li>
         ))}
