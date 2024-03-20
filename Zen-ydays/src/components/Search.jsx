@@ -119,7 +119,6 @@ const Search = () => {
   return (
     <>
       <HeaderAll />
-
       <div className="searchBar">
         <input
           className="Search"
