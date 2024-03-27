@@ -1,13 +1,19 @@
 import { signInWithPopup } from "firebase/auth";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
-import { useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext.jsx";
 import { auth, firestore, provider } from "../../db/firebase-config.jsx";
+import "./home.css";
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const Home = () => {
+  const inputs = useRef([]);
+  const [validation, setValidation] = useState("");
+  const { signIn } = useContext(UserContext);
+  const formRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,20 +51,91 @@ const Home = () => {
     }
   };
 
-  const signin = () => {
-    navigate("/signin");
-  };
-
   const signup = () => {
     navigate("/signup");
   };
 
+  const addInputs = (el) => {
+    if (el && !inputs.current.includes(el)) {
+      inputs.current.push(el);
+    }
+  };
+
+  const handleForm = async (e) => {
+    e.preventDefault();
+
+    if (
+      inputs.current[0].value.length == "" ||
+      inputs.current[1].value.length == ""
+    ) {
+      setValidation("Veuillez remplir tous les champs");
+      return;
+    }
+
+    try {
+      const cred = await signIn(
+        inputs.current[0].value,
+        inputs.current[1].value
+      );
+
+      console.log("Cred:", cred);
+
+      formRef.current.reset();
+      setValidation("");
+      navigate("/check/connected");
+    } catch (error) {
+      setValidation("Email ou mot de passe incorrect");
+    }
+  };
+
   return (
     <div className="auth">
-      <h1>Hi, Sign up or sign in</h1>
-      <button onClick={signin}>Sign in</button>
-      <button onClick={signup}>Sign up</button>
-      <button onClick={signInWithGoogle}>Sign In With Google</button>
+      <h2>Connexion</h2>
+
+      <form onSubmit={handleForm} ref={formRef}>
+        <div>
+          <label htmlFor="email">E-mail:</label>
+          <input
+            ref={addInputs}
+            type="email"
+            name="email"
+            placeholder="Email"
+            id="signup"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="password">Mot de passe:</label>
+          <input
+            ref={addInputs}
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+          />
+        </div>
+
+        <p>{validation}</p>
+        <button>Connexion</button>
+      </form>
+
+      <button
+        onClick={signInWithGoogle}
+        type="button"
+        className="login-with-google-btn"
+      >
+        Sign in with Google
+      </button>
+
+      <div className="separation">
+        <span className="line"></span>
+        <p>Ou</p>
+        <span className="line"></span>
+      </div>
+
+      <button className="second-btn" onClick={signup}>
+        Créer un compte
+      </button>
     </div>
   );
 };
