@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { auth, firestore } from "../db/firebase-config";
 
@@ -8,7 +8,7 @@ export const UserContext = createContext();
 export function UserContextProvider(props) {
   const [currentUser, setCurrentUser] = useState();
   const [loadingData, setLoadingData] = useState(true);
-  const [userList, setUserList] = useState([]); // Utiliser l'état pour stocker la liste des utilisateurs
+  const [userList, setUserList] = useState([]); 
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
 
@@ -20,8 +20,7 @@ export function UserContextProvider(props) {
     const fetchUsers = async () => {
       try {
         const usersRef = collection(firestore, "users");
-        const q = query(usersRef);
-        const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(usersRef);
 
         const users = [];
         querySnapshot.forEach((doc) => {
@@ -57,7 +56,7 @@ export function UserContextProvider(props) {
 
   const fetchFollowerFollowingCounts = async (userId) => {
     try {
-      const userDocRef = doc(firestore, "utilisateurs", userId);
+      const userDocRef = doc(firestore, "users", userId); // Correction du nom de la collection
       const userDocSnapshot = await getDoc(userDocRef);
       const userData = userDocSnapshot.data();
 
