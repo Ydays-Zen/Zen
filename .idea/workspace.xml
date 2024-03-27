@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb4d97d1-c2e8-4a05-809c-b132f31a5e99" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Zen-ydays/src/pages/Settings/Settings.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zen-ydays/src/pages/Readbooks/Readbooks.css" beforeDir="false" afterPath="$PROJECT_DIR$/Zen-ydays/src/pages/Readbooks/Readbooks.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zen-ydays/src/pages/Readbooks/Readbooks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Zen-ydays/src/pages/Readbooks/Readbooks.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zen-ydays/src/pages/Settings/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Zen-ydays/src/pages/Settings/Settings.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +16,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -54,8 +61,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "New__ReadBooks",
+    "git-widget-placeholder": "settings",
     "ignore.virus.scanning.warn.message": "true",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",

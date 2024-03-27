@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { auth, firestore } from "../../db/firebase-config.jsx";
 import { doc, updateDoc } from 'firebase/firestore';
 import Header from "../../layout/home/Header.jsx";
+import "./Settings.css";
 
 function SettingsPage() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -34,6 +35,11 @@ function SettingsPage() {
 
   return (
     <div>
+      <div className="top_setting_account">
+        <div className="return_setting">
+        </div>
+        <div className="top_info"></div>
+      </div>
       <Header />
       <h2>Modifier le pseudo</h2>
       <div>
