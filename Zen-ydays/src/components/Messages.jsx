@@ -1,3 +1,4 @@
+// Messages.jsx
 import {
   collection,
   onSnapshot,
@@ -20,29 +21,29 @@ const Messages = ({ currentUser, selectedUser }) => {
 
     const messagesRef = collection(firestore, "messages");
 
-    const combinedQuery = query(
-      messagesRef,
-      where('participants', 'in', [
-        [currentUser.uid, selectedUser.ID],
-        [selectedUser.ID, currentUser.uid],
-      ]),
-      orderBy('createdAt')
-    );
+        const combinedQuery = query(
+            messagesRef,
+            where('participants', 'in', [
+                [currentUser.uid, selectedUser.ID],
+                [selectedUser.ID, currentUser.uid],
+            ]),
+            orderBy('createdAt')
+        );
 
-    const unsubscribe = onSnapshot(combinedQuery, (querySnapshot) => {
-      const newMessages = [];
-      querySnapshot.forEach((doc) => {
-        const messageData = doc.data();
-        console.log('Message ID:', doc.id);
-        newMessages.push({ ...messageData, id: doc.id }); // Inclure l'ID du message dans l'objet message
-      });
-      setMessages(newMessages);
-    });
+        const unsubscribe = onSnapshot(combinedQuery, (querySnapshot) => {
+            const newMessages = [];
+            querySnapshot.forEach((doc) => {
+                const messageData = doc.data();
+                console.log('Message ID:', doc.id);
+                newMessages.push(messageData);
+            });
+            setMessages(newMessages);
+        });
 
-    return () => {
-      unsubscribe();
-    };
-  }, [currentUser, selectedUser]);
+        return () => {
+            unsubscribe();
+        };
+    }, [currentUser, selectedUser]);
 
   let scrollDiv = document.querySelector(".messages_read");
 
@@ -74,7 +75,7 @@ const Messages = ({ currentUser, selectedUser }) => {
                 :{" "}
               </span>
               <span className="span_text">{message.text}</span>
-              {message.participants[0] === currentUser.uid && message.vues > 0 && <span className="vu_indicator">Vu</span>}
+              {/* <span>{message.createdAt && message.createdAt.toDate().toLocaleString()}</span> */}
             </li>
           ))}
       </ul>
@@ -83,3 +84,4 @@ const Messages = ({ currentUser, selectedUser }) => {
 };
 
 export default Messages;
+

@@ -6,12 +6,10 @@ import {
   getDocs,
   query,
   where,
-  doc,
-  updateDoc,
 } from "firebase/firestore";
 import './styles/Chat.css';
 
-const Chat = ({ onSelectUser, updateMessageViews }) => {
+const Chat = ({ onSelectUser }) => {
   const { currentUser } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [userList, setUserList] = useState([]);
@@ -60,9 +58,11 @@ const Chat = ({ onSelectUser, updateMessageViews }) => {
     user.displayName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // console.log(user.photoURL)
+
   return (
     <div className="content-user">
-      <h2 className="title-Messages">Message</h2>
+      <h2 class="title-Messages">Message</h2>
       <input
         type="text"
         className="search_user"
@@ -72,11 +72,9 @@ const Chat = ({ onSelectUser, updateMessageViews }) => {
       />
       <ul className="user_read">
         {filteredUserList.map((user) => (
-          <li className="select_user" key={user.ID} onClick={() => {
-            onSelectUser(user);
-            updateMessageViews(user); // Appel de la fonction pour mettre à jour les vues
-          }}>
+          <li className="select_user" key={user.ID} onClick={() => onSelectUser(user)}>
             {user.displayName}
+            {/* <img src={user.photoURL} alt="" /> */}
           </li>
         ))}
       </ul>
