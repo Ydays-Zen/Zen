@@ -15,7 +15,7 @@ const Script = () => {
       const likedBooksRef = collection(firestore, "Books");
       const q = query(
         likedBooksRef,
-        where("likedBy", "array-contains", currentUser.uid)
+        where("likedBy", "array-contains", currentUser.uid),
       );
       const querySnapshot = await getDocs(q);
 
@@ -57,7 +57,7 @@ const Script = () => {
 
   return (
     <>
-      <h1>Livres aimés par l'utilisateur</h1>
+      <h1>Livres aimés par l utilisateur</h1>
 
       {booksList.map((book) => (
         <div key={book.id} className="book">

@@ -36,6 +36,8 @@ const Home = () => {
           ID: result.user.uid,
           displayName: result.user.displayName,
           img: result.user.photoURL,
+          follow: [],
+          followers: [],
         });
       }
     } catch (err) {
