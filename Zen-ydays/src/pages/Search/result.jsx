@@ -1,6 +1,5 @@
-// Result.jsx
-import React, { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { firestore } from "../../db/firebase-config";
 import HeaderAll from "../../layout/HeaderAll";
@@ -40,14 +39,6 @@ const Result = () => {
     fetchResults();
   }, [searchQuery]);
 
-  // Définissez la fonction handleUser pour gérer le clic sur le bouton Message
-  const handleUser = (selectedUser) => {
-    // Faites ce que vous devez faire avec l'utilisateur sélectionné
-    console.log("Utilisateur sélectionné:", selectedUser.displayName);
-    // Par exemple, vous pouvez appeler sendMessage ici
-    // Assurez-vous que sendMessage est disponible dans ce composant parent
-  };
-
   return (
     <>
       <HeaderAll />
@@ -69,7 +60,7 @@ const Result = () => {
             <p>Aucun utilisateur trouvé.</p>
           ) : (
             userResults.map((user, index) => (
-              <UserResult key={index} user={user} handleUser={handleUser} /> // Passez handleUser comme prop
+              <UserResult key={index} user={user} />
             ))
           )}
         </div>
