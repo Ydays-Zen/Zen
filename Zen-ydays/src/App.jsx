@@ -9,13 +9,10 @@ import Message from "./pages/Messages/Message.jsx";
 import Post from "./pages/Post/Post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
 import Result from "./pages/Search/Result.jsx";
-import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 // import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
 import Readbooks from "./pages/Readbooks/Readbook.jsx";
-
-
 
 const App = () => {
   return (
@@ -29,7 +26,6 @@ const App = () => {
               <Route path="connected" element={<Connected />} />
             </Route>
 
-            <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/check/Post" element={<Post />} />
             <Route path="/check/Messages" element={<Message />} />

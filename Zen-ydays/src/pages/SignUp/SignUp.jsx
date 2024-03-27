@@ -1,19 +1,10 @@
-import { signInWithPopup } from "firebase/auth";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { v4 } from "uuid";
 import { UserContext } from "../../context/userContext.jsx";
-import {
-  auth,
-  firestore,
-  provider,
-  storage,
-} from "../../db/firebase-config.jsx";
-
-const cookies = new Cookies();
+import { firestore, storage } from "../../db/firebase-config.jsx";
 
 const SignUp = () => {
   const inputs = useRef([]);
@@ -26,6 +17,39 @@ const SignUp = () => {
   const handleForm = async (e) => {
     e.preventDefault();
 
+    // Tout les champs doivent etre remplis
+    if (
+      !inputs.current[0].value ||
+      !inputs.current[1].value ||
+      !inputs.current[2].value ||
+      !inputs.current[3].value
+    ) {
+      setValidation("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    //regex pour vérifier si l'email est valide
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailRegex.test(inputs.current[1].value)) {
+      setValidation("Veuillez entrer un email valide.");
+      return;
+    }
+
+    // Vérifier si les mots de passe correspondent
+    if (inputs.current[2].value !== inputs.current[3].value) {
+      setValidation("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    // regex pour vérifier si le mot de passe contient au moins 8 caractères une lettre majuscule un chiffre et un caractère spécial
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(inputs.current[2].value)) {
+      setValidation(
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial."
+      );
+      return;
+    }
     // Vérifier si une image a été sélectionnée
     if (!image) {
       setValidation("Veuillez sélectionner une photo de profil.");
@@ -47,7 +71,7 @@ const SignUp = () => {
       const cred = await signUp(
         inputs.current[1].value,
         inputs.current[2].value,
-        imageUrl // Pass the image URL to the signUp function
+        imageUrl
       );
 
       const userRef = collection(firestore, "users");
@@ -66,31 +90,6 @@ const SignUp = () => {
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
       setValidation("Erreur lors de l'inscription : " + error.message);
-    }
-  };
-
-  const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      cookies.set("auth-token", result.user.refreshToken);
-      navigate("/check/connected");
-
-      const userRef = collection(firestore, "users");
-      const userQuery = query(userRef, where("ID", "==", result.user.uid));
-      const userSnapshot = await getDocs(userQuery);
-
-      if (userSnapshot.empty) {
-        // L'utilisateur n'existe pas, alors ajoutez-le
-        await addDoc(userRef, {
-          ID: result.user.uid,
-          displayName: result.user.displayName,
-          img: result.user.photoURL,
-          follow: [],
-          followers: [],
-        });
-      }
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -157,21 +156,25 @@ const SignUp = () => {
             }}
           />
         </div>
+        <p>
+          Vouz avez déjà un compte ?{" "}
+          <span onClick={signin}>Connectez-vous</span>
+        </p>
 
         <p>{validation}</p>
 
         <button type="submit">Créer compte</button>
       </form>
 
-      <div className="separation">
+      {/* <div className="separation">
         <span className="line"></span>
         <p>Ou</p>
         <span className="line"></span>
-      </div>
+      </div> */}
 
-      <button className="second-btn" onClick={signin}>
-        Créer un compte
-      </button>
+      {/* <button className="second-btn" onClick={signin}>
+        Se connecter
+      </button> */}
     </div>
   );
 };
