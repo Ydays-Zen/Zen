@@ -25,6 +25,8 @@ const Readbooks = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const { currentUser } = useContext(UserContext);
+  const [activeResume, setActiveResume] = useState(null);
+  const [activeContent, setActiveContent] = useState(null);
 
   const fetchBook = async () => {
     try {
@@ -58,6 +60,11 @@ const Readbooks = () => {
     }
   };
 
+  // Affichage du résumé
+  const handleResumeClick = (bookId) => {
+    setActiveResume(bookId === activeResume ? null : bookId);
+  };
+
   const fetchComments = async () => {
     try {
       const commentsRef = collection(firestore, "Comments");
@@ -70,6 +77,11 @@ const Readbooks = () => {
     } catch (error) {
       console.error("Erreur lors de la récupération des commentaires :", error);
     }
+  };
+
+  // Affichage du contenu
+  const handleContentClick = (bookId) => {
+    setActiveContent(bookId === activeContent ? null : bookId);
   };
 
   useEffect(() => {
@@ -116,9 +128,25 @@ const Readbooks = () => {
           <div className="readbooks__book__image">
             <img src={book.image} alt={book.title} />
           </div>
+           {/* Resume */}
+           <div className="readbooks__book__resume">
+            <button className="second-btn" onClick={() => handleResumeClick(book.id)}>Voir le Résumé</button>
+            {/* Affichage Resume */}
+            {activeResume === book.id && (
+              <div className="readbooks__book__resume__content">
+                <p>{book.resume}</p>
+              </div>
+            )}
+
+          </div>
           <div className="readbooks__book__content">
-            <h1>{book.title}</h1>
-            <p>{book.content}</p>
+            <button className="second-btn" onClick={() => handleContentClick(book.id)}>Voir le Contenu</button>
+            {/* Affichage Contenu */}
+            {activeContent === book.id && (
+              <div className="readbooks__book__content__content">
+                <p>{book.content}</p>
+              </div>
+            )}
           </div>
         </div>
         <hr />
