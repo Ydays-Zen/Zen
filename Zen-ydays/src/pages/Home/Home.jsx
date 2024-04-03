@@ -99,7 +99,7 @@ const Home = () => {
             ref={addInputs}
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="E-mail"
             id="signup"
           />
         </div>
@@ -110,7 +110,7 @@ const Home = () => {
             ref={addInputs}
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="Mot de passe"
             id="password"
           />
         </div>
@@ -124,7 +124,7 @@ const Home = () => {
         type="button"
         className="login-with-google-btn"
       >
-        Sign in with Google
+        Connexion avec Google
       </button>
 
       <div className="separation">

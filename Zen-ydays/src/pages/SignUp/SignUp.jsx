@@ -114,33 +114,33 @@ const SignUp = () => {
         </div>
 
         <div>
-          <label>Email:</label>
+          <label>E-mail:</label>
           <input
             ref={(el) => (inputs.current[1] = el)}
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="E-mail"
             id="signup"
           />
         </div>
 
         <div>
-          <label>Password:</label>
+          <label>Mot de passe:</label>
           <input
             ref={(el) => (inputs.current[2] = el)}
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="Mot de passe"
             id="password"
           />
         </div>
 
         <div>
-          <label>Confirm password:</label>
+          <label>Confirmer le mot de passe</label>
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm password"
+            placeholder="Confirmer le mot de passe"
             id="confirmPassword"
           />
         </div>
