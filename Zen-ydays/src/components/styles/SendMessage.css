@@ -18,15 +18,10 @@
 
 .btn_send {
     padding: 10px;
-    background-color: #4caf50;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn_send:hover {
-    background-color: #45a049;
+    background-color: #16181C;
     transition: background-color 0.3s ease;
 }
