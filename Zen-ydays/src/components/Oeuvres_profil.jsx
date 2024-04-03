@@ -61,7 +61,6 @@ export function Oeuvres_profil() {
   return (
     <div>
       <div className="container_oeuvres">
-        <h3>VOS OEUVRES</h3>
         <div className="all_oeuvres">
           {booksList.map((book) => (
             <div key={book.id}>
