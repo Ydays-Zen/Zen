@@ -1,28 +1,3 @@
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
-import {
-  faHeart as faHeartSolid,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
-import Category from "../../components/Category";
-import NavBar from "../../components/NavBar";
-import { UserContext } from "../../context/userContext";
-import { firestore } from "../../db/firebase-config";
-
-import "./style.css";
-
-import { useCategory } from "../../context/CategoryContext";
-
 const Main = () => {
   const { btnValue } = useCategory();
   const [booksList, setBooksList] = useState([]);
@@ -129,59 +104,9 @@ const Main = () => {
               {/* Affichage de la couverture du livre */}
               <img className="couverture" src={book.image} alt="Couverture" />
 
-<<<<<<< HEAD
-            {currentUser && (
-              <div className="content">
-                {/* Système de like */}
-
-                <div className="likes">
-                  <FontAwesomeIcon className="like_img"
-                    onClick={() => handleLikeSubmit(book.id)}
-                    icon={
-                      book.likedBy && book.likedBy.includes(currentUser.uid)
-                        ? faHeartSolid
-                        : faHeartRegular
-                    }
-                    size="xl"
-                    color={
-                      book.likedBy && book.likedBy.includes(currentUser.uid)
-                        ? "red"
-                        : "black"
-                    }
-                  />
-
-                  <p>{book.likedBy ? book.likedBy.length : 0}</p>
-                </div>
-                {/* Resume */}
-                <button className="Resume_button" onClick={() => handleResumeClick(book.id)}>
-                  Résumé
-                </button>
-                {/* Affichage du Résumé  */}
-
-                <div
-                  className={`resume ${
-                    activeResume === book.id ? "active" : ""
-                  }`}
-                >
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                    size="xl"
-                    onClick={() => handleResumeClick(book.id)}
-                    className={` ${activeResume === book.id ? "active" : ""}`}
-                  />
-                  <h3>Résumé</h3>
-                  <p>{book.resume}</p>
-                </div>
-=======
-              <div className="tags">
-                <p className="tag">{book.tags}</p>
->>>>>>> e64309d8412e3c09c0cfdbea3f6f3b2f99a77e75
-              </div>
-
               {currentUser && (
                 <div className="content">
                   {/* Système de like */}
-
                   <div className="likes">
                     <FontAwesomeIcon
                       onClick={() => handleLikeSubmit(book.id)}
@@ -197,15 +122,18 @@ const Main = () => {
                           : "black"
                       }
                     />
-
                     <p>{book.likedBy ? book.likedBy.length : 0}</p>
                   </div>
-                  {/* Resume */}
-                  <button onClick={() => handleResumeClick(book.id)}>
+
+                  {/* Résumé */}
+                  <button
+                    className="Resume_button"
+                    onClick={() => handleResumeClick(book.id)}
+                  >
                     Résumé
                   </button>
-                  {/* Affichage du Résumé  */}
 
+                  {/* Affichage du Résumé */}
                   <div
                     className={`resume ${
                       activeResume === book.id ? "active" : ""
@@ -215,7 +143,9 @@ const Main = () => {
                       icon={faXmark}
                       size="xl"
                       onClick={() => handleResumeClick(book.id)}
-                      className={` ${activeResume === book.id ? "active" : ""}`}
+                      className={` ${
+                        activeResume === book.id ? "active" : ""
+                      }`}
                     />
                     <h3>Résumé</h3>
                     <p>{book.resume}</p>

@@ -12,13 +12,8 @@ import SignIn from "./pages/SignIn/SignIn.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 // import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
-<<<<<<< HEAD
 import Readbooks from "./pages/Readbooks/Readbooks.jsx";
-import Result from "./pages/Search/Result.jsx";
-=======
-import Readbooks from "./pages/Readbooks/Readbook.jsx";
-
->>>>>>> e64309d8412e3c09c0cfdbea3f6f3b2f99a77e75
+import Result from "./pages/Search/result.jsx";
 
 
 const App = () => {

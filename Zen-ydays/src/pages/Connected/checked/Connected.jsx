@@ -19,15 +19,10 @@ const Connected = () => {
 
   const userId = currentUser.uid;
 
-<<<<<<< HEAD
     console.log('User ID:', userId);
     console.log('Pseudo:', currentUser.displayName);
     console.log("Photo:", currentUser.photoURL);
     
-=======
-  console.log("User ID:", userId);
-  console.log("Pseudo:", currentUser.displayName);
->>>>>>> e64309d8412e3c09c0cfdbea3f6f3b2f99a77e75
 
   // Deconnexion
   const logOut = async () => {
@@ -43,16 +38,11 @@ const Connected = () => {
   return (
     <div>
       <Header />
-<<<<<<< HEAD
       {currentUser && (
         <button className="btn_logout" onClick={logOut}>
           <img src={LogOut} alt="Log Out"/>
         </button>
       )}
-=======
-      {/* {currentUser && <h2>Welcome {currentUser.email}</h2>} */}
-      {currentUser && <button onClick={logOut}>Log Out</button>}
->>>>>>> e64309d8412e3c09c0cfdbea3f6f3b2f99a77e75
       <Main />
     </div>
   );
