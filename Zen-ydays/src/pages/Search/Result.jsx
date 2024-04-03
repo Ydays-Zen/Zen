@@ -1,4 +1,3 @@
-// Result.jsx
 import React, { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
@@ -68,7 +67,7 @@ const Result = () => {
             <p>Aucun utilisateur trouvé.</p>
           ) : (
             userResults.map((user, index) => (
-              <UserResult key={index} user={user} handleUser={handleUser} /> // Passez handleUser comme prop
+              <UserResult key={index} user={user} handleUser={handleUser} />
             ))
           )}
         </div>
