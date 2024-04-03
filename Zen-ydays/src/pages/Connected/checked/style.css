@@ -24,6 +24,169 @@
     width: 24px;
 }
 
+.link{
+    text-decoration: none;
+    color: var(--text-black);
+}
+
+.mainDisplayBooks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.displaybooks{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    max-width: 200px;
+}
+
+.couverture {
+    width: 200px;
+    height: 300px;
+    max-width: none;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+
+    width: 200px;
+}
+
+.tag {
+    background-color: #d3c8b268;
+    border: 1px solid var(--tertiary);
+    border-radius: 8px;
+    padding: 5px 15px;
+}
+
+.content .likes {
+    display: flex;
+    justify-content: start;
+}
+
+.like_img{
+    transition: 0.3s;
+}
+
+.like_img:hover{
+    color: red;
+    transform: scale(1.2);
+}
+
+
+
+.Resume_button {
+    display: inline-block;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: #090909;
+    padding: 0.4em 1.4em;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: var(--secondary);
+    border: 1px solid #e8e8e8;
+}
+
+.Resume_button:active {
+    color: var(--tertiary);
+}
+
+.Resume_button:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.Resume_button:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: var(--tertiary);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.Resume_button:hover {
+    color: #ffffff;
+    border: 1px solid var(--tertiary);
+}
+
+.Resume_button:hover:before {
+    top: -35%;
+    background-color: var(--tertiary);
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.Resume_button:hover:after {
+    top: -45%;
+    background-color: var(--tertiary);
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+
+.displaybooks .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 50px;
+}
+
+.content p {
+    margin-left: 10px;
+}
+
+
+.displaybooks .resume {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;    
+    transform: translate(-50%, -50%);
+    width: 40%;
+    min-width: 350px;
+
+
+    background-color: var(--secondary);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.displaybooks .active {
+    display: block;
+}
+
 @media screen and (min-width: 1400px) {
     .btn_logout{
         top: 2%;

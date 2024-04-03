@@ -2,6 +2,26 @@
     width: 50%;
 }
 
+
+.messages_read::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+}
+
+.messages_read::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: transparent;
+}
+
+.messages_read::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #333;
+}
+
 .messages_read {
     list-style: none;
     padding: 0;
@@ -10,6 +30,8 @@
     overflow-y: auto; /* "auto" pour activer le défilement uniquement si nécessaire */
     scroll-behavior: smooth;
     transition: all 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column; /* Afficher les éléments en colonnes */
 }
 
 .li_messages {
@@ -18,19 +40,26 @@
 
 .sent {
     text-align: right;
-    /* Couleur de fond pour les messages de l'utilisateur actuel */
-    color: #31a01d;
-    /* Couleur du texte pour les messages de l'utilisateur actuel */
+    color: #fff;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 10px;
+    display: inline-block;
+    background-color: #007bff;
+    align-self: flex-end; /* Aligner les messages envoyés à droite */
+    word-break: break-word;
 }
 
 .received {
     text-align: left;
-    /* Couleur de fond pour les messages de l'autre utilisateur */
+    color: #fff;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 10px 10px 10px 0px;
+    display: inline-block;
+    background-color: #333;
+    align-self: flex-start;
+    word-break: break-word;
 }
+
 
 .span_text {
     width: 100%;
@@ -39,6 +68,12 @@
 
 .chat_h2 {
     text-align: center;
-    color: #333;
+    color: #fff;
     /* Couleur du titre */
+}
+
+.vu_indicator {
+    color: #fff;
+    font-size: 0.8em;
+    margin-left: 5px;
 }

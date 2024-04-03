@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { UserContext } from '../context/userContext';
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
 
 import "./styles/infoProfil.css";
 
@@ -7,6 +7,7 @@ export function Info_profil() {
   const { followerCount, followingCount, currentUser } =
     useContext(UserContext);
 
+  console.log("Info_profil -> currentUser", currentUser);
   return (
     <div className="container_info">
       <div className="imgProfil">

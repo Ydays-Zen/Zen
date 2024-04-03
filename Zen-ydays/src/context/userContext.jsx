@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { collection, getDocs, query, doc, getDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { auth, firestore } from "../db/firebase-config";
@@ -63,7 +67,9 @@ export function UserContextProvider(props) {
 
       if (userData) {
         setFollowerCount(userData.abonnes ? userData.abonnes.length : 0);
-        setFollowingCount(userData.abonnements ? userData.abonnements.length : 0);
+        setFollowingCount(
+          userData.abonnements ? userData.abonnements.length : 0,
+        );
       }
     } catch (error) {
       console.error("Error fetching follower and following counts:", error);

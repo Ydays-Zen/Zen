@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../components/styles/Search.css";
-import HeaderAll from "../layout/HeaderAll.jsx";
+import HeaderAll from "../layout/HeaderAll";
+import Script from "./Script";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,7 +25,6 @@ const Search = () => {
   return (
     <>
       <HeaderAll />
-
       <div className="searchBar">
         <input
           className="Search"
@@ -38,6 +38,10 @@ const Search = () => {
           Rechercher
         </button>
       </div>
+
+      <main className="mainDisplayBooks">
+        <Script />
+      </main>
     </>
   );
 };

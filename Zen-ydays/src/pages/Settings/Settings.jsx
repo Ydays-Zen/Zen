@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, firestore } from "../../db/firebase-config.jsx"; // Assurez-vous que le chemin vers firebase-config.jsx est correct
 
-import Header from "../../layout/home/Header.jsx";
+import Header from "../../layout/HeaderAll.jsx";
 
 function SettingsPage() {
   const [currentUser, setCurrentUser] = useState(null); // État local pour stocker l'utilisateur actuellement authentifié
