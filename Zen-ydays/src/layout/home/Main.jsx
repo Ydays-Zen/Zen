@@ -14,24 +14,32 @@ import {
   where,
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
+import Category from "../../components/Category";
+import NavBar from "../../components/NavBar";
 import { UserContext } from "../../context/userContext";
 import { firestore } from "../../db/firebase-config";
-import { Link } from "react-router-dom";
 
 import "./style.css";
-import NavBar from "../../components/NavBar";
-import Category from "../../components/Category";
+
+import { useCategory } from "../../context/CategoryContext";
 
 const Main = () => {
+  const { btnValue } = useCategory();
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [activeResume, setActiveResume] = useState(null);
 
+  // Récupérez les données des livres et des commentaires
   const fetchData = async () => {
     try {
       const booksRef = collection(firestore, "Books");
-      const querySnapshot = await getDocs(booksRef);
 
+      // Utilisez btnValue pour filtrer les livres si elle est définie
+      const filteredBooksQuery = btnValue
+        ? query(booksRef, where("tags", "array-contains", btnValue))
+        : booksRef;
+
+      const querySnapshot = await getDocs(filteredBooksQuery);
       const booksData = [];
 
       for (const doc of querySnapshot.docs) {
@@ -64,8 +72,9 @@ const Main = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [btnValue]); // Rafraîchir la liste lorsque btnValue change
 
+  // Gestion du like
   const handleLikeSubmit = async (bookUid) => {
     try {
       if (!currentUser) {
@@ -109,24 +118,18 @@ const Main = () => {
 
   return (
     <>
-    <Category/>
-      <main className="mainDisplayBooks">
-        {booksList.map((book) => (
-          <div key={book.id} className="displaybooks">
-            <Link to={`/check/readbooks/${book.id}`} className="link">
-            <h2>{book.title}</h2>
-               
-            
+      <div className="connected">
+        <Category />
 
-            {/* Affichage de la couverture du livre */}
-            <img className="couverture" src={book.image} alt="Couverture" />
-          </Link>
+        <main className="mainDisplayBooks">
+          {booksList.map((book) => (
+            <div key={book.id} className="displaybooks">
+              <h2>{book.title}</h2>
 
-            <div className="tags">
-              <p className="tag">{book.tags}</p>
-            </div>
-         
+              {/* Affichage de la couverture du livre */}
+              <img className="couverture" src={book.image} alt="Couverture" />
 
+<<<<<<< HEAD
             {currentUser && (
               <div className="content">
                 {/* Système de like */}
@@ -169,12 +172,61 @@ const Main = () => {
                   <h3>Résumé</h3>
                   <p>{book.resume}</p>
                 </div>
+=======
+              <div className="tags">
+                <p className="tag">{book.tags}</p>
+>>>>>>> e64309d8412e3c09c0cfdbea3f6f3b2f99a77e75
               </div>
-            )}
-          </div>  
-        ))}
-      </main>
-      <NavBar />
+
+              {currentUser && (
+                <div className="content">
+                  {/* Système de like */}
+
+                  <div className="likes">
+                    <FontAwesomeIcon
+                      onClick={() => handleLikeSubmit(book.id)}
+                      icon={
+                        book.likedBy && book.likedBy.includes(currentUser.uid)
+                          ? faHeartSolid
+                          : faHeartRegular
+                      }
+                      size="xl"
+                      color={
+                        book.likedBy && book.likedBy.includes(currentUser.uid)
+                          ? "red"
+                          : "black"
+                      }
+                    />
+
+                    <p>{book.likedBy ? book.likedBy.length : 0}</p>
+                  </div>
+                  {/* Resume */}
+                  <button onClick={() => handleResumeClick(book.id)}>
+                    Résumé
+                  </button>
+                  {/* Affichage du Résumé  */}
+
+                  <div
+                    className={`resume ${
+                      activeResume === book.id ? "active" : ""
+                    }`}
+                  >
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      size="xl"
+                      onClick={() => handleResumeClick(book.id)}
+                      className={` ${activeResume === book.id ? "active" : ""}`}
+                    />
+                    <h3>Résumé</h3>
+                    <p>{book.resume}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </main>
+        <NavBar />
+      </div>
     </>
   );
 };

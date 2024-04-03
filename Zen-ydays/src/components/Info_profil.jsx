@@ -33,4 +33,8 @@ export function Info_profil() {
   );
 }
 
+<<<<<<< HEAD
 export default Info_profil;
+=======
+export default Info_profil;
+>>>>>>> e64309d8412e3c09c0cfdbea3f6f3b2f99a77e75
