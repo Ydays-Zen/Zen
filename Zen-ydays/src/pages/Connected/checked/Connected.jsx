@@ -24,6 +24,7 @@ import NavBar from "../../../components/NavBar";
 import { UserContext } from "../../../context/userContext";
 import { firestore } from "../../../db/firebase-config";
 import { auth } from "../../../db/firebase-config.jsx";
+import { Link } from "react-router-dom";
 const cookies = new Cookies();
 
 import "./style.css";
@@ -156,11 +157,12 @@ const Connected = () => {
         <main className="mainDisplayBooks">
           {booksList.map((book) => (
             <div key={book.id} className="displaybooks">
+              <Link to={`/check/readbooks/${book.id}`} className="link">
               <h2>{book.title}</h2>
 
               {/* Affichage de la couverture du livre */}
               <img className="couverture" src={book.image} alt="Couverture" />
-
+              </Link>
               <div className="tags">
                 <p className="tag">{book.tags}</p>
               </div>

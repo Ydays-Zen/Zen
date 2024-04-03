@@ -6,6 +6,11 @@
     
 }
 
+.link {
+    text-decoration: none;
+    color: var(--text-black);
+}
+
 .btn_logout {
     position: absolute;
     padding: 10px;
