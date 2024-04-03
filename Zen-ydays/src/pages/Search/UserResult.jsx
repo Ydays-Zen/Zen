@@ -9,6 +9,21 @@ const UserResult = ({ user, handleUser }) => {
   const [showSendMessage, setShowSendMessage] = useState(false); // État pour contrôler l'affichage de SendMessage
   const [isFollowing, setIsFollowing] = useState(false); // État pour déterminer si l'utilisateur est suivi ou non
 
+  useEffect(() => {
+    const checkFollowing = async () => {
+      const currentUser = auth.currentUser;
+      const userRef = collection(firestore, "users");
+
+      const userQuerySnapshot = await getDocs(query(userRef, where("ID", "==", user.ID)));
+      if (!userQuerySnapshot.empty) {
+        const userDoc = userQuerySnapshot.docs[0].data();
+        setIsFollowing(userDoc.follow.includes(currentUser.uid)); // Vérifie si l'utilisateur est dans la liste des suivis
+      }
+    };
+
+    checkFollowing();
+  }, [user.ID]);
+
   const handleClickMessage = () => {
     handleUser(user); // Passez l'utilisateur sélectionné à la fonction handleUser
     setShowSendMessage(true); // Afficher le composant SendMessage lorsque le bouton est cliqué
@@ -58,6 +73,7 @@ const UserResult = ({ user, handleUser }) => {
     } else {
       console.error("User document not found.");
     }
+    setIsFollowing(true);
   };
 
   const handleClickUnfollow = async () => {
@@ -104,6 +120,7 @@ const UserResult = ({ user, handleUser }) => {
     } else {
       console.error("User document not found.");
     }
+    setIsFollowing(false);
   };
 
   return (
@@ -111,8 +128,11 @@ const UserResult = ({ user, handleUser }) => {
       <h4>{displayName}</h4>
       <h4>{ID}</h4>
       <button onClick={handleClickMessage}>Message</button>
-        <button onClick={handleClickFollow}>Follow</button>
+      {isFollowing ? ( // Afficher le bouton correspondant en fonction de l'état isFollowing
         <button onClick={handleClickUnfollow}>Unfollow</button>
+      ) : (
+        <button onClick={handleClickFollow}>Follow</button>
+      )}
       {showSendMessage && <SendMessage selectedUser={user} />}
     </div>
   );
