@@ -50,7 +50,7 @@ const UserResult = ({ user, handleUser }) => {
 
       // Ajoutez l'UID de l'utilisateur connecté au champ follow de l'utilisateur ciblé
       await updateDoc(doc(userRef, userId), {
-        follow: arrayUnion(currentUser.uid)
+        followers: arrayUnion(currentUser.uid)
       });
 
       // Vérifiez s'il y a un document correspondant pour l'utilisateur connecté
@@ -61,7 +61,7 @@ const UserResult = ({ user, handleUser }) => {
 
         // Ajoutez l'UID de l'utilisateur ciblé au champ followers de l'utilisateur connecté
         await updateDoc(doc(userRef, currentUserId), {
-          followers: arrayUnion(ID)
+          follow: arrayUnion(ID)
         });
       } else {
         console.error("Current user document not found.");
@@ -97,7 +97,7 @@ const UserResult = ({ user, handleUser }) => {
 
       // Supprimez l'UID de l'utilisateur connecté du champ follow de l'utilisateur ciblé
       await updateDoc(doc(userRef, userId), {
-        follow: arrayRemove(currentUser.uid)
+        followers: arrayRemove(currentUser.uid)
       });
 
       // Vérifiez s'il y a un document correspondant pour l'utilisateur connecté
@@ -108,7 +108,7 @@ const UserResult = ({ user, handleUser }) => {
 
         // Supprimez l'UID de l'utilisateur ciblé du champ followers de l'utilisateur connecté
         await updateDoc(doc(userRef, currentUserId), {
-          followers: arrayRemove(ID)
+          follow: arrayRemove(ID)
         });
       } else {
         console.error("Current user document not found.");
