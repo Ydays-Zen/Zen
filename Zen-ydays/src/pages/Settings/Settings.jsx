@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { doc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from "../../db/firebase-config.jsx"; // Assurez-vous que le chemin vers firebase-config.jsx est correct
 
 import Header from "../../layout/HeaderAll.jsx";
@@ -16,18 +17,27 @@ function SettingsPage() {
   }, []);
 
   // Fonction pour mettre à jour le pseudo
-  const updatePseudo = () => {
-    if (currentUser) {
-      firestore.collection("users").doc(currentUser.uid).update({
-        displayName: nouveauPseudo // Mettez à jour le displayName de l'utilisateur dans la collection "users"
-      }).then(() => {
-        console.log("Nouveau pseudo enregistré avec succès:", nouveauPseudo);
-        setNouveauPseudo(""); // Réinitialiser le champ de saisie du nouveau pseudo
-      }).catch((error) => {
-        console.error("Erreur lors de la mise à jour du pseudo:", error.message);
-      });
+  const updatePseudo = async () => {
+    try {
+      if (!currentUser) {
+        console.error("Aucun utilisateur connecté.");
+        return; // Sortir de la fonction si aucun utilisateur n'est connecté
+      }
+  
+      const userDocRef = doc(firestore, 'users', currentUser.uid);
+      await setDoc(userDocRef, {
+        displayName: nouveauPseudo
+      }, { merge: true }); // Utiliser merge: true pour créer le document s'il n'existe pas encore
+      console.log("Nouveau pseudo enregistré avec succès:", nouveauPseudo);
+      setNouveauPseudo(""); // Réinitialiser le champ de saisie après la mise à jour
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du pseudo:", error.message);
     }
   };
+  
+  
+  
+  
 
   return (
     <div>
