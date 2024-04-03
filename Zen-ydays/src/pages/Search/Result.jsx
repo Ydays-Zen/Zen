@@ -1,6 +1,7 @@
+// Result.jsx
 import React, { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom"; // Importez Link depuis react-router-dom
 import Search from "../../components/Search";
 import { firestore } from "../../db/firebase-config";
 import HeaderAll from "../../layout/HeaderAll";
@@ -30,7 +31,7 @@ const Result = () => {
           where("displayName", "==", searchQuery)
         );
         const usersSnapshot = await getDocs(usersQuery);
-        const usersData = usersSnapshot.docs.map((doc) => doc.data());
+        const usersData = usersSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         setUserResults(usersData);
       } catch (error) {
         console.error("Erreur lors de la récupération des résultats :", error);
@@ -67,7 +68,10 @@ const Result = () => {
             <p>Aucun utilisateur trouvé.</p>
           ) : (
             userResults.map((user, index) => (
-              <UserResult key={index} user={user} handleUser={handleUser} />
+              
+              <Link key={index} to={`/user/${user.id}`}>
+                <UserResult user={user} handleUser={handleUser} />
+              </Link>
             ))
           )}
         </div>
