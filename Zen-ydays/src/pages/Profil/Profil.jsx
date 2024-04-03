@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import SubManager from "../../components/SubManager.jsx";
 import Subscription from "../../components/Subscription.jsx";
 import { UserContext } from "../../context/userContext";
 // import SubManager from "../../components/SubManager.jsx";
-import Header from "../../layout/profil/Header.jsx";
-import Main from "../../layout/profil/Main.jsx";
+import Info_profil from "../../components/Info_profil.jsx";
+import Menu from "../../components/Menu";
+import NavBar from "../../components/NavBar";
+import Oeuvres_profil from "../../components/Oeuvres_profil.jsx";
+import { firestore } from "../../db/firebase-config";
 
 import "./Profil.css";
 
@@ -44,8 +47,14 @@ function Profil() {
 
   return (
     <>
-      <Header />
-      <Main />
+      <header>
+        <NavBar />
+        <Menu />
+      </header>
+      <main className="mainProfil">
+        <Info_profil />
+        <Oeuvres_profil />
+      </main>
 
       <Subscription onFollow={handleFollow} />
     </>

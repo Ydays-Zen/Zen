@@ -1,8 +1,10 @@
-import { useState, useRef, useContext, useEffect } from "react";
-import { UserContext } from "../../context/userContext.jsx";
+import { addDoc, collection } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, firestore } from "../../db/firebase-config.jsx"; // Import your Firebase config
-import { collection, addDoc } from "firebase/firestore";
+import { v4 } from "uuid";
+import { UserContext } from "../../context/userContext.jsx";
+import { firestore, storage } from "../../db/firebase-config.jsx";
 
 const SignUp = () => {
   const inputs = useRef([]);
@@ -10,114 +12,169 @@ const SignUp = () => {
   const { signUp } = useContext(UserContext);
   const formRef = useRef();
   const navigate = useNavigate();
-
-  const UserRef = collection(firestore, "users");
-
-  const addInputs = (el) => {
-    if (el && !inputs.current.includes(el)) {
-      inputs.current.push(el);
-    }
-  };
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in and user profile is updated
-        // Store UID and display name in the "users" collection
-        addDoc(UserRef, {
-          ID: user.uid,
-          displayName: user.displayName || inputs.current[0].value,
-        })
-          .then(() => {
-            // Document successfully written
-            console.log("Document successfully written!");
-          })
-          .catch((error) => {
-            console.error("Error writing document: ", error);
-          });
-
-        formRef.current.reset();
-        setValidation("");
-        navigate("/check/connected");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [UserRef, navigate]);
+  const [image, setImage] = useState(null);
 
   const handleForm = async (e) => {
     e.preventDefault();
-  
+
+    // Tout les champs doivent etre remplis
+    if (
+      !inputs.current[0].value ||
+      !inputs.current[1].value ||
+      !inputs.current[2].value ||
+      !inputs.current[3].value
+    ) {
+      setValidation("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    //regex pour vérifier si l'email est valide
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailRegex.test(inputs.current[1].value)) {
+      setValidation("Veuillez entrer un email valide.");
+      return;
+    }
+
+    // Vérifier si les mots de passe correspondent
     if (inputs.current[2].value !== inputs.current[3].value) {
-      setValidation("Les mots de passe ne correspondent pas");
-    } else if (inputs.current[2].value.length < 6 || inputs.current[3].value.length < 6) {
-      setValidation("6 caractères minimum");
-    } else {
-      try {
-        const cred = await signUp(inputs.current[1].value, inputs.current[2].value);
-  
-        // Ajoutez la vérification ici pour voir si l'utilisateur existe déjà
-        const userRef = collection(firestore, "users");
-        const userQuery = query(userRef, where("ID", "==", cred.user.uid));
-        const userSnapshot = await getDocs(userQuery);
-  
-        if (userSnapshot.empty) {
-          // L'utilisateur n'existe pas, alors ajoutez-le
-          await addDoc(userRef, {
-            ID: cred.user.uid,
-            displayName: cred.user.displayName || inputs.current[0].value,
-          });
-        }
-  
-        formRef.current.reset();
-        setValidation("");
-        navigate("/check/connected");
-      } catch (error) {
-        // ... (votre code de gestion d'erreur existant)
-      }
+      setValidation("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    // regex pour vérifier si le mot de passe contient au moins 8 caractères une lettre majuscule un chiffre et un caractère spécial
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(inputs.current[2].value)) {
+      setValidation(
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial."
+      );
+      return;
+    }
+    // Vérifier si une image a été sélectionnée
+    if (!image) {
+      setValidation("Veuillez sélectionner une photo de profil.");
+      return;
+    }
+
+    try {
+      const imgRef = ref(storage, `images/${v4()}/${image.name + v4()}`);
+
+      // Télécharger l'image vers Firebase Storage
+      await uploadBytes(imgRef, image);
+      console.log("Image téléchargée avec succès.");
+
+      // Obtenez l'URL de téléchargement de l'image
+      const imageUrl = await getDownloadURL(imgRef);
+      console.log("Image URL:", imageUrl);
+
+      // Inscrire l'utilisateur avec l'URL de l'image
+      const cred = await signUp(
+        inputs.current[1].value,
+        inputs.current[2].value,
+        imageUrl
+      );
+
+      const userRef = collection(firestore, "users");
+      const userSnapshot = await addDoc(userRef, {
+        ID: v4(), // Générez un ID unique pour chaque utilisateur
+        displayName: cred.user.displayName || inputs.current[0].value,
+        img: imageUrl || "",
+        follow: [],
+        followers: [],
+      });
+
+      formRef.current.reset();
+      setValidation("");
+      setImage(null);
+      navigate("/check/connected");
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+      setValidation("Erreur lors de l'inscription : " + error.message);
     }
   };
 
+  const signin = () => {
+    navigate("/");
+  };
+
   return (
-    <div>
+    <div className="auth">
       <h2>Sign up</h2>
 
       <form onSubmit={handleForm} ref={formRef}>
-        <input
-          ref={addInputs}
-          type="text"
-          name="displayName"
-          placeholder="Pseudo"
-          id="displayName"
-          required
-        />
-        <input
-          ref={addInputs}
-          type="email"
-          name="email"
-          placeholder="Email"
-          id="signup"
-          required
-        />
-        <input
-          ref={addInputs}
-          type="password"
-          name="password"
-          placeholder="Password"
-          id="password"
-          required
-        />
-        <input
-          ref={addInputs}
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm password"
-          id="confirmPassword"
-          required
-        />
+        <div>
+          <label>Pseudo:</label>
+          <input
+            ref={(el) => (inputs.current[0] = el)}
+            type="text"
+            name="displayName"
+            placeholder="Pseudo"
+            id="displayName"
+          />
+        </div>
+
+        <div>
+          <label>E-mail:</label>
+          <input
+            ref={(el) => (inputs.current[1] = el)}
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            id="signup"
+          />
+        </div>
+
+        <div>
+          <label>Mot de passe:</label>
+          <input
+            ref={(el) => (inputs.current[2] = el)}
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+            id="password"
+          />
+        </div>
+
+        <div>
+          <label>Confirmer le mot de passe</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirmer le mot de passe"
+            id="confirmPassword"
+          />
+        </div>
+        <div>
+          <label>Photo de profil:</label>
+          <input
+            type="file"
+            name=""
+            id=""
+            onChange={(event) => {
+              const selectedFile = event.target.files[0];
+              setImage(selectedFile); // Met à jour l'état de l'image
+            }}
+          />
+        </div>
+        <p>
+          Vouz avez déjà un compte ?{" "}
+          <span onClick={signin}>Connectez-vous</span>
+        </p>
+
         <p>{validation}</p>
-        <button type="submit">Submit</button>
+
+        <button type="submit">Créer compte</button>
       </form>
+
+      {/* <div className="separation">
+        <span className="line"></span>
+        <p>Ou</p>
+        <span className="line"></span>
+      </div> */}
+
+      {/* <button className="second-btn" onClick={signin}>
+        Se connecter
+      </button> */}
     </div>
   );
 };

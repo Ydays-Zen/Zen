@@ -3,10 +3,15 @@
 .content-user {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 20%;
-    height: 100%;
+    height: 100vh;
+    padding: 5px;
+}
+
+.title-Messages {
+    text-align: center;
+    color: #fff;
+    /* Couleur du titre */
 }
 
 .user_h2 {
@@ -23,7 +28,8 @@
 .select_user {
     padding: 10px;
     margin: 5px 0;
-    background-color: #f0f0f0;
+    background-color: #16181C;
+    color: #fff;
     /* Couleur de fond pour chaque utilisateur */
     border-radius: 5px;
     cursor: pointer;
@@ -31,7 +37,13 @@
 }
 
 .select_user:hover {
-    background-color: #ddd;
+    background-color: #333;
     /* Couleur de fond lorsqu'un utilisateur est survolé */
     transition: background-color 0.3s ease;
+}
+
+.search_user {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
 }

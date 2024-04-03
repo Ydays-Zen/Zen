@@ -30,3 +30,7 @@
   transition: all 0.3s ease-in-out;
   background-color: #D3C8B2;
 }
+
+.book {
+  border: 1px solid #786146;
+}
