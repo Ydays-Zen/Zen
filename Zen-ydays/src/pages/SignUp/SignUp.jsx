@@ -7,36 +7,54 @@ import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 
 const SignUp = () => {
-  const inputs = useRef([]);
+  const displayNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+  const formRef = useRef(null);
+
   const [validation, setValidation] = useState("");
-  const { signUp } = useContext(UserContext);
-  const formRef = useRef();
-  const navigate = useNavigate();
   const [image, setImage] = useState(null);
+  const { signUp } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleForm = async (e) => {
     e.preventDefault();
 
-    // Tout les champs doivent etre remplis
+    // Vérifiez si les références aux éléments du formulaire sont définies
     if (
-      !inputs.current[0].value ||
-      !inputs.current[1].value ||
-      !inputs.current[2].value ||
-      !inputs.current[3].value
+      !displayNameRef.current ||
+      !emailRef.current ||
+      !passwordRef.current ||
+      !confirmPasswordRef.current
     ) {
+      console.error(
+        "Les références aux éléments du formulaire ne sont pas définies."
+      );
+      return;
+    }
+
+    // Récupérer les valeurs des champs du formulaire
+    const displayName = displayNameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
+
+    // Vérifier si tous les champs sont remplis
+    if (!displayName || !email || !password || !confirmPassword) {
       setValidation("Veuillez remplir tous les champs.");
       return;
     }
 
     //regex pour vérifier si l'email est valide
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(inputs.current[1].value)) {
+    if (!emailRegex.test(email)) {
       setValidation("Veuillez entrer un email valide.");
       return;
     }
 
     // Vérifier si les mots de passe correspondent
-    if (inputs.current[2].value !== inputs.current[3].value) {
+    if (password !== confirmPassword) {
       setValidation("Les mots de passe ne correspondent pas.");
       return;
     }
@@ -44,7 +62,7 @@ const SignUp = () => {
     // regex pour vérifier si le mot de passe contient au moins 8 caractères une lettre majuscule un chiffre et un caractère spécial
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(inputs.current[2].value)) {
+    if (!passwordRegex.test(confirmPassword)) {
       setValidation(
         "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial."
       );
@@ -57,32 +75,25 @@ const SignUp = () => {
     }
 
     try {
-      const imgRef = ref(storage, `images/${v4()}/${image.name + v4()}`);
+      // Effectuer l'inscription
+      const cred = await signUp(email, password);
 
-      // Télécharger l'image vers Firebase Storage
+      // Enregistrer l'utilisateur dans Firestore
+      const imgRef = ref(storage, `images/${v4()}/${image.name + v4()}`);
       await uploadBytes(imgRef, image);
       console.log("Image téléchargée avec succès.");
-
-      // Obtenez l'URL de téléchargement de l'image
       const imageUrl = await getDownloadURL(imgRef);
       console.log("Image URL:", imageUrl);
 
-      // Inscrire l'utilisateur avec l'URL de l'image
-      const cred = await signUp(
-        inputs.current[1].value,
-        inputs.current[2].value,
-        imageUrl
-      );
-
-      const userRef = collection(firestore, "users");
-      const userSnapshot = await addDoc(userRef, {
-        ID: v4(), // Générez un ID unique pour chaque utilisateur
-        displayName: cred.user.displayName || inputs.current[0].value,
+      await addDoc(collection(firestore, "users"), {
+        ID: v4(),
+        displayName: cred.user.displayName || displayName,
         img: imageUrl || "",
         follow: [],
         followers: [],
       });
 
+      // Réinitialiser le formulaire et l'état
       formRef.current.reset();
       setValidation("");
       setImage(null);
@@ -92,89 +103,50 @@ const SignUp = () => {
       setValidation("Erreur lors de l'inscription : " + error.message);
     }
   };
-
-  const signin = () => {
-    navigate("/");
-  };
-
   return (
     <div className="auth">
       <h2>Sign up</h2>
-
       <form onSubmit={handleForm} ref={formRef}>
+        {/* Champs du formulaire */}
         <div>
-          <label>Pseudo:</label>
-          <input
-            ref={(el) => (inputs.current[0] = el)}
-            type="text"
-            name="displayName"
-            placeholder="Pseudo"
-            id="displayName"
-          />
+          <label htmlFor="displayName">Pseudo</label>
+          <input type="text" ref={displayNameRef} placeholder="Pseudo" />
         </div>
 
         <div>
-          <label>E-mail:</label>
-          <input
-            ref={(el) => (inputs.current[1] = el)}
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            id="signup"
-          />
+          <label htmlFor="email">E-mail</label>
+          <input type="email" ref={emailRef} placeholder="E-mail" />
         </div>
 
         <div>
-          <label>Mot de passe:</label>
-          <input
-            ref={(el) => (inputs.current[2] = el)}
-            type="password"
-            name="password"
-            placeholder="Mot de passe"
-            id="password"
-          />
+          <label htmlFor="password">Mot de passe</label>
+          <input type="password" ref={passwordRef} placeholder="Mot de passe" />
         </div>
 
         <div>
-          <label>Confirmer le mot de passe</label>
+          <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
           <input
             type="password"
-            name="confirmPassword"
+            ref={confirmPasswordRef}
             placeholder="Confirmer le mot de passe"
-            id="confirmPassword"
           />
         </div>
+
+        {/* Champ pour l'image */}
         <div>
-          <label>Photo de profil:</label>
+          <label htmlFor="image">Image</label>
           <input
             type="file"
-            name=""
-            id=""
-            onChange={(event) => {
-              const selectedFile = event.target.files[0];
-              setImage(selectedFile); // Met à jour l'état de l'image
-            }}
+            onChange={(event) => setImage(event.target.files[0])}
           />
         </div>
-        <p>
-          Vouz avez déjà un compte ?{" "}
-          <span onClick={signin}>Connectez-vous</span>
-        </p>
 
-        <p>{validation}</p>
-
-        <button type="submit">Créer compte</button>
+        {/* Bouton de soumission */}
+        <button type="submit">Submit</button>
       </form>
 
-      {/* <div className="separation">
-        <span className="line"></span>
-        <p>Ou</p>
-        <span className="line"></span>
-      </div> */}
-
-      {/* <button className="second-btn" onClick={signin}>
-        Se connecter
-      </button> */}
+      {/* Affichage des messages de validation */}
+      <p>{validation}</p>
     </div>
   );
 };
