@@ -1,46 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { collection, doc, getDoc } from 'firebase/firestore';
-import { firestore } from '../../db/firebase-config';
 
 const UserDifferent = () => {
   const { userId } = useParams();
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserData = async () => {
       try {
-        const userDoc = collection(firestore, 'users', userId);
-        const userSnapshot = await getDoc(userDoc);
-        if (userSnapshot.exists()) {
-          setUser(userSnapshot.data());
-        } else {
-          setError('Utilisateur non trouvé.');
+        const response = await fetch(`https://api.example.com/users/${userId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
         }
+        const userData = await response.json();
+        setUserData(userData);
+        setLoading(false);
       } catch (error) {
-        console.error('Erreur lors de la récupération des données utilisateur:', error);
-        setError('Erreur lors de la récupération des données utilisateur.');
-      } finally {
+        console.error('Error fetching user data:', error);
         setLoading(false);
       }
     };
 
-    fetchUser();
+    fetchUserData();
   }, [userId]);
+
+  useEffect(() => {
+    if (userData) {
+      console.log('User data:', userData);
+    }
+  }, [userData]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!userData) {
+    return <div>Failed to load user data</div>;
+  }
 
   return (
     <div>
-      {loading ? (
-        <p>Chargement...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <div>
-          <h2>Profil de {user.displayName}</h2>
-        </div>
-      )}
+      <h2>User Details</h2>
+      <p>Display Name: {userData.displayName}</p>
+      <p>Followers: {userData.followers}</p>
+      <p>Following: {userData.following}</p>
     </div>
   );
 };
