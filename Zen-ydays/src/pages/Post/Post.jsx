@@ -101,72 +101,59 @@ const Post = () => {
       <NavBar />
       <div className="body_post">
         <div className="post">
-          <h2>Poster un Livre</h2>
-          <form onSubmit={handleSubmit}>
+          <header className="Head_post">
+            <h2>Post</h2>
+            <p>Lancez vous et rédigez votre propre histoire !</p>
+          </header>
+          <hr/>
+          <form onSubmit={handleSubmit} className="formulaire_post">
             <label>Titre:</label>
-            <input
-              type="text"
-              placeholder="Titre"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+            <input type="text" placeholder="Titre" value={title} onChange={(e) => setTitle(e.target.value)}/>
 
-            <label>Résumé:</label>
-            <textarea
-              placeholder="Résumé"
-              value={resume}
-              onChange={(e) => setResume(e.target.value)}
-            ></textarea>
+            <label>Tags:</label>
+            <select value={tags} onChange={(e) => setTags(e.target.value)}>
+              <option value="">Catagory</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Romance">Romance</option>
+              <option value="Horreur">Horreur</option>
+              <option value="aventure">Aventure</option>
+              <option value="Drame">Drame</option>
+              <option value="Comédie">Comédie</option>
+            </select>
+
 
             <label>Image (URL):</label>
 
             <input
-              type="file"
-              name=""
-              id=""
-              onChange={(event) => {
-                // Utilisez FileReader pour lire le contenu du fichier
-                const selectedFile = event.target.files[0];
+                type="file"
+                name=""
+                id=""
+                onChange={(event) => {
+                  // Utilisez FileReader pour lire le contenu du fichier
+                  const selectedFile = event.target.files[0];
 
-                // Mise à jour de l'état de l'image
-                setImage(selectedFile);
+                  // Mise à jour de l'état de l'image
+                  setImage(selectedFile);
 
-                // Vous pouvez également afficher l'aperçu de l'image si nécessaire
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                  // e.target.result contient l'URL de l'image en base64
-                  const imageUrl = e.target.result;
-                  console.log("Image Preview URL:", imageUrl);
-                };
-                reader.readAsDataURL(selectedFile);
-              }}
+                  // Vous pouvez également afficher l'aperçu de l'image si nécessaire
+                  const reader = new FileReader();
+                  reader.onload = (e) => {
+                    // e.target.result contient l'URL de l'image en base64
+                    const imageUrl = e.target.result;
+                    console.log("Image Preview URL:", imageUrl);
+                  };
+                  reader.readAsDataURL(selectedFile);
+                }}
             />
 
-              <label>Tags:</label>
-              <select
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-              >
-                <option value="">Choisir un tag</option>
-                <option value="Fiction">Fiction</option>
-                <option value="Romance">Romance</option>
-                <option value="Horreur">Horreur</option>
-                <option value="aventure">Aventure</option>
-                <option value="Drame">Drame</option>
-                <option value="Comédie">Comédie</option>
-              </select>
-              
 
+            <label>Résumé:</label>
+            <textarea placeholder="Résumé" value={resume} onChange={(e) => setResume(e.target.value)}></textarea>
 
             <label>Contenu:</label>
-            <input
-              type="text"
-              placeholder="Contenu"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
+            <textarea type="text" placeholder="Contenu" value={content} onChange={(e) => setContent(e.target.value)}/>
 
-            <button type="submit">Poster le Livre</button>
+            <button type="submit" className="btn_post_book">Poster</button>
           </form>
         </div>
 
