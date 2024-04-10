@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { auth, firestore } from '../../db/firebase-config'; // Assurez-vous d'importer firestore également
-import { collection, doc, updateDoc, arrayUnion, arrayRemove, getDocs, query, where } from 'firebase/firestore'; // Importez les méthodes nécessaires depuis firestore
-import PropTypes from 'prop-types';
-import SendMessage from '../../components/SendMessage';
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore"; // Importez les méthodes nécessaires depuis firestore
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import SendMessage from "../../components/SendMessage";
+import { auth, firestore } from "../../db/firebase-config"; // Assurez-vous d'importer firestore également
 
 const UserResult = ({ user, handleUser }) => {
   const { displayName, ID } = user;
@@ -14,7 +24,9 @@ const UserResult = ({ user, handleUser }) => {
       const currentUser = auth.currentUser;
       const userRef = collection(firestore, "users");
 
-      const userQuerySnapshot = await getDocs(query(userRef, where("ID", "==", user.ID)));
+      const userQuerySnapshot = await getDocs(
+        query(userRef, where("ID", "==", user.ID))
+      );
       if (!userQuerySnapshot.empty) {
         const userDoc = userQuerySnapshot.docs[0].data();
         setIsFollowing(userDoc.follow.includes(currentUser.uid)); // Vérifie si l'utilisateur est dans la liste des suivis
@@ -29,6 +41,10 @@ const UserResult = ({ user, handleUser }) => {
     setShowSendMessage(true); // Afficher le composant SendMessage lorsque le bouton est cliqué
   };
 
+  const handleMessageSent = () => {
+    setShowSendMessage(false);
+  };
+
   const handleClickFollow = async () => {
     const currentUser = auth.currentUser;
     console.log("Current user:", currentUser);
@@ -37,10 +53,14 @@ const UserResult = ({ user, handleUser }) => {
     console.log("User reference:", userRef);
 
     // Recherchez le document avec le champ ID correspondant à l'UID de l'utilisateur ciblé
-    const userQuerySnapshot = await getDocs(query(userRef, where("ID", "==", user.ID)));
+    const userQuerySnapshot = await getDocs(
+      query(userRef, where("ID", "==", user.ID))
+    );
 
     // Recherchez le document de l'utilisateur connecté
-    const currentUserQuerySnapshot = await getDocs(query(userRef, where("ID", "==", currentUser.uid)));
+    const currentUserQuerySnapshot = await getDocs(
+      query(userRef, where("ID", "==", currentUser.uid))
+    );
 
     // Vérifiez s'il y a un document correspondant pour l'utilisateur ciblé
     if (!userQuerySnapshot.empty) {
@@ -50,7 +70,7 @@ const UserResult = ({ user, handleUser }) => {
 
       // Ajoutez l'UID de l'utilisateur connecté au champ follow de l'utilisateur ciblé
       await updateDoc(doc(userRef, userId), {
-        followers: arrayUnion(currentUser.uid)
+        follow: arrayUnion(currentUser.uid),
       });
 
       // Vérifiez s'il y a un document correspondant pour l'utilisateur connecté
@@ -61,7 +81,7 @@ const UserResult = ({ user, handleUser }) => {
 
         // Ajoutez l'UID de l'utilisateur ciblé au champ followers de l'utilisateur connecté
         await updateDoc(doc(userRef, currentUserId), {
-          follow: arrayUnion(ID)
+          followers: arrayUnion(ID),
         });
       } else {
         console.error("Current user document not found.");
@@ -84,10 +104,14 @@ const UserResult = ({ user, handleUser }) => {
     console.log("User reference:", userRef);
 
     // Recherchez le document avec le champ ID correspondant à l'UID de l'utilisateur ciblé
-    const userQuerySnapshot = await getDocs(query(userRef, where("ID", "==", user.ID)));
+    const userQuerySnapshot = await getDocs(
+      query(userRef, where("ID", "==", user.ID))
+    );
 
     // Recherchez le document de l'utilisateur connecté
-    const currentUserQuerySnapshot = await getDocs(query(userRef, where("ID", "==", currentUser.uid)));
+    const currentUserQuerySnapshot = await getDocs(
+      query(userRef, where("ID", "==", currentUser.uid))
+    );
 
     // Vérifiez s'il y a un document correspondant pour l'utilisateur ciblé
     if (!userQuerySnapshot.empty) {
@@ -97,7 +121,7 @@ const UserResult = ({ user, handleUser }) => {
 
       // Supprimez l'UID de l'utilisateur connecté du champ follow de l'utilisateur ciblé
       await updateDoc(doc(userRef, userId), {
-        followers: arrayRemove(currentUser.uid)
+        follow: arrayRemove(currentUser.uid),
       });
 
       // Vérifiez s'il y a un document correspondant pour l'utilisateur connecté
@@ -108,7 +132,7 @@ const UserResult = ({ user, handleUser }) => {
 
         // Supprimez l'UID de l'utilisateur ciblé du champ followers de l'utilisateur connecté
         await updateDoc(doc(userRef, currentUserId), {
-          follow: arrayRemove(ID)
+          followers: arrayRemove(ID),
         });
       } else {
         console.error("Current user document not found.");
@@ -125,15 +149,17 @@ const UserResult = ({ user, handleUser }) => {
 
   return (
     <div className="user-result">
-      <h4>{displayName}</h4>
-      <h4>{ID}</h4>
+      <Link to={`/check/userDifferent/${user.ID}`} className="link">
+        <h4>{displayName}</h4>
+        <h4>{ID}</h4>
+      </Link>
       <button onClick={handleClickMessage}>Message</button>
-      {isFollowing ? ( // Afficher le bouton correspondant en fonction de l'état isFollowing
-        <button onClick={handleClickUnfollow}>Unfollow</button>
-      ) : (
-        <button onClick={handleClickFollow}>Follow</button>
-      )}
-      {showSendMessage && <SendMessage selectedUser={user} />}
+      <button onClick={isFollowing ? handleClickUnfollow : handleClickFollow}>
+        {isFollowing ? "Unfollow" : "Follow"}
+      </button>
+      {showSendMessage && (
+        <SendMessage selectedUser={user} onMessageSent={handleMessageSent} />
+      )}{" "}
     </div>
   );
 };

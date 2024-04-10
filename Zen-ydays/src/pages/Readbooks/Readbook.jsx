@@ -1,6 +1,3 @@
-
-// Readbooks.js
-
 import {
   addDoc,
   collection,
@@ -132,7 +129,7 @@ const Readbooks = () => {
             <button type="submit">Commenter</button>
           </form>
           {comments.map((comment) => (
-            <div className="readbooks__comments__comment">
+            <div key={comment.id} className="readbooks__comments__comment">
               <p className="info_comment">{comment.createdAt}</p>
               <p className="content_comment">{comment.content}</p>
             </div>
