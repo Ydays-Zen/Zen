@@ -24,28 +24,10 @@ export function Oeuvres_profil() {
       const querySnapshot = await getDocs(bookProfil);
 
       const booksData = [];
+      querySnapshot.forEach((doc) => {
+        booksData.push({ id: doc.id, ...doc.data() });
+      });
 
-      for (const doc of querySnapshot.docs) {
-        const bookData = doc.data();
-        const bookUid = doc.id;
-
-        const commentsRef = collection(firestore, "Comments");
-        const bookCommentsQuery = query(
-          commentsRef,
-          where("bookUid", "==", bookUid)
-        );
-        const commentsSnapshot = await getDocs(bookCommentsQuery);
-
-        const bookWithComments = {
-          ...bookData,
-          id: bookUid,
-          comments: commentsSnapshot.docs.map((commentDoc) =>
-            commentDoc.data()
-          ),
-        };
-
-        booksData.push(bookWithComments);
-      }
 
       setBooksList(booksData);
     } catch (error) {

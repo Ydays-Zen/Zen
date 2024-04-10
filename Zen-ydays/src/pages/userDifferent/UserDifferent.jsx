@@ -1,3 +1,5 @@
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   arrayRemove,
   arrayUnion,
@@ -9,9 +11,10 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SendMessage from "../../components/SendMessage";
 import { auth, firestore } from "../../db/firebase-config";
+import "./userDifferent.css";
 
 const UserDifferent = () => {
   const { userId } = useParams();
@@ -21,6 +24,24 @@ const UserDifferent = () => {
   const [booksCount, setBooksCount] = useState(0);
   const [showSendMessage, setShowSendMessage] = useState(false); // État pour contrôler l'affichage de SendMessage
   const [isFollowing, setIsFollowing] = useState(false);
+  const [booksList, setBooksList] = useState([]);
+
+  useEffect(() => {
+    const checkFollowing = async () => {
+      const currentUser = auth.currentUser;
+      const userRef = collection(firestore, "users");
+
+      const userQuerySnapshot = await getDocs(
+        query(userRef, where("ID", "==", userId))
+      );
+      if (!userQuerySnapshot.empty) {
+        const userDoc = userQuerySnapshot.docs[0].data();
+        setIsFollowing(userDoc.follow.includes(currentUser.uid)); // Vérifie si l'utilisateur est dans la liste des suivis
+      }
+    };
+
+    checkFollowing();
+  }, [userId]);
 
   const handleUser = (userData) => {
     setUser(userData);
@@ -189,6 +210,28 @@ const UserDifferent = () => {
     setIsFollowing(true);
   };
 
+  // Récupérez les données des livres et des commentaires
+  const fetchData = async () => {
+    try {
+      const booksRef = collection(firestore, "Books");
+      const bookProfil = query(booksRef, where("userId", "==", userId));
+      const querySnapshot = await getDocs(bookProfil);
+
+      const booksData = [];
+      querySnapshot.forEach((doc) => {
+        booksData.push({ id: doc.id, ...doc.data() });
+      });
+
+      setBooksList(booksData);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données :", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <main className="mainProfil">
       <div className="container_info">
@@ -210,10 +253,18 @@ const UserDifferent = () => {
           </div>
         </div>
         <h2>{user?.displayName}</h2>
-        <button onClick={handleClickMessage}>Message</button>
-        <button onClick={isFollowing ? handleClickUnfollow : handleClickFollow}>
-          {isFollowing ? "Unfollow" : "Follow"}
-        </button>
+
+        <div className="containerBtn">
+          <button className="btnProfil" onClick={handleClickMessage}>
+            Message
+          </button>
+          <button
+            className="btnProfil"
+            onClick={isFollowing ? handleClickUnfollow : handleClickFollow}
+          >
+            {isFollowing ? "Unfollow" : "Follow"}
+          </button>
+        </div>
 
         {showSendMessage && (
           <SendMessage selectedUser={user} onMessageSent={handleMessageSent} />
@@ -227,6 +278,24 @@ const UserDifferent = () => {
           </div>
           <div className="line"></div>
         </div>
+      </div>
+
+      <div className="container_oeuvres">
+        {booksList.map((book) => (
+          <div key={book.id} className="book">
+            <Link to={`/check/readbooks/${book.id}`} className="link">
+              <img src={book.image} alt="Couverture" className="couverture" />
+              <div className="likes">
+                <FontAwesomeIcon
+                  icon={faHeartSolid}
+                  size="lg"
+                  color={"white"}
+                />
+                <p>{book.likedBy ? book.likedBy.length : 0}</p>
+              </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </main>
   );
