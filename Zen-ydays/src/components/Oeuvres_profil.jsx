@@ -2,11 +2,12 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { UserContext } from "../context/userContext";
 import { firestore } from "../db/firebase-config";
 
-import "../pages/Profil/Profil.css";
+import "./styles/infoProfil.css";
 
 export function Oeuvres_profil() {
   const [booksList, setBooksList] = useState([]);
@@ -59,29 +60,25 @@ export function Oeuvres_profil() {
   }, [currentUser]);
 
   return (
-    <div>
+    <>
       <div className="container_oeuvres">
-        <div className="all_oeuvres">
-          {booksList.map((book) => (
-            <div key={book.id}>
-              <p>{book.title}</p>
-              {/* Affichege de notre couverture de livre  */}
-              <img src={book.image} alt="Couverture" />
-              <div>
-                <FontAwesomeIcon icon={faHeartSolid} size="xl" color={"red"} />
+        {booksList.map((book) => (
+          <div key={book.id} className="book">
+            <Link to={`/check/readbooks/${book.id}`} className="link">
+              <img src={book.image} alt="Couverture" className="couverture" />
+              <div className="likes">
+                <FontAwesomeIcon
+                  icon={faHeartSolid}
+                  size="lg"
+                  color={"white"}
+                />
                 <p>{book.likedBy ? book.likedBy.length : 0}</p>
               </div>
-
-              {book.comments.map((comment, index) => (
-                <div key={index}>
-                  <p>{comment.content}</p>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+            </Link>
+          </div>
+        ))}
       </div>
-    </div>
+    </>
   );
 }
 
