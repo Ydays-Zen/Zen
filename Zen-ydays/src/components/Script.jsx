@@ -57,7 +57,7 @@ const Script = () => {
 
   return (
     <>
-      <h1>Livres aimés par l utilisateur</h1>
+
 
       {booksList.map((book) => (
         <div key={book.id} className="book">
@@ -69,7 +69,6 @@ const Script = () => {
 
       <hr />
 
-      <h2>Suggestions de livres basées sur les tags</h2>
 
       {suggestions.map((book) => (
         <div key={book.id} className="book">

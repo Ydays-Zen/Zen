@@ -18,3 +18,9 @@
     justify-content: center;
     margin: 0 auto;
 }
+
+.head_name_page>h2{
+    text-decoration: underline;
+    font-weight: normal;
+    text-underline-position: under;
+}

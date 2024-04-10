@@ -7,6 +7,7 @@ import { firestore } from "../../db/firebase-config";
 import HeaderAll from "../../layout/HeaderAll";
 import BookResult from "./BookResult";
 import UserResult from "./UserResult";
+import './result.css'
 
 const Result = () => {
   const location = useLocation();
@@ -47,33 +48,36 @@ const Result = () => {
   };
 
   return (
-    <>
-      <HeaderAll />
-      <Search />
-      <div className="resultContainer">
-        <h2>Résultats de recherche pour `{searchQuery}`</h2>
-        <div className="bookResults">
-          <h3>Résultats des livres :</h3>
-          {bookResults.length === 0 ? (
-            <p>Aucun livre trouvé.</p>
-          ) : (
-            bookResults.map((book, index) => (
-              <BookResult key={index} book={book} />
-            ))
-          )}
+      <>
+        <HeaderAll/>
+        <div className="head_name_page">
+          <h2>Recherche</h2>
         </div>
-        <div className="userResults">
-          <h3>Résultats des utilisateurs :</h3>
-          {userResults.length === 0 ? (
-            <p>Aucun utilisateur trouvé.</p>
-          ) : (
-            userResults.map((user, index) => (
-              <UserResult key={index} user={user} handleUser={handleUser} /> // Passez handleUser comme prop
-            ))
-          )}
+        <Search/>
+        <div className="resultContainer">
+          <h2>Book</h2>
+          <div className="bookResults">
+            <h3>Résultats des livres :</h3>
+            {bookResults.length === 0 ? (
+                <p>Aucun livre trouvé.</p>
+            ) : (
+                bookResults.map((book, index) => (
+                    <BookResult key={index} book={book}/>
+                ))
+            )}
+          </div>
+          <div className="userResults">
+            <h3>Résultats des utilisateurs :</h3>
+            {userResults.length === 0 ? (
+                <p>Aucun utilisateur trouvé.</p>
+            ) : (
+                userResults.map((user, index) => (
+                    <UserResult key={index} user={user} handleUser={handleUser}/> // Passez handleUser comme prop
+                ))
+            )}
+          </div>
         </div>
-      </div>
-    </>
+      </>
   );
 };
 

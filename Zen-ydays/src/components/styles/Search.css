@@ -5,30 +5,9 @@
   margin: 10px 0;
 }
 
-.Search{
-  padding: 10px;
-  background-color: #D3C8B2;
-  border: 1px solid #786146;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
-  color: #786146;
-  height: 40px;
-    
-}
-
-.searchButton  {
-  background-color: #786146;
-  border: none;
-  color: #FFF5E1;
-  cursor: pointer;
-    height: 40px;
-
-}
-
-.searchButton:hover {
-  transition: all 0.3s ease-in-out;
-  background-color: #D3C8B2;
+.searchButton{
+  width: 25vw;
+  max-width: 250px;
 }
 
 .book {
