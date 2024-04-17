@@ -181,7 +181,9 @@ const Readbooks = () => {
           </div>
               </div>
            {/* Resume */}
+
            <div className="readbooks__book__resume">
+            <div className="button_placement">
             <button className="second-btn" onClick={() => handleResumeClick(book.id)}>Voir le Résumé</button>
             {/* Affichage Resume */}
             {activeResume === book.id && (
@@ -193,6 +195,7 @@ const Readbooks = () => {
           </div>
                   <div className="readbooks__book__content">
           <button className="second-btn" onClick={() => handleContentClick(book.id)}>Commencez la Lecture</button>
+          </div>
           {/* Affichage Contenu */}
           <div className={`readbooks__book__content__content ${activeContent === book.id ? 'visible' : ''}`}>
             <div className="book-text">
