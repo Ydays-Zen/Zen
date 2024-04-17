@@ -3,17 +3,75 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  overflow-x:  hidden;
 }
 
 .readbooks__book {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
+  font-size: 16px;
 }
+
+/* .readbooks__book__info {
+  font-size: 12px;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+} */
+
+.readbooks__book__info>h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: var(--tertiary);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.readbooks_head>h2 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: right;
+  width: 30vw;
+  align-items: flex-end;
+
+}
+
+.readbooks_head>h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: left;
+  align-items: flex-start;
+  width: 30vw;
+  
+}
+
+.readbooks_head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.second-btn {
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: 0.3s;
+}
+
 
 .readbooks__book__image {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .readbooks__book__image img {
@@ -22,15 +80,104 @@
   border-radius: 5px;
 }
 
+.readbooks__book__resume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.readbooks__book__resume__content {
+  background-color: var(--tertiary);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: opacity 0.5s ease;
+
+}
+
+.readbooks__book__resume__content.visible {
+  opacity: 1;
+  height: 90vh;
+}
+
 .readbooks__book__content {
-  max-width: 600px;
   margin-top: 3vh;
 }
 
-.readbooks__book h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.readbooks__book__content__content {
+
+  background-color: var(--tertiary);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  height: 100%;
+  width: 65vw;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  
+
 }
+
+.readbooks__book__content__content.visible {
+  opacity: 1;
+  height: 90vh;
+}
+
+.readbooks__book__content__content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.readbooks__book__content__content::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 5px;
+}
+
+
+
+.book-text {
+  font-size: 12px;
+  margin-bottom: 10px;
+  height: 90%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 8px;
+
+}
+
+.pagination li {
+  margin: 0 2px;
+
+}
+
+.pagination li a {
+  display: block;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.pagination li.active a {
+  background-color: var(--secondary);
+  color: #fff;
+}
+
+.pagination li a:hover {
+  background-color: var(--secondary);
+}
+
+.arrow {
+  font-size: 14px; 
+  cursor: pointer;
+}
+
 
 .readbooks__book p {
   font-size: 16px;
@@ -41,12 +188,21 @@ hr{
   height: 2px;
   background-color: var(--secondary);
   border: none;
+  margin-top: 10vh;
 }
 
 .readbooks__comments {
   width: 100%;
   max-width: 800px;
-  margin:1vh 0 15vh;
+  height: 50%;
+}
+
+.readbooks__comments>h2{
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
 }
 
 .readbooks__comments h2 {
@@ -68,7 +224,7 @@ hr{
   padding: 10px;
   margin-bottom: 10px;
   resize: vertical;
-  color: black;
+  color: rgb(255, 255, 255);
   background: var(--primary);
   border: var(--secondary) 1px solid;
 }
