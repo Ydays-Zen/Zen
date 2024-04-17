@@ -15,7 +15,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Category from "../../../components/Category";
 import Menu from "../../../components/Menu";
@@ -24,7 +24,6 @@ import NavBar from "../../../components/NavBar";
 import { UserContext } from "../../../context/userContext";
 import { firestore } from "../../../db/firebase-config";
 import { auth } from "../../../db/firebase-config.jsx";
-import { Link } from "react-router-dom";
 const cookies = new Cookies();
 
 import "./style.css";
@@ -158,10 +157,10 @@ const Connected = () => {
           {booksList.map((book) => (
             <div key={book.id} className="displaybooks">
               <Link to={`/check/readbooks/${book.id}`} className="link">
-              <h2>{book.title}</h2>
+                <h2>{book.title}</h2>
 
-              {/* Affichage de la couverture du livre */}
-              <img className="couverture" src={book.image} alt="Couverture" />
+                {/* Affichage de la couverture du livre */}
+                <img className="couverture" src={book.image} alt="Couverture" />
               </Link>
               <div className="tags">
                 <p className="tag">{book.tags}</p>
@@ -171,7 +170,7 @@ const Connected = () => {
                 <div className="content">
                   {/* Système de like */}
 
-                  <div className="likes">
+                  <div>
                     <FontAwesomeIcon
                       onClick={() => handleLikeSubmit(book.id)}
                       icon={
