@@ -2,11 +2,12 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { UserContext } from "../context/userContext";
 import { firestore } from "../db/firebase-config";
 
-import "../pages/Profil/Profil.css";
+import "./styles/infoProfil.css";
 
 export function Oeuvres_profil() {
   const [booksList, setBooksList] = useState([]);
@@ -23,28 +24,10 @@ export function Oeuvres_profil() {
       const querySnapshot = await getDocs(bookProfil);
 
       const booksData = [];
+      querySnapshot.forEach((doc) => {
+        booksData.push({ id: doc.id, ...doc.data() });
+      });
 
-      for (const doc of querySnapshot.docs) {
-        const bookData = doc.data();
-        const bookUid = doc.id;
-
-        const commentsRef = collection(firestore, "Comments");
-        const bookCommentsQuery = query(
-          commentsRef,
-          where("bookUid", "==", bookUid)
-        );
-        const commentsSnapshot = await getDocs(bookCommentsQuery);
-
-        const bookWithComments = {
-          ...bookData,
-          id: bookUid,
-          comments: commentsSnapshot.docs.map((commentDoc) =>
-            commentDoc.data()
-          ),
-        };
-
-        booksData.push(bookWithComments);
-      }
 
       setBooksList(booksData);
     } catch (error) {
@@ -59,30 +42,25 @@ export function Oeuvres_profil() {
   }, [currentUser]);
 
   return (
-    <div>
+    <>
       <div className="container_oeuvres">
-        <h3>VOS OEUVRES</h3>
-        <div className="all_oeuvres">
-          {booksList.map((book) => (
-            <div key={book.id}>
-              <p>{book.title}</p>
-              {/* Affichege de notre couverture de livre  */}
-              <img src={book.image} alt="Couverture" />
-              <div>
-                <FontAwesomeIcon icon={faHeartSolid} size="xl" color={"red"} />
+        {booksList.map((book) => (
+          <div key={book.id} className="book">
+            <Link to={`/check/readbooks/${book.id}`} className="link">
+              <img src={book.image} alt="Couverture" className="couverture" />
+              <div className="likes">
+                <FontAwesomeIcon
+                  icon={faHeartSolid}
+                  size="lg"
+                  color={"white"}
+                />
                 <p>{book.likedBy ? book.likedBy.length : 0}</p>
               </div>
-
-              {book.comments.map((comment, index) => (
-                <div key={index}>
-                  <p>{comment.content}</p>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+            </Link>
+          </div>
+        ))}
       </div>
-    </div>
+    </>
   );
 }
 

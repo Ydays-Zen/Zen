@@ -50,14 +50,7 @@
     max-width: 200px;
 }
 
-.couverture {
-    width: 200px;
-    height: 300px;
-    max-width: none;
-    object-fit: cover;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+
 
 .tags {
     display: flex;

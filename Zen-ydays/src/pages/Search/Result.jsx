@@ -1,6 +1,6 @@
 // Result.jsx
-import React, { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Search from "../../components/Search";
 import { firestore } from "../../db/firebase-config";

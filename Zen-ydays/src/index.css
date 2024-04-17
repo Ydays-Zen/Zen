@@ -85,6 +85,11 @@ button:focus-visible {
   border: 1px solid var(--border);
 }
 
+.btnProfil {
+  width: 100px;
+  
+}
+
 input {
   background-color: var(--tertiary);
   outline: none;

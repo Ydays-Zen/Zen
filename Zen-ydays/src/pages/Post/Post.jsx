@@ -1,5 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
+import AvatarEditor from "react-avatar-editor";
 import Menu from "../../components/Menu.jsx";
 import Nav from "../../components/Nav.jsx";
 import NavBar from "../../components/NavBar.jsx";
@@ -18,6 +19,31 @@ const Post = () => {
   const [image, setImage] = useState(null);
   const [tags, setTags] = useState("");
   const [imageUrl] = useState("");
+  const [editor, setEditor] = useState(null);
+  const [scale, setScale] = useState(1);
+
+  const handleScaleChange = (e) => {
+    const newScale = parseFloat(e.target.value);
+    setScale(newScale);
+  };
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (!editor) return;
+
+    const canvas = editor.getImage();
+    const imgBlob = await new Promise((resolve) => {
+      canvas.toBlob(resolve, "image/jpeg"); // Spécifiez le type MIME de l'image
+    });
+
+    // Mettre à jour l'état de l'image avec le nouveau Blob
+    setImage(imgBlob);
+  };
 
   const bookRef = collection(firestore, "Books");
 
@@ -123,6 +149,18 @@ const Post = () => {
 
 
             <label>Image (URL):</label>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+            {image && (
+              <div>
+                <AvatarEditor
+                  ref={(ed) => setEditor(ed)}
+                  image={image}
+                  width={150}
+                  height={200}
+                  border={20}
+                  scale={scale}
+                  onZoomChange={handleScaleChange}
+                />
 
             <input
                 type="file"
@@ -150,6 +188,16 @@ const Post = () => {
             <label>Résumé:</label>
             <textarea placeholder="Résumé" value={resume} onChange={(e) => setResume(e.target.value)}></textarea>
 
+            <label>Tags:</label>
+            <select value={tags} onChange={(e) => setTags(e.target.value)}>
+              <option value="">Choisir un tag</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Romance">Romance</option>
+              <option value="Horreur">Horreur</option>
+              <option value="aventure">Aventure</option>
+              <option value="Drame">Drame</option>
+              <option value="Comédie">Comédie</option>
+            </select>
             <label>Contenu:</label>
             <textarea type="text" placeholder="Contenu" value={content} onChange={(e) => setContent(e.target.value)}/>
 

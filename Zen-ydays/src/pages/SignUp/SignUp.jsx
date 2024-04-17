@@ -86,7 +86,7 @@ const SignUp = () => {
       console.log("Image URL:", imageUrl);
 
       await addDoc(collection(firestore, "users"), {
-        ID: v4(),
+        ID: cred.user.uid,
         displayName: cred.user.displayName || displayName,
         img: imageUrl || "",
         follow: [],

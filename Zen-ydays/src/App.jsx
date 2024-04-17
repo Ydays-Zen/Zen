@@ -8,11 +8,10 @@ import Home from "./pages/Home/Home.jsx";
 import Message from "./pages/Messages/Message.jsx";
 import Post from "./pages/Post/Post.jsx";
 import Profil from "./pages/Profil/Profil.jsx";
-import SignUp from "./pages/SignUp/SignUp.jsx";
-// import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
-import Published_books from "./pages/Published_book/Published_books.jsx";
 import Readbooks from "./pages/Readbooks/Readbook.jsx";
 import Result from "./pages/Search/Result.jsx";
+import SignUp from "./pages/SignUp/SignUp.jsx";
+import UserDifferent from "./pages/userDifferent/UserDifferent.jsx";
 
 const App = () => {
   return (
@@ -29,14 +28,13 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/check/Post" element={<Post />} />
             <Route path="/check/Messages" element={<Message />} />
-            <Route path="/check/Profil" element={<Profil />} />
-            {/* <Route path="/check/userDifferent" element={<UserDifferent />} /> */}
+            <Route path="/check/profil" element={<Profil />} />
             <Route path="/result" element={<Result />} />
             <Route path="/search" element={<Search />} />
             <Route path="/check/readbooks/:bookId" element={<Readbooks />} />
             <Route
-              path="/check/published_book/"
-              element={<Published_books />}
+              path="/check/userDifferent/:userId"
+              element={<UserDifferent />}
             />
           </Routes>
         </CategoryProvider>
