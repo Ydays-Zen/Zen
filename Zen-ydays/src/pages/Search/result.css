@@ -9,6 +9,14 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+
+}
+
+.resultContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .result {

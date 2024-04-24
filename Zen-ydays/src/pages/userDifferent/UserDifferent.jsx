@@ -10,42 +10,22 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SendMessage from "../../components/SendMessage";
 import { auth, firestore } from "../../db/firebase-config";
 import "./userDifferent.css";
 
-const UserDifferent = () => {
+const UserDifferent = ({ handleUser }) => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [followCount, setFollowCount] = useState(0);
   const [followersCount, setFollowersCount] = useState(0);
   const [booksCount, setBooksCount] = useState(0);
-  const [showSendMessage, setShowSendMessage] = useState(false); // État pour contrôler l'affichage de SendMessage
-  const [isFollowing, setIsFollowing] = useState(false);
   const [booksList, setBooksList] = useState([]);
-
-  useEffect(() => {
-    const checkFollowing = async () => {
-      const currentUser = auth.currentUser;
-      const userRef = collection(firestore, "users");
-
-      const userQuerySnapshot = await getDocs(
-        query(userRef, where("ID", "==", userId))
-      );
-      if (!userQuerySnapshot.empty) {
-        const userDoc = userQuerySnapshot.docs[0].data();
-        setIsFollowing(userDoc.follow.includes(currentUser.uid)); // Vérifie si l'utilisateur est dans la liste des suivis
-      }
-    };
-
-    checkFollowing();
-  }, [userId]);
-
-  const handleUser = (userData) => {
-    setUser(userData);
-  };
+  const [showSendMessage, setShowSendMessage] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -59,13 +39,10 @@ const UserDifferent = () => {
         if (!userSnapshot.empty) {
           const userData = userSnapshot.docs[0].data();
           setUser(userData);
-
-          // Récupérer le nombre de follow et followers
           const followCount = userData.follow ? userData.follow.length : 0;
           const followersCount = userData.followers
             ? userData.followers.length
             : 0;
-
           setFollowCount(followCount);
           setFollowersCount(followersCount);
         } else {
@@ -83,7 +60,7 @@ const UserDifferent = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const countBooks = async () => {
@@ -97,140 +74,124 @@ const UserDifferent = () => {
       }
     };
     countBooks();
-  }, []);
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const booksRef = collection(firestore, "Books");
+        const bookProfil = query(booksRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(bookProfil);
+
+        const booksData = [];
+        querySnapshot.forEach((doc) => {
+          booksData.push({ id: doc.id, ...doc.data() });
+        });
+
+        setBooksList(booksData);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  useEffect(() => {
+    const checkFollowing = async () => {
+      const currentUser = auth.currentUser;
+      const userRef = collection(firestore, "users");
+
+      const userQuerySnapshot = await getDocs(
+        query(userRef, where("ID", "==", user?.ID))
+      );
+      if (!userQuerySnapshot.empty) {
+        const userDoc = userQuerySnapshot.docs[0].data();
+        setIsFollowing(userDoc.follow?.includes(currentUser?.uid));
+      }
+    };
+
+    checkFollowing();
+  }, [user?.ID]);
+
+  const handleClickMessage = () => {
+    handleUser(user);
+    setShowSendMessage(true);
+  };
 
   const handleMessageSent = () => {
     setShowSendMessage(false);
   };
 
-  const handleClickMessage = () => {
-    handleUser(user); // Passez l'utilisateur sélectionné à la fonction handleUser
-    setShowSendMessage(true); // Afficher le composant SendMessage lorsque le bouton est cliqué
-  };
-
-  const handleClickUnfollow = async () => {
-    const currentUser = auth.currentUser;
-    console.log("Current user:", currentUser);
-
-    const userRef = collection(firestore, "users");
-    console.log("User reference:", userRef);
-
-    // Recherchez le document avec le champ ID correspondant à l'UID de l'utilisateur ciblé
-    const userQuerySnapshot = await getDocs(
-      query(userRef, where("ID", "==", userId))
-    );
-
-    // Recherchez le document de l'utilisateur connecté
-    const currentUserQuerySnapshot = await getDocs(
-      query(userRef, where("ID", "==", currentUser.uid))
-    );
-
-    // Vérifiez s'il y a un document correspondant pour l'utilisateur ciblé
-    if (!userQuerySnapshot.empty) {
-      const userDoc = userQuerySnapshot.docs[0];
-      const userId = userDoc.id; // Obtenez l'ID du document de l'utilisateur ciblé
-      console.log("User ID:", userId);
-
-      // Supprimez l'UID de l'utilisateur connecté du champ follow de l'utilisateur ciblé
-      await updateDoc(doc(userRef, userId), {
-        followers: arrayRemove(currentUser.uid),
-      });
-
-      // Vérifiez s'il y a un document correspondant pour l'utilisateur connecté
-      if (!currentUserQuerySnapshot.empty) {
-        const currentUserDoc = currentUserQuerySnapshot.docs[0];
-        const currentUserId = currentUserDoc.id; // Obtenez l'ID du document de l'utilisateur connecté
-        console.log("Current user ID:", currentUserId);
-
-        // Supprimez l'UID de l'utilisateur ciblé du champ followers de l'utilisateur connecté
-        await updateDoc(doc(userRef, currentUserId), {
-          follow: arrayRemove(userId),
-        });
-      } else {
-        console.error("Current user document not found.");
-      }
-
-      console.log(`Unfollowed user: ${user.displayName}`);
-      console.log(`Unfollowed userID: ${userId}`);
-      console.log("UserConnected : ", currentUser.uid);
-    } else {
-      console.error("User document not found.");
-    }
-    setIsFollowing(false);
-  };
-
   const handleClickFollow = async () => {
     const currentUser = auth.currentUser;
-    console.log("Current user:", currentUser);
 
     const userRef = collection(firestore, "users");
-    console.log("User reference:", userRef);
 
-    // Recherchez le document avec le champ ID correspondant à l'UID de l'utilisateur ciblé
     const userQuerySnapshot = await getDocs(
-      query(userRef, where("ID", "==", userId))
+      query(userRef, where("ID", "==", user?.ID))
     );
 
-    // Recherchez le document de l'utilisateur connecté
-    const currentUserQuerySnapshot = await getDocs(
-      query(userRef, where("ID", "==", currentUser.uid))
-    );
-
-    // Vérifiez s'il y a un document correspondant pour l'utilisateur ciblé
     if (!userQuerySnapshot.empty) {
       const userDoc = userQuerySnapshot.docs[0];
-      const userId = userDoc.id; // Obtenez l'ID du document de l'utilisateur ciblé
-      console.log("User ID:", userId);
-
-      // Ajoutez l'UID de l'utilisateur connecté au champ follow de l'utilisateur ciblé
+      const userId = userDoc.id;
       await updateDoc(doc(userRef, userId), {
-        followers: arrayUnion(currentUser.uid),
+        follow: arrayUnion(currentUser?.uid),
       });
 
-      // Vérifiez s'il y a un document correspondant pour l'utilisateur connecté
+      const currentUserQuerySnapshot = await getDocs(
+        query(userRef, where("ID", "==", currentUser?.uid))
+      );
+
       if (!currentUserQuerySnapshot.empty) {
         const currentUserDoc = currentUserQuerySnapshot.docs[0];
-        const currentUserId = currentUserDoc.id; // Obtenez l'ID du document de l'utilisateur connecté
-        console.log("Current user ID:", currentUserId);
-
-        // Ajoutez l'UID de l'utilisateur ciblé au champ followers de l'utilisateur connecté
+        const currentUserId = currentUserDoc.id;
         await updateDoc(doc(userRef, currentUserId), {
-          follow: arrayUnion(userId),
+          followers: arrayUnion(user?.ID),
         });
       } else {
         console.error("Current user document not found.");
       }
-
-      console.log(`Followed user: ${user.displayName}`);
-      console.log(`Followed userID: ${userId}`);
-      console.log("UserConnected : ", currentUser.uid);
     } else {
       console.error("User document not found.");
     }
     setIsFollowing(true);
   };
 
-  // Récupérez les données des livres et des commentaires
-  const fetchData = async () => {
-    try {
-      const booksRef = collection(firestore, "Books");
-      const bookProfil = query(booksRef, where("userId", "==", userId));
-      const querySnapshot = await getDocs(bookProfil);
+  const handleClickUnfollow = async () => {
+    const currentUser = auth.currentUser;
 
-      const booksData = [];
-      querySnapshot.forEach((doc) => {
-        booksData.push({ id: doc.id, ...doc.data() });
+    const userRef = collection(firestore, "users");
+
+    const userQuerySnapshot = await getDocs(
+      query(userRef, where("ID", "==", user?.ID))
+    );
+
+    if (!userQuerySnapshot.empty) {
+      const userDoc = userQuerySnapshot.docs[0];
+      const userId = userDoc.id;
+      await updateDoc(doc(userRef, userId), {
+        follow: arrayRemove(currentUser?.uid),
       });
 
-      setBooksList(booksData);
-    } catch (error) {
-      console.error("Erreur lors de la récupération des données :", error);
-    }
-  };
+      const currentUserQuerySnapshot = await getDocs(
+        query(userRef, where("ID", "==", currentUser?.uid))
+      );
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+      if (!currentUserQuerySnapshot.empty) {
+        const currentUserDoc = currentUserQuerySnapshot.docs[0];
+        const currentUserId = currentUserDoc.id;
+        await updateDoc(doc(userRef, currentUserId), {
+          followers: arrayRemove(user?.ID),
+        });
+      } else {
+        console.error("Current user document not found.");
+      }
+    } else {
+      console.error("User document not found.");
+    }
+    setIsFollowing(false);
+  };
 
   return (
     <main className="mainProfil">
@@ -255,9 +216,8 @@ const UserDifferent = () => {
         <h2>{user?.displayName}</h2>
 
         <div className="containerBtn">
-          <button className="btnProfil" onClick={handleClickMessage}>
-            Message
-          </button>
+          <button onClick={handleClickMessage}>Message</button>
+
           <button
             className="btnProfil"
             onClick={isFollowing ? handleClickUnfollow : handleClickFollow}
@@ -284,7 +244,9 @@ const UserDifferent = () => {
         {booksList.map((book) => (
           <div key={book.id} className="book">
             <Link to={`/check/readbooks/${book.id}`} className="link">
-              <img src={book.image} alt="Couverture" className="couverture" />
+              {book.image && (
+                <img src={book.image} alt="Couverture" className="couverture" />
+              )}
               <div className="likes">
                 <FontAwesomeIcon
                   icon={faHeartSolid}
@@ -299,6 +261,10 @@ const UserDifferent = () => {
       </div>
     </main>
   );
+};
+
+UserDifferent.propTypes = {
+  handleUser: PropTypes.func.isRequired,
 };
 
 export default UserDifferent;

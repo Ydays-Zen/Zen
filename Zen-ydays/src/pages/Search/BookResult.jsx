@@ -5,46 +5,54 @@ import { useEffect, useState } from "react";
 import { firestore } from "../../db/firebase-config";
 
 const BookResult = ({ book }) => {
-  // Ajoutez un état pour stocker les données de l'utilisateur
   const [userData, setUserData] = useState(null);
 
-  // Récupérez les données de l'utilisateur
   const fetchUserData = async () => {
-    const usersCol = collection(firestore, "users");
-    const userSnapshot = await getDocs(usersCol);
-    const usersList = userSnapshot.docs.map((doc) => doc.data());
-    const userData = usersList.find((user) => user.ID === book.userId);
-    console.log(userData);
-    setUserData(userData);
+    try {
+      const usersCol = collection(firestore, "users");
+      const userSnapshot = await getDocs(usersCol);
+      const usersList = userSnapshot.docs.map((doc) => doc.data());
+      const userData = usersList.find((user) => user.ID === book.userId);
+      setUserData(userData);
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des données de l'utilisateur :",
+        error
+      );
+    }
   };
 
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  // const fetchUsersData = async () => {
-  //   const usersCol = collection(firestore, "users");
-  //   const userSnapshot = await getDocs(usersCol);
-  //   const usersList = userSnapshot.docs.map((doc) => doc.data());
-  //   console.log(usersList);
-  // };
-
-  // useEffect(() => {
-  //   fetchUsersData();
-  // }, []);
-  // useEffect(() => {
-  //   fetchUserData();
-  // }, [book.userId]);
-
   return (
-    <div className="book-result">
-      <img src={book.image} alt={book.title} />
+    <div className="bookSuggestions">
       <h3>{book.title}</h3>
-      <p>{book.resume}</p>
-      {userData && <p>Posté par : {userData.displayName}</p>}{" "}
+
+      {book.image && (
+        <img src={book.image} alt={book.title} className="couverture" />
+      )}
+
+      <div className="author imgProfil">
+        {userData && userData.img && (
+          <img
+            src={userData.img}
+            alt=""
+            style={{
+              width: "50px",
+              height: "50px",
+              marginRight: "10px",
+            }}
+          />
+        )}
+
+        {userData && userData.displayName && <p>{userData.displayName}</p>}
+      </div>
     </div>
   );
 };
+
 
 // Définition des propTypes pour vérifier les données
 BookResult.propTypes = {

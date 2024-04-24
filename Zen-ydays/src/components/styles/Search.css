@@ -2,14 +2,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
 }
 
-.searchButton{
-  width: 25vw;
-  max-width: 250px;
+.searchButton {
+  width: 38px;
 }
 
-.book {
-  border: 1px solid #786146;
+.sugestionsBook {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.bookSuggestions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+
+  max-width: 200px;
+  width: 100%;
+}
+.author {
+  display: flex;
 }
