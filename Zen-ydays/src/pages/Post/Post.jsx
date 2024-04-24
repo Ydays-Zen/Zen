@@ -1,13 +1,15 @@
 import { addDoc, collection } from "firebase/firestore";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
-import { v4 } from "uuid";
 import Menu from "../../components/Menu.jsx";
 import Nav from "../../components/Nav.jsx";
 import NavBar from "../../components/NavBar.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import "./post.css";
+
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 const Post = () => {
   const { currentUser } = useContext(UserContext);
@@ -16,6 +18,7 @@ const Post = () => {
   const [resume, setResume] = useState("");
   const [image, setImage] = useState(null);
   const [tags, setTags] = useState("");
+  const [imageUrl] = useState("");
   const [editor, setEditor] = useState(null);
   const [scale, setScale] = useState(1);
 
@@ -35,10 +38,10 @@ const Post = () => {
 
     const canvas = editor.getImage();
     const imgBlob = await new Promise((resolve) => {
-      canvas.toBlob(resolve, "image/jpeg"); // Specify the MIME type of the image
+      canvas.toBlob(resolve, "image/jpeg"); // Spécifiez le type MIME de l'image
     });
 
-    // Update the image state with the new Blob
+    // Mettre à jour l'état de l'image avec le nouveau Blob
     setImage(imgBlob);
   };
 
@@ -47,44 +50,55 @@ const Post = () => {
   const uploadImg = async () => {
     if (!image) return "";
 
-    const imgRef = storage.ref(
+    const imgRef = ref(
+      storage,
       `images/${currentUser.uid}/${image.name + v4()}`
     );
 
     try {
-      await imgRef.put(image);
+      await uploadBytes(imgRef, image);
       console.log("Uploaded img");
 
-      // Get the file path after upload
-      const url = await imgRef.getDownloadURL();
+      // Obtenez le chemin du fichier après le téléchargement
+      const url = await getDownloadURL(imgRef);
       console.log("Image URL:", url);
 
-      // Return the image URL to use in the form
+      // Retournez l'URL de l'image pour l'utiliser dans le formulaire
       return url;
     } catch (error) {
-      console.error("Error uploading image:", error);
+      console.error("Erreur lors du téléchargement de l'image :", error);
       return "";
     }
   };
 
+  useEffect(() => {
+    console.log("Nouvelle URL dans useEffect :", imageUrl);
+  }, [imageUrl]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Handle submit reached");
 
     if (!currentUser) {
-      console.log("You must be logged in to post a book.");
+      console.log("Vous devez être connecté pour poster un livre.");
       return;
     }
 
     if (!title || !resume || !image || !tags || !content) {
-      console.log("Please fill out all form fields.");
+      console.log("Veuillez remplir tous les champs du formulaire.");
+      return;
+    }
+
+    if (!image) {
+      console.log("Veuillez sélectionner une image.");
       return;
     }
 
     try {
-      // Wait for image to be uploaded
+      // Attendre que l'image soit téléchargée
       const imageUrl = await uploadImg();
 
-      // Now imageUrl should be updated
+      // Maintenant imageUrl devrait être mis à jour
       await addDoc(bookRef, {
         title,
         resume,
@@ -102,7 +116,7 @@ const Post = () => {
       setTags("");
       setContent("");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Erreur lors de la soumission du formulaire :", error);
     }
   };
 
@@ -113,12 +127,8 @@ const Post = () => {
       <NavBar />
       <div className="body_post">
         <div className="post">
-          <header className="Head_post">
-            <h2>Post</h2>
-            <p>Get started and write your own story!</p>
-          </header>
-          <hr />
-          <form onSubmit={handleSubmit} className="formulaire_post">
+          <h2>Poster un Livre</h2>
+          <form>
             <label>Titre:</label>
             <input
               type="text"
@@ -126,18 +136,12 @@ const Post = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-
-            <label>Tags:</label>
-            <select value={tags} onChange={(e) => setTags(e.target.value)}>
-              <option value="">Catégorie</option>
-              <option value="Fiction">Fiction</option>
-              <option value="Romance">Romance</option>
-              <option value="Horreur">Horreur</option>
-              <option value="Aventure">Aventure</option>
-              <option value="Drame">Drame</option>
-              <option value="Comédie">Comédie</option>
-            </select>
-
+            <label>Résumé:</label>
+            <textarea
+              placeholder="Résumé"
+              value={resume}
+              onChange={(e) => setResume(e.target.value)}
+            ></textarea>
             <label>Image (URL):</label>
             <input type="file" accept="image/*" onChange={handleImageChange} />
             {image && (
@@ -151,29 +155,56 @@ const Post = () => {
                   scale={scale}
                   onZoomChange={handleScaleChange}
                 />
+
+                <input
+                  type="range"
+                  min="0.1"
+                  max="2"
+                  step="0.01"
+                  value={scale}
+                  onChange={handleScaleChange}
+                />
+                <button onClick={handleSave}>Enregistrer</button>
               </div>
             )}
 
-            <label>Résumé:</label>
-            <textarea
-              placeholder="Résumé"
-              value={resume}
-              onChange={(e) => setResume(e.target.value)}
-            ></textarea>
-
+            <label>Tags:</label>
+            <select value={tags} onChange={(e) => setTags(e.target.value)}>
+              <option value="">Choisir un tag</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Romance">Romance</option>
+              <option value="Horreur">Horreur</option>
+              <option value="aventure">Aventure</option>
+              <option value="Drame">Drame</option>
+              <option value="Comédie">Comédie</option>
+            </select>
             <label>Contenu:</label>
-            <textarea
+            <input
               type="text"
               placeholder="Contenu"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-            ></textarea>
-
-            <button type="submit" className="btn_post_book">
-              Poster
+            />
+            <button type="submit" onClick={handleSubmit}>
+              Poster le Livre
             </button>
           </form>
         </div>
+
+        {/* Aperçu du livre  
+      <div className="book-preview">
+        <h2>Aperçu du Livre</h2>
+        {preview && (
+          <div>
+            <h3>{preview.title}</h3>
+            <p>{preview.resume}</p>
+            <img src={preview.imageUrl} alt="Aperçu du livre"/>
+            <p>{preview.tags.join(", ")}</p>
+
+          </div>
+        )}
+
+    </div>*/}
       </div>
     </div>
   );
