@@ -38,6 +38,7 @@ const Connected = () => {
   const { btnValue } = useCategory();
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
+  const [user, setUser] = useState(null);
   const [activeResume, setActiveResume] = useState(null);
 
   const userId = currentUser.uid;
@@ -132,6 +133,38 @@ const Connected = () => {
   console.log("User ID:", userId);
   console.log("Pseudo:", currentUser.displayName);
 
+  // Récupération des données de l'utilisateur
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userQuery = query(
+          collection(firestore, "users"),
+          where("ID", "==", book.userId)
+        );
+        const userSnapshot = await getDocs(userQuery);
+
+        if (!userSnapshot.empty) {
+          const userData = userSnapshot.docs[0].data();
+          setUser(userData);
+
+        
+        } else {
+          console.log(
+            "Aucun document trouvé pour l'utilisateur avec l'ID:",
+            book.userId
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération de l'utilisateur:",
+          error
+        );
+      }
+    };
+
+    fetchUser();
+  }, [userId]);
+
   // Deconnexion
   const logOut = async () => {
     try {
@@ -161,7 +194,7 @@ const Connected = () => {
               <Link to={`/check/readbooks/${book.id}`} className="link">
                 <div className="Head_post_name">
                   <FontAwesomeIcon icon={faUser} />
-                  <p>Nom user</p>
+                  <p>{user && user.displayname}</p>
                 </div>
                 <h2>{book.title}</h2>
                 {/* Affichage de la couverture du livre */}
