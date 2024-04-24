@@ -1,15 +1,13 @@
 import { addDoc, collection } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
+import { v4 } from "uuid";
 import Menu from "../../components/Menu.jsx";
 import Nav from "../../components/Nav.jsx";
 import NavBar from "../../components/NavBar.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import "./post.css";
-
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
 
 const Post = () => {
   const { currentUser } = useContext(UserContext);
@@ -18,7 +16,6 @@ const Post = () => {
   const [resume, setResume] = useState("");
   const [image, setImage] = useState(null);
   const [tags, setTags] = useState("");
-  const [imageUrl] = useState("");
   const [editor, setEditor] = useState(null);
   const [scale, setScale] = useState(1);
 
@@ -38,10 +35,10 @@ const Post = () => {
 
     const canvas = editor.getImage();
     const imgBlob = await new Promise((resolve) => {
-      canvas.toBlob(resolve, "image/jpeg"); // Spécifiez le type MIME de l'image
+      canvas.toBlob(resolve, "image/jpeg"); // Specify the MIME type of the image
     });
 
-    // Mettre à jour l'état de l'image avec le nouveau Blob
+    // Update the image state with the new Blob
     setImage(imgBlob);
   };
 
@@ -50,55 +47,44 @@ const Post = () => {
   const uploadImg = async () => {
     if (!image) return "";
 
-    const imgRef = ref(
-      storage,
+    const imgRef = storage.ref(
       `images/${currentUser.uid}/${image.name + v4()}`
     );
 
     try {
-      await uploadBytes(imgRef, image);
+      await imgRef.put(image);
       console.log("Uploaded img");
 
-      // Obtenez le chemin du fichier après le téléchargement
-      const url = await getDownloadURL(imgRef);
+      // Get the file path after upload
+      const url = await imgRef.getDownloadURL();
       console.log("Image URL:", url);
 
-      // Retournez l'URL de l'image pour l'utiliser dans le formulaire
+      // Return the image URL to use in the form
       return url;
     } catch (error) {
-      console.error("Erreur lors du téléchargement de l'image :", error);
+      console.error("Error uploading image:", error);
       return "";
     }
   };
 
-  useEffect(() => {
-    console.log("Nouvelle URL dans useEffect :", imageUrl);
-  }, [imageUrl]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Handle submit reached");
 
     if (!currentUser) {
-      console.log("Vous devez être connecté pour poster un livre.");
+      console.log("You must be logged in to post a book.");
       return;
     }
 
     if (!title || !resume || !image || !tags || !content) {
-      console.log("Veuillez remplir tous les champs du formulaire.");
-      return;
-    }
-
-    if (!image) {
-      console.log("Veuillez sélectionner une image.");
+      console.log("Please fill out all form fields.");
       return;
     }
 
     try {
-      // Attendre que l'image soit téléchargée
+      // Wait for image to be uploaded
       const imageUrl = await uploadImg();
 
-      // Maintenant imageUrl devrait être mis à jour
+      // Now imageUrl should be updated
       await addDoc(bookRef, {
         title,
         resume,
@@ -116,7 +102,7 @@ const Post = () => {
       setTags("");
       setContent("");
     } catch (error) {
-      console.error("Erreur lors de la soumission du formulaire :", error);
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -129,24 +115,28 @@ const Post = () => {
         <div className="post">
           <header className="Head_post">
             <h2>Post</h2>
-            <p>Lancez vous et rédigez votre propre histoire !</p>
+            <p>Get started and write your own story!</p>
           </header>
-          <hr/>
+          <hr />
           <form onSubmit={handleSubmit} className="formulaire_post">
             <label>Titre:</label>
-            <input type="text" placeholder="Titre" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Titre"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
 
             <label>Tags:</label>
             <select value={tags} onChange={(e) => setTags(e.target.value)}>
-              <option value="">Catagory</option>
+              <option value="">Catégorie</option>
               <option value="Fiction">Fiction</option>
               <option value="Romance">Romance</option>
               <option value="Horreur">Horreur</option>
-              <option value="aventure">Aventure</option>
+              <option value="Aventure">Aventure</option>
               <option value="Drame">Drame</option>
               <option value="Comédie">Comédie</option>
             </select>
-
 
             <label>Image (URL):</label>
             <input type="file" accept="image/*" onChange={handleImageChange} />
@@ -161,64 +151,29 @@ const Post = () => {
                   scale={scale}
                   onZoomChange={handleScaleChange}
                 />
-
-            <input
-                type="file"
-                name=""
-                id=""
-                onChange={(event) => {
-                  // Utilisez FileReader pour lire le contenu du fichier
-                  const selectedFile = event.target.files[0];
-
-                  // Mise à jour de l'état de l'image
-                  setImage(selectedFile);
-
-                  // Vous pouvez également afficher l'aperçu de l'image si nécessaire
-                  const reader = new FileReader();
-                  reader.onload = (e) => {
-                    // e.target.result contient l'URL de l'image en base64
-                    const imageUrl = e.target.result;
-                    console.log("Image Preview URL:", imageUrl);
-                  };
-                  reader.readAsDataURL(selectedFile);
-                }}
-            />
-
+              </div>
+            )}
 
             <label>Résumé:</label>
-            <textarea placeholder="Résumé" value={resume} onChange={(e) => setResume(e.target.value)}></textarea>
+            <textarea
+              placeholder="Résumé"
+              value={resume}
+              onChange={(e) => setResume(e.target.value)}
+            ></textarea>
 
-            <label>Tags:</label>
-            <select value={tags} onChange={(e) => setTags(e.target.value)}>
-              <option value="">Choisir un tag</option>
-              <option value="Fiction">Fiction</option>
-              <option value="Romance">Romance</option>
-              <option value="Horreur">Horreur</option>
-              <option value="aventure">Aventure</option>
-              <option value="Drame">Drame</option>
-              <option value="Comédie">Comédie</option>
-            </select>
             <label>Contenu:</label>
-            <textarea type="text" placeholder="Contenu" value={content} onChange={(e) => setContent(e.target.value)}/>
+            <textarea
+              type="text"
+              placeholder="Contenu"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            ></textarea>
 
-            <button type="submit" className="btn_post_book">Poster</button>
+            <button type="submit" className="btn_post_book">
+              Poster
+            </button>
           </form>
         </div>
-
-        {/* Aperçu du livre  
-      <div className="book-preview">
-        <h2>Aperçu du Livre</h2>
-        {preview && (
-          <div>
-            <h3>{preview.title}</h3>
-            <p>{preview.resume}</p>
-            <img src={preview.imageUrl} alt="Aperçu du livre"/>
-            <p>{preview.tags.join(", ")}</p>
-
-          </div>
-        )}
-
-    </div>*/}
       </div>
     </div>
   );
