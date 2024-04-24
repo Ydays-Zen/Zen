@@ -183,15 +183,14 @@ const Readbooks = () => {
             <div className="button_placement">
             <button className="second-btn" onClick={() => handleResumeClick(book.id)}>Voir le Résumé</button>
             {/* Affichage Resume */}
-            {activeResume === book.id && (
-              <div className="readbooks__book__resume__content">
+            <div className={`readbooks__book__resume__content ${activeResume === book.id ? 'visible' : ''}`}>
                 <p>{book.resume}</p>
               </div>
-            )}
 
-          </div>
+          
                   <div className="readbooks__book__content">
           <button className="second-btn" onClick={() => handleContentClick(book.id)}>Commencez la Lecture</button>
+          </div>
           </div>
           {/* Affichage Contenu */}
           <div className={`readbooks__book__content__content ${activeContent === book.id ? 'visible' : ''}`}>

@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  overflow-x:  hidden;
 }
 
 .readbooks__book {
@@ -84,7 +83,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 3vh;
+  
+
 }
 
 .readbooks__book__resume__content {
@@ -93,12 +94,23 @@
   border-radius: 5px;
   margin-top: 10px;
   transition: opacity 0.5s ease;
+  opacity: 0;
+  width: 10px;
+  height: 10px;
 
 }
 
 .readbooks__book__resume__content.visible {
   opacity: 1;
-  height: 90vh;
+  height: 80vh;
+  width: 70vw;
+}
+
+.button_placement.p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .readbooks__book__content {
@@ -124,13 +136,13 @@
   height: 90vh;
 }
 
-.readbooks__book__content__content::-webkit-scrollbar {
-  width: 10px;
-}
 
-.readbooks__book__content__content::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
-  border-radius: 5px;
+
+
+.button_placement {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
 }
 
 
@@ -138,7 +150,10 @@
 .book-text {
   font-size: 12px;
   margin-bottom: 10px;
-  height: 90%;
+}
+
+.readbooks__book__content__content p {
+  font-size: 16px;
 }
 
 .pagination {
