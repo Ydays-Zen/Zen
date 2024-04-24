@@ -25,6 +25,8 @@ import NavBar from "../../../components/NavBar";
 import { UserContext } from "../../../context/userContext";
 import { firestore } from "../../../db/firebase-config";
 import { auth } from "../../../db/firebase-config.jsx";
+import {useParams} from "react-router-dom";
+
 
 const cookies = new Cookies();
 
@@ -39,7 +41,8 @@ const Connected = () => {
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [user, setUser] = useState(null);
-  const [activeResume, setActiveResume] = useState(null);
+  const[book, setBook] = useState({});
+
 
   const userId = currentUser.uid;
 
