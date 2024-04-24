@@ -1,6 +1,7 @@
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import {faBookmark} from "@fortawesome/free-solid-svg-icons";
 import {
-  faHeart as faHeartSolid,
+  faHeart as faHeartSolid, faUser,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,6 +25,7 @@ import NavBar from "../../../components/NavBar";
 import { UserContext } from "../../../context/userContext";
 import { firestore } from "../../../db/firebase-config";
 import { auth } from "../../../db/firebase-config.jsx";
+
 const cookies = new Cookies();
 
 import "./style.css";
@@ -157,59 +159,43 @@ const Connected = () => {
           {booksList.map((book) => (
             <div key={book.id} className="displaybooks">
               <Link to={`/check/readbooks/${book.id}`} className="link">
+                <div className="Head_post_name">
+                  <FontAwesomeIcon icon={faUser} />
+                  <p>Nom user</p>
+                </div>
                 <h2>{book.title}</h2>
-
                 {/* Affichage de la couverture du livre */}
                 <img className="couverture" src={book.image} alt="Couverture" />
               </Link>
               <div className="tags">
-                <p className="tag">{book.tags}</p>
-              </div>
 
-              {currentUser && (
-                <div className="content">
-                  {/* Système de like */}
+                <p className="tag">Genre: {book.tags}</p>
+                {/* Système de like */}
 
-                  <div>
+                <div className="like_save">
+                  <FontAwesomeIcon icon={faBookmark} style={{color: "#ffffff",background:"#000000"}} />
+                  <div className="like">
                     <FontAwesomeIcon
-                      onClick={() => handleLikeSubmit(book.id)}
-                      icon={
-                        book.likedBy && book.likedBy.includes(currentUser.uid)
-                          ? faHeartSolid
-                          : faHeartRegular
-                      }
-                      size="xl"
-                      color={
-                        book.likedBy && book.likedBy.includes(currentUser.uid)
-                          ? "red"
-                          : "black"
-                      }
+                        onClick={() => handleLikeSubmit(book.id)}
+                        icon={
+                          book.likedBy && book.likedBy.includes(currentUser.uid)
+                              ? faHeartSolid
+                              : faHeartRegular
+                        }
+                        size="xl"
+                        color={
+                          book.likedBy && book.likedBy.includes(currentUser.uid)
+                              ? "red"
+                              : "white"
+                        }
                     />
-
                     <p>{book.likedBy ? book.likedBy.length : 0}</p>
                   </div>
-                  {/* Resume */}
-                  <button onClick={() => handleResumeClick(book.id)}>
-                    Résumé
-                  </button>
-                  {/* Affichage du Résumé  */}
 
-                  <div
-                    className={`resume ${
-                      activeResume === book.id ? "active" : ""
-                    }`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faXmark}
-                      size="xl"
-                      onClick={() => handleResumeClick(book.id)}
-                      className={` ${activeResume === book.id ? "active" : ""}`}
-                    />
-                    <h3>Résumé</h3>
-                    <p>{book.resume}</p>
-                  </div>
+
                 </div>
-              )}
+              </div>
+
             </div>
           ))}
         </main>

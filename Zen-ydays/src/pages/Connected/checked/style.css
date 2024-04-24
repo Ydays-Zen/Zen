@@ -6,11 +6,6 @@
     
 }
 
-.link {
-    text-decoration: none;
-    color: var(--text-black);
-}
-
 .btn_logout {
     position: absolute;
     padding: 10px;
@@ -30,8 +25,15 @@
 }
 
 .link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-decoration: none;
-    color: var(--text-black);
+    margin: 0;
+}
+
+.link>h2{
+    text-align: center;
 }
 
 .mainDisplayBooks {
@@ -47,8 +49,9 @@
 .displaybooks{
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 50px;
-    max-width: 200px;
+    max-width: 70vw;
 }
 
 
@@ -56,18 +59,12 @@
 .tags {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
-
-    width: 200px;
+    width: 70vw;
+    max-width: 700px;
 }
 
-.tag {
-    background-color: #d3c8b268;
-    border: 1px solid var(--tertiary);
-    border-radius: 8px;
-    padding: 5px 15px;
-}
 
 .content .likes {
     display: flex;
@@ -215,4 +212,41 @@
     margin: 0 auto;
     width: 25em;
     height: 80px;
+}
+
+
+.Head_post_name{
+    position: relative;
+    left: -5vw;
+    display: flex;
+    justify-content: left;
+    align-items: start  ;
+    width: 60vw;
+
+}
+.Head_post_name>p{
+    margin:0 0 0 3vw;
+}
+
+.Head_post_name>img{
+    background-color: gray;
+    width: 50px;
+    border-radius: 50px;
+}
+
+
+.like_save{
+    width: 120px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.like{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    width: 50px;
 }
