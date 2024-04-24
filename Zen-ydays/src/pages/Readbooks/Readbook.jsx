@@ -167,7 +167,7 @@ const Readbooks = () => {
       <div className="readbooks">
         <div className="readbooks__book">
           <div className="readbooks__book__info">
-        <h1>{book.title}</h1>
+        <h2>{book.title}</h2>
         <div className="readbooks_head"> 
         <h3>Écrit par: {user && user.displayName}</h3>
         <h2>Genre: {book.tags}</h2> 

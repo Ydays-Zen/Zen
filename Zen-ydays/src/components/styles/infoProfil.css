@@ -92,10 +92,7 @@
 
 
 .couverture {
-    width: 150px;
-    height: 200px;
-    max-width: none;
-    object-fit: cover;
+  width: 70vw;
 }
 
 .likes {

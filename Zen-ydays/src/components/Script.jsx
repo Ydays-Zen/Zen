@@ -1,7 +1,9 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import { firestore } from "../db/firebase-config";
+import "./styles/Search.css";
 
 const Script = () => {
   const { currentUser } = useContext(UserContext);
@@ -15,7 +17,7 @@ const Script = () => {
       const likedBooksRef = collection(firestore, "Books");
       const q = query(
         likedBooksRef,
-        where("likedBy", "array-contains", currentUser.uid),
+        where("likedBy", "array-contains", currentUser.uid)
       );
       const querySnapshot = await getDocs(q);
 
@@ -28,55 +30,80 @@ const Script = () => {
     };
 
     fetchData();
-  }, [currentUser]); // Assurez-vous de rappeler fetchData lorsque currentUser change
+  }, [currentUser]);
 
   useEffect(() => {
-    const fetchSuggestions = async () => {
-      // Extraire les IDs des livres aimés par l'utilisateur
-      const likedBookIds = booksList.map((book) => book.id);
+    const fetchUserForSuggestions = async () => {
+      const suggestionsWithAuthors = await Promise.all(
+        booksList.map(async (book) => {
+          try {
+            const userQuery = query(
+              collection(firestore, "users"),
+              where("ID", "==", book.userId)
+            );
+            const userSnapshot = await getDocs(userQuery);
 
-      // Rechercher d'autres livres avec les mêmes tags, mais qui ne sont pas déjà aimés par l'utilisateur
-      const booksRef = collection(firestore, "Books");
-      const q = query(booksRef);
-      const querySnapshot = await getDocs(q);
+            if (!userSnapshot.empty) {
+              const userData = userSnapshot.docs[0].data();
+              return {
+                ...book,
+                author: userData.displayName,
+                img: userData.img,
+              };
+            } else {
+              console.log(
+                "Aucun document trouvé pour l'utilisateur avec l'ID:",
+                book.userId
+              );
+              return { ...book, author: "Auteur inconnu" };
+            }
+          } catch (error) {
+            console.error(
+              "Erreur lors de la récupération de l'utilisateur:",
+              error
+            );
+            return { ...book, author: "Auteur inconnu" };
+          }
+        })
+      );
 
-      const suggestionsData = querySnapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-        .filter((book) => !likedBookIds.includes(book.id)); // Filtrer les livres déjà aimés
-
-      setSuggestions(suggestionsData);
+      setSuggestions(suggestionsWithAuthors);
     };
 
     if (booksList.length > 0) {
-      fetchSuggestions();
+      fetchUserForSuggestions();
     }
-  }, [booksList, currentUser]);
+  }, [booksList]);
 
   return (
     <>
+      <main className="sugestionsBook">
+        {/* Afficher les suggestions de livres avec les auteurs */}
+        {suggestions.map((book) => (
+          <div key={book.id}>
+            <Link to={`/check/readbooks/${book.id}`} className="link">
+              <div className="bookSuggestions">
+                <div className="author imgProfil">
+                  <img
+                    src={book.img}
+                    alt=""
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      marginRight: "10px",
+                    }}
+                  />
 
+                  <p>{book.author}</p>
+                </div>
 
-      {booksList.map((book) => (
-        <div key={book.id} className="book">
-          <h3>{book.title}</h3>
-          <p>{book.author}</p>
-          <p>{book.tags}</p>
-        </div>
-      ))}
-
-      <hr />
-
-
-      {suggestions.map((book) => (
-        <div key={book.id} className="book">
-          <h3>{book.title}</h3>
-          <p>{book.author}</p>
-          <p>{book.tags}</p>
-        </div>
-      ))}
+                <h3>{book.title}</h3>
+                <img src={book.image} alt="" className="couverture" />
+              </div>
+            </Link>
+          </div>
+        ))}
+      </main>
     </>
   );
 };
