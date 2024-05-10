@@ -5,8 +5,7 @@
   margin: 0;
   display: flex;
   justify-content: center;
-  align-items: start;
-  height: 100vh; /* Utilisez la hauteur de la vue (viewport height) pour centrer verticalement */
+  align-items: center;
 }
 
 .post {
@@ -14,63 +13,12 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-width: 30vw;
   max-width: 400px;
   width: 100%;
-}
-
-.Head_post{
-  display: flex;
-  justify-content: space-around;
-  width: 100vw;
-}
-
-.Head_post>h2 {
-  color: var(--text);
-  text-align: center;
-  font-weight: normal;
-  text-decoration: underline;
-  text-underline-position: under;
-}
-
-.Head_post>p{
-  width: 55%;
-  text-align: center;
-}
-
-.formulaire_post{
-  padding: 20px;
-  border-radius: 10px;
-  align-items: start;
-}
-
-.formulaire_post>label {
-  display: none;
-}
-
-
-.formulaire_post>input,.formulaire_post>textarea,.formulaire_post>select{
-  margin-bottom: 30px;
-}
-
-.formulaire_post>select{
-  height: 5vh;
-  width: 40vw;
-  max-width: 280px;
-  padding: 5px 10px 5px 8px;
-  background-color: var(--tertiary);
-  border: none;
-  border-radius: 10px;
-}
-
-.formulaire_post>textarea{
-  width: 280px;
-  height: 7vh;
-  padding: 0.6em 1.2em;
-  border: none;
-  background-color: var(--tertiary);
-  border-radius: 10px;
+  background-color: #16181c8e;
+  border: 1px solid var(--border);
+  margin: 10px;
 }
 
 .book-preview{
@@ -79,11 +27,6 @@
   word-break: break-word;
 }
 
-.btn_post_book{
-  min-width: 80px;
-  max-width: 200px;
-  width: 25vw;
-}
 
 
 

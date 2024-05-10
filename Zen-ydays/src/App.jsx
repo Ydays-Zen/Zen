@@ -10,7 +10,7 @@ import Profil from "./pages/Profil/Profil.jsx";
 import Readbooks from "./pages/Readbooks/Readbook.jsx";
 import Result from "./pages/Search/Result.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
-import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
+import UserDifferent from "./pages/userDifferent/UserDifferent.jsx";
 
 const App = () => {
   // Définissez votre fonction handleUser ici
@@ -34,7 +34,7 @@ const App = () => {
             <Route path="/check/Post" element={<Post />} />
             <Route path="/check/Messages" element={<Message />} />
             <Route path="/check/profil" element={<Profil />} />
-            <Route path="/result" element={<Result />} />
+            <Route path="/check/result" element={<Result />} />
             {/* <Route path="/search" element={<Search />} /> */}
             <Route path="/check/readbooks/:bookId" element={<Readbooks />} />
             <Route

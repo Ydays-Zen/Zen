@@ -1,10 +1,9 @@
 // Message.jsx
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from "react";
 import Chat from '../../components/Chat';
 import Messages from '../../components/Messages';
 import SendMessage from '../../components/SendMessage';
-import { UserContext } from '../../context/userContext';
-import HeaderAll from '../../layout/HeaderAll';
+import { UserContext } from "../../context/userContext";
 
 import './Message.css';
 
@@ -19,7 +18,6 @@ const Message = () => {
 
   return (
     <div className="app-container">
-      <HeaderAll />
       <div className="main-container">
         <Chat userList={userList} onSelectUser={onSelectUser} />
         {selectedUser && (

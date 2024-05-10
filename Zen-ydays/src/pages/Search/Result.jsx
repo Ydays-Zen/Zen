@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Script from "../../components/Script";
 import { firestore } from "../../db/firebase-config";
-import HeaderAll from "../../layout/HeaderAll";
+// import HeaderAll from "../../layout/HeaderAll";
 import BookResult from "./BookResult";
 import UserResult from "./UserResult";
 import "./result.css";
@@ -70,7 +70,6 @@ const Result = () => {
 
   return (
     <>
-      <HeaderAll />
       <div className="head_name_page">
         <h2>Recherche</h2>
       </div>

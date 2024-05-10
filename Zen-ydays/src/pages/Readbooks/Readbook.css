@@ -35,7 +35,6 @@
   font-size: 14px;
   margin-bottom: 10px;
   text-align: right;
-  width: 30vw;
   align-items: flex-end;
 
 }
@@ -73,11 +72,7 @@
   align-items: center;
 }
 
-.readbooks__book__image img {
-  max-width: 200px;
-  height: auto;
-  border-radius: 5px;
-}
+
 
 .readbooks__book__resume {
   display: flex;
@@ -95,15 +90,16 @@
   margin-top: 10px;
   transition: opacity 0.5s ease;
   opacity: 0;
-  width: 10px;
-  height: 10px;
-
 }
 
 .readbooks__book__resume__content.visible {
   opacity: 1;
-  height: 80vh;
+  /* height: 80vh; */
   width: 70vw;
+}
+
+.readbooks__book__resume__content.hidden {
+  display: none;
 }
 
 .button_placement.p{
@@ -133,7 +129,11 @@
 
 .readbooks__book__content__content.visible {
   opacity: 1;
-  height: 90vh;
+  /* height: 90vh; */
+}
+
+.readbooks__book__content__content.hidden {
+  display: none;
 }
 
 
@@ -244,28 +244,17 @@ hr{
   border: var(--secondary) 1px solid;
 }
 
-.readbooks__comments button {
-  padding: 10px 20px;
-  background-color: var(--tertiary);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
 
-.readbooks__comments button:hover {
-  background-color: var(--secondary);
-  color: black;
-  border: none;
-}
 
 .readbooks__comments__comment {
   border-radius: 5px;
   border: 1px solid var(--secondary);
-  padding: 5px;
+  padding: 15px;
   margin-bottom: 10px;
   word-wrap: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .readbooks__comments__comment p {

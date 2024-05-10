@@ -90,7 +90,7 @@ button:focus-visible {
   
 }
 
-input {
+input{
   background-color: var(--tertiary);
   outline: none;
   border: none;
@@ -104,9 +104,37 @@ input {
   transition: border-color 0.25s;
 }
 
-input:focus {
+input:focus, textarea:focus, select:focus {
   border: 1px solid var(--border);
 }
+
+textarea {
+  background-color: var(--tertiary);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6em 1.2em;
+  width: 280px;
+  height: 125px;
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--text);
+  transition: border-color 0.25s;
+  resize: none;
+}
+
+select {
+  background-color: var(--tertiary);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--text);
+  transition: border-color 0.25s;
+}
+
 
 img {
   max-width: 300px;
