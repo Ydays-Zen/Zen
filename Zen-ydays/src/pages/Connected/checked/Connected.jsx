@@ -1,7 +1,6 @@
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import {
-  faBookmark,
-  faHeart as faHeartSolid,
+  faHeart as faHeartSolid, faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "firebase/auth";
@@ -15,14 +14,13 @@ import {
   where,
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Category from "../../../components/Category";
 // import NavBar from "../../../components/NavBar";
 import { UserContext } from "../../../context/userContext";
 import { firestore } from "../../../db/firebase-config";
 import { auth } from "../../../db/firebase-config.jsx";
-
 const cookies = new Cookies();
 
 import "./style.css";
@@ -36,6 +34,7 @@ const Connected = () => {
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [user, setUser] = useState(null);
+  const [activeResume, setActiveResume] = useState(null);
 
   const userId = currentUser.uid;
 
@@ -137,6 +136,8 @@ const Connected = () => {
         if (!userSnapshot.empty) {
           const userData = userSnapshot.docs[0].data();
           setUser(userData);
+
+        
         } else {
           console.log(
             "Aucun document trouvé pour l'utilisateur avec l'ID:",
@@ -177,6 +178,7 @@ const Connected = () => {
             <div key={book.id} className="displaybooks">
               <Link to={`/check/readbooks/${book.id}`} className="link">
                 <div className="Head_post_name">
+                  <FontAwesomeIcon icon={faUser} />
                   <p>{user && user.displayname}</p>
                 </div>
                 <h2>{book.title}</h2>
@@ -184,34 +186,35 @@ const Connected = () => {
                 <img className="couverture" src={book.image} alt="Couverture" />
               </Link>
               <div className="tags">
-                <p className="tag">{book.tags}</p>
+
+                <p className="tag">Genre: {book.tags}</p>
                 {/* Système de like */}
 
                 <div className="like_save">
-                  <FontAwesomeIcon
-                    icon={faBookmark}
-                    style={{ color: "#ffffff", background: "#000000" }}
-                    size="xl"
-                  />
+                  <FontAwesomeIcon icon={faBookmark} style={{color: "#ffffff",background:"#000000"}} />
                   <div className="like">
                     <FontAwesomeIcon
-                      onClick={() => handleLikeSubmit(book.id)}
-                      icon={
-                        book.likedBy && book.likedBy.includes(currentUser.uid)
-                          ? faHeartSolid
-                          : faHeartRegular
-                      }
-                      size="xl"
-                      color={
-                        book.likedBy && book.likedBy.includes(currentUser.uid)
-                          ? "red"
-                          : "white"
-                      }
+                        onClick={() => handleLikeSubmit(book.id)}
+                        icon={
+                          book.likedBy && book.likedBy.includes(currentUser.uid)
+                              ? faHeartSolid
+                              : faHeartRegular
+                        }
+                        size="xl"
+                        color={
+                          book.likedBy && book.likedBy.includes(currentUser.uid)
+                              ? "red"
+                              : "white"
+                        }
                     />
+
                     <p>{book.likedBy ? book.likedBy.length : 0}</p>
                   </div>
+
+
                 </div>
               </div>
+
             </div>
           ))}
         </main>
