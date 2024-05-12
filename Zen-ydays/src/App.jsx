@@ -12,7 +12,7 @@ import SignUp from "./pages/SignUp/SignUp.jsx";
 // import UserDifferent from "./pages/UserDifferent/UserDifferent.jsx";
 import Published_books from "./pages/Published_book/Published_books.jsx";
 import Readbooks from "./pages/Readbooks/Readbook.jsx";
-import Result from "./pages/Search/Result.jsx";
+import Result from "./pages/Search/result.jsx";
 
 const App = () => {
   return (

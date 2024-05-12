@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../components/styles/Search.css";
-import HeaderAll from "../layout/HeaderAll";
 import Script from "./Script";
+import NavBar from "./NavBar";
+import NavBarDesktop from "./NarBarDesktop";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // 768 est un exemple de largeur pour basculer vers la version mobile
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Vérifie la taille de l'écran au chargement de la page
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
@@ -24,7 +39,7 @@ const Search = () => {
 
   return (
     <>
-      <HeaderAll />
+      {isMobile ? <NavBar /> : <NavBarDesktop />}
       <div className="searchBar">
         <input
           className="Search"

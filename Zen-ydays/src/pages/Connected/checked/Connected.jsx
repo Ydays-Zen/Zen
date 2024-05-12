@@ -4,7 +4,6 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { signOut } from "firebase/auth";
 import {
   collection,
   doc,
@@ -15,29 +14,37 @@ import {
   where,
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import Category from "../../../components/Category";
-import Menu from "../../../components/Menu";
-import Nav from "../../../components/Nav";
-import NavBar from "../../../components/NavBar";
 import { UserContext } from "../../../context/userContext";
 import { firestore } from "../../../db/firebase-config";
-import { auth } from "../../../db/firebase-config.jsx";
 import { Link } from "react-router-dom";
-const cookies = new Cookies();
 
 import "./style.css";
 
 import { useCategory } from "../../../context/CategoryContext";
+import NavBar from "../../../components/NavBar.jsx";
+import NavBarDesktop from "../../../components/NarBarDesktop.jsx";
 
 const Connected = () => {
-  const navigate = useNavigate();
 
   const { btnValue } = useCategory();
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [activeResume, setActiveResume] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // 768 est un exemple de largeur pour basculer vers la version mobile
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Vérifie la taille de l'écran au chargement de la page
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const userId = currentUser.uid;
 
@@ -131,37 +138,26 @@ const Connected = () => {
   console.log("User ID:", userId);
   console.log("Pseudo:", currentUser.displayName);
 
-  // Deconnexion
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-      cookies.remove("auth-token");
-      navigate("/");
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  
 
   return (
     <div>
       <header>
-        <Nav />
-        <Menu />
-      </header>
-
-      {/* {currentUser && <h2>Welcome {currentUser.email}</h2>} */}
-      {currentUser && <button onClick={logOut}>Log Out</button>}
+      {isMobile ? <NavBar /> : <NavBarDesktop />}
+    </header>
+      
+      
       <div className="connected">
-        <Category />
+        {/* <Category /> */}
 
         <main className="mainDisplayBooks">
           {booksList.map((book) => (
             <div key={book.id} className="displaybooks">
               <Link to={`/check/readbooks/${book.id}`} className="link">
-              <h2>{book.title}</h2>
+                <h2>{book.title}</h2>
 
-              {/* Affichage de la couverture du livre */}
-              <img className="couverture" src={book.image} alt="Couverture" />
+                {/* Affichage de la couverture du livre */}
+                <img className="couverture" src={book.image} alt="Couverture" />
               </Link>
               <div className="tags">
                 <p className="tag">{book.tags}</p>
@@ -196,9 +192,8 @@ const Connected = () => {
                   {/* Affichage du Résumé  */}
 
                   <div
-                    className={`resume ${
-                      activeResume === book.id ? "active" : ""
-                    }`}
+                    className={`resume ${activeResume === book.id ? "active" : ""
+                      }`}
                   >
                     <FontAwesomeIcon
                       icon={faXmark}
@@ -214,7 +209,6 @@ const Connected = () => {
             </div>
           ))}
         </main>
-        <NavBar />
       </div>
     </div>
   );

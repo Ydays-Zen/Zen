@@ -12,9 +12,6 @@ import {
 } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Menu from "../../components/Menu.jsx";
-import Nav from "../../components/Nav.jsx";
-import NavBar from "../../components/NavBar.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore } from "../../db/firebase-config.jsx";
 import "./Readbook.css";
@@ -108,9 +105,6 @@ const Readbooks = () => {
 
   return (
     <div>
-      <Nav />
-      <Menu />
-      <NavBar />
       <div className="readbooks">
         <div className="readbooks__book">
           <div className="readbooks__book__image">

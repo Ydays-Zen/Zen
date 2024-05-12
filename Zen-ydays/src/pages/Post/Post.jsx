@@ -1,8 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import Menu from "../../components/Menu.jsx";
-import Nav from "../../components/Nav.jsx";
-import NavBar from "../../components/NavBar.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore, storage } from "../../db/firebase-config.jsx";
 import "./post.css";
@@ -96,9 +93,6 @@ const Post = () => {
 
   return (
     <div>
-      <Nav />
-      <Menu />
-      <NavBar />
       <div className="body_post">
         <div className="post">
           <h2>Poster un Livre</h2>

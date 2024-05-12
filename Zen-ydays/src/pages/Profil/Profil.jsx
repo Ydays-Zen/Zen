@@ -1,18 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import SubManager from "../../components/SubManager.jsx";
 import Subscription from "../../components/Subscription.jsx";
 import { UserContext } from "../../context/userContext";
 // import SubManager from "../../components/SubManager.jsx";
 import Info_profil from "../../components/Info_profil.jsx";
-import Menu from "../../components/Menu";
-import NavBar from "../../components/NavBar";
 import Oeuvres_profil from "../../components/Oeuvres_profil.jsx";
 import { firestore } from "../../db/firebase-config";
 
 import "./Profil.css";
+import NavBar from "../../components/NavBar.jsx";
+import NavBarDesktop from "../../components/NarBarDesktop.jsx";
 
 function Profil() {
   const { currentUser } = useContext(UserContext);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // 768 est un exemple de largeur pour basculer vers la version mobile
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Vérifie la taille de l'écran au chargement de la page
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleFollow = async (targetUserId) => {
     try {
@@ -48,8 +62,7 @@ function Profil() {
   return (
     <>
       <header>
-        <NavBar />
-        <Menu />
+      {isMobile ? <NavBar /> : <NavBarDesktop />}
       </header>
       <main className="mainProfil">
         <Info_profil />

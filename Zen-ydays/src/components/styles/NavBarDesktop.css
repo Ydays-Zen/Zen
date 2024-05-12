@@ -1,0 +1,74 @@
+/* NavBarDesktop.css */
+
+.desktop-nav {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    border-right: 2px solid #fff;
+    background-color: black;
+}
+
+.menu-items-desktop {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 150px;
+}
+
+.menu-items-desktop li {
+    padding: 10px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-items-desktop a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    display: block;
+}
+
+.menu-items a:hover {
+    color: #ffffff;
+}
+
+.button-logout {
+    width: 90%;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.button-logout:hover {
+    color: #ffffff;
+}
+
+.logo-container {
+    width: 100px;
+    height: 100px;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+}
