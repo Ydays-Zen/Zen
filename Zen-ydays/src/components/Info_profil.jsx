@@ -87,13 +87,13 @@ export function Info_profil() {
           <div>
             <p>Followers</p>
 
-            <p>{followersCount}</p>
+            <p>{followCount}</p>
           </div>
 
           <div>
             <p>Follow</p>
 
-            <p>{followCount}</p>
+            <p>{followersCount}</p>
           </div>
         </div>
       </div>

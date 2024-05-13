@@ -1,15 +1,23 @@
-// import Menu from "../components/Menu";
-// import Nav from "../components/Nav";
-// import NavBar from "../components/NavBar";
+import { useEffect, useState } from "react";
+import NavBarDesktop from "../components/NarBarDesktop.jsx";
+import NavBar from "../components/NavBar.jsx";
 
-// const HeaderAll = () => {
-//   return (
-//     <div>
-//       <Nav />
-//       <Menu />
-//       <NavBar />
-//     </div>
-//   );
-// };
+const HeaderAll = () => {
+  const [isMobile, setIsMobile] = useState(false);
 
-// export default HeaderAll;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  return <>{isMobile ? <NavBar /> : <NavBarDesktop />}</>;
+};
+
+export default HeaderAll;

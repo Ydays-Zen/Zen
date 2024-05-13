@@ -51,9 +51,8 @@ const Category = () => {
   return (
     <>
       <div className="category">
-        <div>
-          <h2>Category</h2>
-
+        <h2>Category</h2>
+        <div className="category-content">
           {displayCategory()}
 
           <p>{btnValue}</p>

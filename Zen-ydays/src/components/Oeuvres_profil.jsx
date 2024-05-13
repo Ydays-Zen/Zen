@@ -47,7 +47,7 @@ export function Oeuvres_profil() {
         {booksList.map((book) => (
           <div key={book.id} className="book">
             <Link to={`/check/readbooks/${book.id}`} className="link">
-              <img src={book.image} alt="Couverture" className="couverture" />
+              <img src={book.image} alt="Couverture" />
               <div className="likes">
                 <FontAwesomeIcon
                   icon={faHeartSolid}

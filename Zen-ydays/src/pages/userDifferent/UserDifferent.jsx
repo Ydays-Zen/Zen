@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SendMessage from "../../components/SendMessage";
 import { auth, firestore } from "../../db/firebase-config";
+import HeaderAll from "../../layout/HeaderAll";
 import "./userDifferent.css";
 
 const UserDifferent = ({ handleUser }) => {
@@ -194,72 +195,83 @@ const UserDifferent = ({ handleUser }) => {
   };
 
   return (
-    <main className="mainProfil">
-      <div className="container_info">
-        <div className="imgProfil">
-          <img src={user?.img} alt="" />
-          <div className="stats">
-            <div>
-              <p>Posts</p>
-              <p>{booksCount}</p>
-            </div>
-            <div>
-              <p>Followers</p>
-              <p>{followersCount}</p>
-            </div>
-            <div>
-              <p>Follow</p>
-              <p>{followCount}</p>
-            </div>
-          </div>
-        </div>
-        <h2>{user?.displayName}</h2>
+    <>
+      <HeaderAll />
 
-        <div className="containerBtn">
-          <button onClick={handleClickMessage}>Message</button>
-
-          <button
-            className="btnProfil"
-            onClick={isFollowing ? handleClickUnfollow : handleClickFollow}
-          >
-            {isFollowing ? "Unfollow" : "Follow"}
-          </button>
-        </div>
-
-        {showSendMessage && (
-          <SendMessage selectedUser={user} onMessageSent={handleMessageSent} />
-        )}
-        <div className="menuProfil">
-          <div>
-            <a href="#">Posts</a>
-            <a href="#">Reposts</a>
-            <a href="#">Sauvegarder</a>
-            <a href="#">Brouillont</a>
-          </div>
-          <div className="line"></div>
-        </div>
-      </div>
-
-      <div className="container_oeuvres">
-        {booksList.map((book) => (
-          <div key={book.id} className="book">
-            <Link to={`/check/readbooks/${book.id}`} className="link">
-              {book.image && (
-                <img src={book.image} alt="Couverture" className="couverture" />
-              )}
-              <div className="likes">
-                <FontAwesomeIcon
-                  icon={faHeartSolid}
-                  size="lg"
-                  color={"white"}
-                />
-                <p>{book.likedBy ? book.likedBy.length : 0}</p>
+      <main className="mainProfil">
+        <div className="container_info">
+          <div className="imgProfil">
+            <img src={user?.img} alt="" />
+            <div className="stats">
+              <div>
+                <p>Posts</p>
+                <p>{booksCount}</p>
               </div>
-            </Link>
+              <div>
+                <p>Followers</p>
+                <p>{followersCount}</p>
+              </div>
+              <div>
+                <p>Follow</p>
+                <p>{followCount}</p>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    </main>
+          <h2>{user?.displayName}</h2>
+
+          <div className="containerBtn">
+            <button onClick={handleClickMessage}>Message</button>
+
+            <button
+              className="btnProfil"
+              onClick={isFollowing ? handleClickUnfollow : handleClickFollow}
+            >
+              {isFollowing ? "Unfollow" : "Follow"}
+            </button>
+          </div>
+
+          {showSendMessage && (
+            <SendMessage
+              selectedUser={user}
+              onMessageSent={handleMessageSent}
+            />
+          )}
+          <div className="menuProfil">
+            <div>
+              <a href="#">Posts</a>
+              <a href="#">Reposts</a>
+              <a href="#">Sauvegarder</a>
+              <a href="#">Brouillont</a>
+            </div>
+            <div className="line"></div>
+          </div>
+        </div>
+
+        <div className="container_oeuvres">
+          {booksList.map((book) => (
+            <div key={book.id} className="book">
+              <Link to={`/check/readbooks/${book.id}`} className="link">
+                {book.image && (
+                  <img
+                    src={book.image}
+                    alt="Couverture"
+                    className="couverture"
+                  />
+                )}
+                <div className="likes">
+                  <FontAwesomeIcon
+                    icon={faHeartSolid}
+                    size="lg"
+                    color={"white"}
+                  />
+                  <p>{book.likedBy ? book.likedBy.length : 0}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </main>
+    </>
   );
 };
 

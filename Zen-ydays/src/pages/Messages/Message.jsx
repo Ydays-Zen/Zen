@@ -4,8 +4,9 @@ import Chat from '../../components/Chat';
 import Messages from '../../components/Messages';
 import SendMessage from '../../components/SendMessage';
 import { UserContext } from "../../context/userContext";
+import HeaderAll from "../../layout/HeaderAll";
 
-import './Message.css';
+import "./Message.css";
 
 const Message = () => {
   const { userList, currentUser } = useContext(UserContext);
@@ -15,19 +16,22 @@ const Message = () => {
     setSelectedUser(user);
   };
 
-
   return (
-    <div className="app-container">
-      <div className="main-container">
-        <Chat userList={userList} onSelectUser={onSelectUser} />
-        {selectedUser && (
-          <div className="chat-container">
-            <Messages currentUser={currentUser} selectedUser={selectedUser} />
-            <SendMessage selectedUser={selectedUser} />
-          </div>
-        )}
+    <>
+      <HeaderAll />
+
+      <div className="app-container">
+        <div className="main-container">
+          <Chat userList={userList} onSelectUser={onSelectUser} />
+          {selectedUser && (
+            <div className="chat-container">
+              <Messages currentUser={currentUser} selectedUser={selectedUser} />
+              <SendMessage selectedUser={selectedUser} />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import { UserContext } from "../../context/userContext";
 import Info_profil from "../../components/Info_profil.jsx";
 import Oeuvres_profil from "../../components/Oeuvres_profil.jsx";
 import { firestore } from "../../db/firebase-config";
+import HeaderAll from "../../layout/HeaderAll";
 
 import "./Profil.css";
 
@@ -45,6 +46,7 @@ function Profil() {
 
   return (
     <>
+      <HeaderAll />
       <main className="mainProfil">
         <Info_profil />
         <Oeuvres_profil />

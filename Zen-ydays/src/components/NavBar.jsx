@@ -1,65 +1,102 @@
-// import Plume from "../assets/plume.svg";
-// // import Home from "../assets/home.svg";
-// // import Search from "../assets/search.svg";
-// // import Bookmark from "../assets/bookmark.svg";
-// // import User from "../assets/user.svg";
-// // import Message from "../assets/Message.svg";
+import {
+  faBookmark,
+  faCog,
+  faEnvelope,
+  faHome,
+  faSearch,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signOut } from "firebase/auth";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { UserContext } from "../context/userContext";
+import { auth } from "../db/firebase-config";
+const cookies = new Cookies();
 
-// import {
-//   faBookmark,
-//   faHouse,
-//   faMessage,
-//   faSearch,
-//   faUser,
-// } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Category from "./Category";
+import "./styles/navbar.css";
 
-// import "./styles/navbar.css";
+const NavBar = () => {
+  const navigate = useNavigate();
 
-// const NavBar = () => {
-//   return (
-//     <>
-//       <nav>
-//         <div className="navBar">
-//           <div className="plume">
-//             <a href="/check/post">
-//               {" "}
-//               <img className="post" src={Plume} alt="write" />
-//             </a>
-//           </div>
+  const [isOpen, setIsOpen] = useState(false);
+  const { currentUser } = useContext(UserContext);
 
-//           <div className="icons">
-//             <a href="/check/connected">
-//               {" "}
-//               {/* <img className="icon" src={Home} alt="home" /> */}
-//               <FontAwesomeIcon icon={faHouse} size="xl" color="black" />
-//             </a>
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-//             <a href="/check/Messages">
-//               {" "}
-//               <FontAwesomeIcon icon={faMessage} size="xl" color="black" />{" "}
-//             </a>
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
-//             <a href="/result">
-//               {" "}
-//               <FontAwesomeIcon icon={faSearch} size="xl" color="black" />{" "}
-//             </a>
+  // Deconnexion
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+      cookies.remove("auth-token");
+      navigate("/");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
-//             <a href="#">
-//               {" "}
-//               <FontAwesomeIcon icon={faBookmark} size="xl" color="black" />{" "}
-//             </a>
-//             <a href="/check/Profil">
-//               {" "}
-//               <FontAwesomeIcon icon={faUser} size="xl" color="black" />
-//             </a>
+  return (
+    <nav>
+      <div
+        className={`burger-menu ${isOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      >
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+      </div>
+      <ul className={`menu-items ${isOpen ? "open" : ""}`}>
+        <li>
+          <FontAwesomeIcon icon={faHome} />
+          <a href="/" onClick={closeMenu}>
+            Accueil
+          </a>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faEnvelope} />
+          <a href="/check/Messages" onClick={closeMenu}>
+            Messages
+          </a>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faSearch} />
+          <a href="/check/result" onClick={closeMenu}>
+            Recherche
+          </a>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faBookmark} />
+          <a href="/" onClick={closeMenu}>
+            Enregistrer
+          </a>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faUser} />
+          <a href="/check/Profil" onClick={closeMenu}>
+            Profil
+          </a>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faCog} />
+          <a href="/" onClick={closeMenu}>
+            Paramètres
+          </a>
+        </li>
+        <Category />
+        <li className="button-logout">
+          {currentUser && <button onClick={logOut}>Log Out</button>}
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-//             <a href="#"></a>
-//           </div>
-//         </div>
-//       </nav>
-//     </>
-//   );
-// };
-
-// export default NavBar;
+export default NavBar;

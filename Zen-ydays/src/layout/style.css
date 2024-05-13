@@ -1,0 +1,46 @@
+.desktop-nav-category {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    border-left: 1px solid #bbbbbb;
+    background-color: black;
+}
+
+
+.plume {
+
+    position:absolute; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    width: 80px;
+    height: 80px;
+    top: 100px;
+    right: 50px;
+    border-radius:50%;
+}
+
+
+.post {
+
+      border: 1px solid var(--border);
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .desktop-nav-category {
+        display: none;
+    }
+    
+}

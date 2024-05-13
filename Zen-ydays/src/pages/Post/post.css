@@ -8,18 +8,6 @@
   align-items: center;
 }
 
-.post {
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  min-width: 30vw;
-  max-width: 400px;
-  width: 100%;
-  background-color: #16181c8e;
-  border: 1px solid var(--border);
-  margin: 10px;
-}
 
 .book-preview{
   padding: 20px;

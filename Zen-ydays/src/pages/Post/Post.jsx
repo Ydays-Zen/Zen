@@ -8,6 +8,7 @@ import "./post.css";
 
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import HeaderAll from "../../layout/HeaderAll";
 
 const Post = () => {
   const { currentUser } = useContext(UserContext);
@@ -120,6 +121,7 @@ const Post = () => {
 
   return (
     <div>
+      <HeaderAll />
       <div className="body_post">
         <div className="post">
           <h2>Poster un Livre</h2>

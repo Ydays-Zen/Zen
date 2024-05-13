@@ -13,6 +13,8 @@ import ReactPaginate from "react-paginate";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext.jsx";
 import { firestore } from "../../db/firebase-config.jsx";
+import HeaderAll from "../../layout/HeaderAll";
+
 import "./Readbook.css";
 
 const Readbooks = () => {
@@ -158,6 +160,7 @@ const Readbooks = () => {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return (
     <div>
+      <HeaderAll />
       <div className="readbooks">
         <div className="readbooks__book">
           <div className="readbooks__book__info">
