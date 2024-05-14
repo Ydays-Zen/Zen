@@ -90,13 +90,10 @@ const Result = () => {
         </button>
       </div>
 
-      <Script />
-
       <div className="resultContainer">
         <div className="bookResults">
-          <h3>Résultats des livres :</h3>
           {bookResults.length === 0 ? (
-            <h4>Aucun livre trouvé.</h4>
+            <h4></h4>
           ) : (
             bookResults.map((book, index) => (
               <div key={book.id}>
@@ -112,15 +109,16 @@ const Result = () => {
           )}
         </div>
         <div className="userResults">
-          <h3>Résultats des utilisateurs :</h3>
           {userResults.length === 0 ? (
-            <h4>Aucun utilisateur trouvé.</h4>
+            <h4></h4>
           ) : (
             userResults.map((user, index) => (
               <UserResult key={index} user={user} handleUser={handleUser} /> // Passez handleUser comme prop
             ))
           )}
         </div>
+
+        <Script />
       </div>
     </>
   );

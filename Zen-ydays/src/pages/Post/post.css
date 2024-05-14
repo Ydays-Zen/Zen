@@ -1,11 +1,10 @@
-
-/* post.css */
-
+/* 
 .body_post {
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
 
@@ -18,12 +17,8 @@
 
 
 
-strong{
-  color: var(--tertiary);
-}
-
 @media screen and (min-width:850px) {
     .book-preview{
       margin-right: 8vw;
     }
-}
+} */

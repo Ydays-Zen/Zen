@@ -27,8 +27,6 @@ const Connected = () => {
   const { btnValue } = useCategory();
   const [booksList, setBooksList] = useState([]);
   const { currentUser } = useContext(UserContext);
-  const [user, setUser] = useState(null);
-  const userId = currentUser.uid;
 
   const fetchData = async () => {
     try {
@@ -102,35 +100,6 @@ const Connected = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userQuery = query(
-          collection(firestore, "users"),
-          where("ID", "==", userId)
-        );
-        const userSnapshot = await getDocs(userQuery);
-
-        if (!userSnapshot.empty) {
-          const userData = userSnapshot.docs[0].data();
-          setUser(userData);
-        } else {
-          console.log(
-            "Aucun document trouvé pour l'utilisateur avec l'ID:",
-            userId
-          );
-        }
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération de l'utilisateur:",
-          error
-        );
-      }
-    };
-
-    fetchUser();
-  }, [userId]);
-
   return (
     <div>
       <div className="connected">
@@ -145,7 +114,7 @@ const Connected = () => {
                 <img className="couverture" src={book.image} alt="Couverture" />
               </Link>
               <div className="tags">
-                <p className="tag">Genre: {book.tags}</p>
+                <p className="tag">{book.tags}</p>
                 <div className="like_save">
                   <FontAwesomeIcon
                     icon={faBookmark}

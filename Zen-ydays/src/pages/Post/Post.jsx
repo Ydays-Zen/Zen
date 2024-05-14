@@ -20,110 +20,108 @@ const Post = () => {
   const [imageUrl] = useState("");
   const [editor, setEditor] = useState(null);
   const [scale, setScale] = useState(1);
+    const [validation, setValidation] = useState("");
 
-  const handleScaleChange = (e) => {
-    const newScale = parseFloat(e.target.value);
-    setScale(newScale);
-  };
+    const handleScaleChange = (e) => {
+      const newScale = parseFloat(e.target.value);
+      setScale(newScale);
+    };
 
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setImage(selectedImage);
-  };
+    const handleImageChange = (e) => {
+      const selectedImage = e.target.files[0];
+      setImage(selectedImage);
+    };
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-    if (!editor) return;
+    const handleSave = async (e) => {
+      e.preventDefault();
+      if (!editor) return;
 
-    const canvas = editor.getImage();
-    const imgBlob = await new Promise((resolve) => {
-      canvas.toBlob(resolve, "image/jpeg"); // Spécifiez le type MIME de l'image
-    });
-
-    // Mettre à jour l'état de l'image avec le nouveau Blob
-    setImage(imgBlob);
-  };
-
-  const bookRef = collection(firestore, "Books");
-
-  const uploadImg = async () => {
-    if (!image) return "";
-
-    const imgRef = ref(
-      storage,
-      `images/${currentUser.uid}/${image.name + v4()}`
-    );
-
-    try {
-      await uploadBytes(imgRef, image);
-      console.log("Uploaded img");
-
-      // Obtenez le chemin du fichier après le téléchargement
-      const url = await getDownloadURL(imgRef);
-      console.log("Image URL:", url);
-
-      // Retournez l'URL de l'image pour l'utiliser dans le formulaire
-      return url;
-    } catch (error) {
-      console.error("Erreur lors du téléchargement de l'image :", error);
-      return "";
-    }
-  };
-
-  useEffect(() => {
-    console.log("Nouvelle URL dans useEffect :", imageUrl);
-  }, [imageUrl]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Handle submit reached");
-
-    if (!currentUser) {
-      console.log("Vous devez être connecté pour poster un livre.");
-      return;
-    }
-
-    if (!title || !resume || !image || !tags || !content) {
-      console.log("Veuillez remplir tous les champs du formulaire.");
-      return;
-    }
-
-    if (!image) {
-      console.log("Veuillez sélectionner une image.");
-      return;
-    }
-
-    try {
-      // Attendre que l'image soit téléchargée
-      const imageUrl = await uploadImg();
-
-      // Maintenant imageUrl devrait être mis à jour
-      await addDoc(bookRef, {
-        title,
-        resume,
-        image: imageUrl,
-        tags: tags.split(",").map((tag) => tag.trim()),
-        date: new Date(),
-        content,
-        like: 0,
-        userId: currentUser.uid,
+      const canvas = editor.getImage();
+      const imgBlob = await new Promise((resolve) => {
+        canvas.toBlob(resolve, "image/jpeg"); // Spécifiez le type MIME de l'image
       });
 
-      setTitle("");
-      setResume("");
-      setImage(null);
-      setTags("");
-      setContent("");
-    } catch (error) {
-      console.error("Erreur lors de la soumission du formulaire :", error);
-    }
-  };
+      // Mettre à jour l'état de l'image avec le nouveau Blob
+      setImage(imgBlob);
+    };
 
-  return (
-    <div>
-      <HeaderAll />
-      <div className="body_post">
-        <div className="post">
+    const bookRef = collection(firestore, "Books");
+
+    const uploadImg = async () => {
+      if (!image) return "";
+
+      const imgRef = ref(
+        storage,
+        `images/${currentUser.uid}/${image.name + v4()}`
+      );
+
+      try {
+        await uploadBytes(imgRef, image);
+        console.log("Uploaded img");
+
+        // Obtenez le chemin du fichier après le téléchargement
+        const url = await getDownloadURL(imgRef);
+        console.log("Image URL:", url);
+
+        // Retournez l'URL de l'image pour l'utiliser dans le formulaire
+        return url;
+      } catch (error) {
+        console.error("Erreur lors du téléchargement de l'image :", error);
+        return "";
+      }
+    };
+
+    useEffect(() => {
+      console.log("Nouvelle URL dans useEffect :", imageUrl);
+    }, [imageUrl]);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log("Handle submit reached");
+      setValidation("");
+
+      if (!currentUser) {
+        console.log("Vous devez être connecté pour poster un livre.");
+        setValidation("Vous devez être connecté pour poster un livre.");
+        return;
+      }
+
+      if (!title || !resume || !image || !tags || !content) {
+        console.log("Veuillez remplir tous les champs du formulaire.");
+        setValidation("Veuillez remplir tous les champs du formulaire.");
+        return;
+      }
+
+      try {
+        // Attendre que l'image soit téléchargée
+        const imageUrl = await uploadImg();
+
+        // Maintenant imageUrl devrait être mis à jour
+        await addDoc(bookRef, {
+          title,
+          resume,
+          image: imageUrl,
+          tags: tags.split(",").map((tag) => tag.trim()),
+          date: new Date(),
+          content,
+          like: 0,
+          userId: currentUser.uid,
+        });
+
+        setTitle("");
+        setResume("");
+        setImage(null);
+        setTags("");
+        setContent("");
+      } catch (error) {
+        console.error("Erreur lors de la soumission du formulaire :", error);
+      }
+    };
+
+    return (
+      <div>
+        <HeaderAll />
+        <div className="body_post">
           <h2>Poster un Livre</h2>
           <form>
             <div>
@@ -205,6 +203,8 @@ const Post = () => {
               </select>
             </div>
 
+            <p>{validation}</p>
+
             <button
               type="submit"
               onClick={handleSubmit}
@@ -232,8 +232,7 @@ const Post = () => {
 
     </div>*/}
       </div>
-    </div>
-  );
+    );
 };
 
 export default Post;
