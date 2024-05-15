@@ -118,6 +118,7 @@ const Connected = () => {
                 <div className="like_save">
                   <FontAwesomeIcon
                     icon={faBookmark}
+                    size="xl"
                     style={{ color: "#ffffff", background: "#000000" }}
                   />
                   <div className="like">

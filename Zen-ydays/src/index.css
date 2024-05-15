@@ -44,6 +44,12 @@ button {
   font: inherit;
 }
 
+span {
+  color: var(--text);
+  text-decoration: none;
+
+}
+
 body,
 ::after,
 ::before {
@@ -57,10 +63,6 @@ h1 {
   line-height: 1.1;
 }
 
-span {
-  color: var(--secondary);
-  text-decoration: underline;
-}
 
 button {
   border-radius: 5px;

@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../db/firebase-config";
-import "./styles/Messages.css"; // Importez le fichier CSS pour les styles
+import "./styles/Messages.css"; 
 
 const Messages = ({ currentUser, selectedUser }) => {
   const [messages, setMessages] = useState([]);

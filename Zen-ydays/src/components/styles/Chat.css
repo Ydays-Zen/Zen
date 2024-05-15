@@ -3,8 +3,7 @@
 .content-user {
     display: flex;
     flex-direction: column;
-    width: 20%;
-    height: 100vh;
+    /* height: 100vh; */
     padding: 5px;
 }
 
@@ -23,17 +22,21 @@
 .user_read {
     list-style: none;
     padding: 0;
+    display: flex;
 }
 
 .select_user {
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px ;
     background-color: #16181C;
+    width: 100%;
     color: #fff;
     /* Couleur de fond pour chaque utilisateur */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-align: center;
+
 }
 
 .select_user:hover {

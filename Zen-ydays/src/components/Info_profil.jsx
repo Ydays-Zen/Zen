@@ -104,7 +104,7 @@ export function Info_profil() {
           <a href="#">Posts</a>
           <a href="#">Reposts</a>
           <a href="#">Sauvegarder</a>
-          <a href="#">Brouillont</a>
+          <a href="#">Brouillon</a>
         </div>
 
         <div className="line"></div>

@@ -1,11 +1,8 @@
 /* Ajoutez ces styles à votre fichier CSS (par exemple, Messages.css) */
 
 .message-input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    width: 50%;
+ display: flex;
+ flex-direction: column;
 }
 
 .input_message {

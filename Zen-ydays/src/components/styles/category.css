@@ -1,6 +1,5 @@
 .category {
   background-color: var(--tertiary);
-  padding: 30px;
   border-radius: 20px;
 }
 
@@ -16,10 +15,21 @@
     padding: 0;
     margin: 0;
     cursor: pointer;
-    margin: 10px 0;
   }
   
   .categoryButton button:hover {
     text-decoration: underline;
     border: none;
+  }
+
+
+  @media screen and (min-width: 768px){
+    .category {
+      padding: 30px;
+    }
+    
+    .categoryButton button {
+      margin: 10px 0;
+    }
+
   }
