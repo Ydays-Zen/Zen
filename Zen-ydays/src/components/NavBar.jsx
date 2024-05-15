@@ -92,7 +92,7 @@ const NavBar = () => {
         </li>
         <Category />
         <li className="button-logout">
-          {currentUser && <button onClick={logOut}>Log Out</button>}
+          {currentUser && <button onClick={logOut}>Déconnecter</button>}
         </li>
       </ul>
     </nav>

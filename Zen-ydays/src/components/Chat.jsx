@@ -1,26 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { collection, getDocs, query, where } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
 import { firestore } from "../db/firebase-config";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
-import './styles/Chat.css';
+import "./styles/Chat.css";
 
 const Chat = ({ onSelectUser }) => {
   const { currentUser } = useContext(UserContext);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [userList, setUserList] = useState([]);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const q = query(collection(firestore, 'messages'), where('participants', 'array-contains', currentUser.uid));
+      const q = query(
+        collection(firestore, "messages"),
+        where("participants", "array-contains", currentUser.uid)
+      );
       const querySnapshot = await getDocs(q);
       const messagesData = [];
-      querySnapshot.forEach(doc => {
+      querySnapshot.forEach((doc) => {
         messagesData.push(doc.data());
       });
       setMessages(messagesData);
@@ -30,7 +28,7 @@ const Chat = ({ onSelectUser }) => {
 
   useEffect(() => {
     const usersWithMessages = messages.reduce((acc, message) => {
-      message.participants.forEach(participant => {
+      message.participants.forEach((participant) => {
         if (participant !== currentUser.uid && !acc.includes(participant)) {
           acc.push(participant);
         }
@@ -39,10 +37,13 @@ const Chat = ({ onSelectUser }) => {
     }, []);
 
     const fetchUsers = async () => {
-      const q = query(collection(firestore, 'users'), where('ID', 'in', usersWithMessages));
+      const q = query(
+        collection(firestore, "users"),
+        where("ID", "in", usersWithMessages)
+      );
       const querySnapshot = await getDocs(q);
       const usersData = [];
-      querySnapshot.forEach(doc => {
+      querySnapshot.forEach((doc) => {
         usersData.push(doc.data());
       });
       setUserList(usersData);
@@ -54,7 +55,7 @@ const Chat = ({ onSelectUser }) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredUserList = userList.filter(user =>
+  const filteredUserList = userList.filter((user) =>
     user.displayName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -62,17 +63,21 @@ const Chat = ({ onSelectUser }) => {
 
   return (
     <div className="content-user">
-      <h2 class="title-Messages">Message</h2>
+      <h2 className="title-Messages">Message</h2>
       <input
         type="text"
         className="search_user"
-        placeholder="Search..."
+        placeholder="Rechercher un utilisateur"
         value={searchTerm}
         onChange={handleSearchChange}
       />
       <ul className="user_read">
         {filteredUserList.map((user) => (
-          <li className="select_user" key={user.ID} onClick={() => onSelectUser(user)}>
+          <li
+            className="select_user"
+            key={user.ID}
+            onClick={() => onSelectUser(user)}
+          >
             {user.displayName}
             {/* <img src={user.photoURL} alt="" /> */}
           </li>

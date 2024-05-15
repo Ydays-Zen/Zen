@@ -204,15 +204,15 @@ const UserDifferent = ({ handleUser }) => {
             <img src={user?.img} alt="" />
             <div className="stats">
               <div>
-                <p>Posts</p>
+                <p>Publications</p>
                 <p>{booksCount}</p>
               </div>
               <div>
-                <p>Followers</p>
+                <p>Abonnés</p>
                 <p>{followersCount}</p>
               </div>
               <div>
-                <p>Follow</p>
+                <p>Suivis</p>
                 <p>{followCount}</p>
               </div>
             </div>
@@ -226,7 +226,7 @@ const UserDifferent = ({ handleUser }) => {
               className="btnProfil"
               onClick={isFollowing ? handleClickUnfollow : handleClickFollow}
             >
-              {isFollowing ? "Unfollow" : "Follow"}
+              {isFollowing ? "Abonner" : "Abonné"}
             </button>
           </div>
 
@@ -238,10 +238,10 @@ const UserDifferent = ({ handleUser }) => {
           )}
           <div className="menuProfil">
             <div>
-              <a href="#">Posts</a>
-              <a href="#">Reposts</a>
+              <a href="#">Publications</a>
+              <a href="#">Republications</a>
               <a href="#">Sauvegarder</a>
-              <a href="#">Brouillont</a>
+              <a href="#">Brouillon</a>
             </div>
             <div className="line"></div>
           </div>

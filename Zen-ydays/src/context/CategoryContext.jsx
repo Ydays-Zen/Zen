@@ -22,7 +22,7 @@ export const useCategory = () => {
 export const CategoryProvider = ({ children }) => {
   const [btnValue, setBtnValue] = useState("");
 
-  if (btnValue === "All") {
+  if (btnValue === "Tout") {
     setBtnValue("");
   }
 

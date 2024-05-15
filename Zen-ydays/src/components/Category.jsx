@@ -51,7 +51,7 @@ const Category = () => {
   return (
     <>
       <div className="category">
-        <h2>Category</h2>
+        <h2>Categories</h2>
         <div className="category-content">
           {displayCategory()}
 

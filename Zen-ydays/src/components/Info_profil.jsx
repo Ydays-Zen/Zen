@@ -79,19 +79,19 @@ export function Info_profil() {
         <img src={userData?.img} alt="" />
         <div className="stats">
           <div>
-            <p>Posts</p>
+            <p>Publications</p>
 
             <p>{booksCount}</p>
           </div>
 
           <div>
-            <p>Followers</p>
+            <p>Abonnés</p>
 
             <p>{followCount}</p>
           </div>
 
           <div>
-            <p>Follow</p>
+            <p>Suivis</p>
 
             <p>{followersCount}</p>
           </div>
@@ -101,8 +101,8 @@ export function Info_profil() {
 
       <div className="menuProfil">
         <div>
-          <a href="#">Posts</a>
-          <a href="#">Reposts</a>
+          <a href="#">Publications</a>
+          <a href="#">Republications</a>
           <a href="#">Sauvegarder</a>
           <a href="#">Brouillon</a>
         </div>

@@ -66,7 +66,7 @@ const NavBarDesktop = () => {
       </ul>
       {currentUser && (
         <button className="button-logout" onClick={logOut}>
-          Log Out
+          Déconnecter
         </button>
       )}
     </nav>
